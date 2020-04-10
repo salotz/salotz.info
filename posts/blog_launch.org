@@ -1,0 +1,43 @@
+
+Here is my obligatory blog launch post where I tell you about how I
+created my blog and so that there is at least one post here ;)
+
+*** This Blog
+
+I ended up choosing [[https://getnikola.com/][Nikola]] mainly because:
+
+- It's written and extended in Python (my default language)
+- It has pretty good support for Emacs Org-Mode markup via a plugin
+- Simple while still supporting basic blog & general purpose web pages
+
+Nikola is basically a wrapper around [[https://pydoit.org/][~doit~]] with special functions for
+web pages.
+
+~doit~ is essentially a python programmable replacement for ~make~,
+and just about every experience report with static site generators is
+that they are just fancy makefiles. QED
+
+*** Future Posts
+
+In future posts I hope to discuss some practical issues around:
+
+- Tools and tips for data science projects as applications and
+  pipelines.
+- Managing dependencies, virtualenvs, repository structure, and
+  release management for python projects.
+- Setting up and managing personal configuration and infrastructure in
+  a linux environment.
+- Software architecture and design.
+
+The goal of my posts will not be tutorials around how to use specific
+tools but rather how they all can fit together and integrate.
+
+*** Potential Collaborations
+
+Check out my list of [[../../pages/projects/][projects]]. I am looking for others to test out and
+critique their design.
+
+I also maintain a personal listing of: Request For Comments (RFCs) and
+Proposals For Software (PFS) in this [[https://github.com/salotz/rfcs][repository]] (web page to come).
+
+Thats it!

@@ -1,0 +1,239 @@
+
+
+* PhD Related
+
+** wepy
+
+Repo: https://github.com/ADicksonLab/wepy
+
+~wepy~ is a pure-python framework and library I wrote to support my
+PhD thesis work in doing *weighted ensemble* simulations of drug
+binding via the [[http://openmm.org/][OpenMM extension]].
+
+The main feature of ~wepy~ was to add support for fast prototyping new
+*resampling* algorithms that are substantially more flexible & complex
+than other libraries allowed for.
+
+It also has support for a general purpose random-access single-file
+database format in HDF5 that drastically simplifies the organization
+of simulation data as well as making it cross-platform; avoiding bugs
+such as those arising from differences in lexical sorting of file
+names between different OSes.
+
+~wepy~ simulations are assembled and configured in python and avoids
+the complexities of dealing with various static configuration files
+(which are really only necessary for allowing untrusted users to
+customize behavior).
+
+~wepy~ is highly customizable while still isolating each component
+making it very simple to extend only the things you need.
+
+** mastic
+
+Repo: https://github.com/ADicksonLab/mastic
+
+This is a library for profiling arbitrary inter-molecular interactions
+in molecular systems.
+
+It provides automatic detection of functional groups through ~rdkit~
+but also allows you to define your own definitions for functional
+groups.
+
+It provides a library of common functional groups for profiling, but
+this is extensible as well.
+
+Results come as pure-python objects as well as pandas tables which can
+then be exported to any format or database.
+
+** geomm
+
+Repo: https://github.com/ADicksonLab/geomm
+
+~geomm~ is a python library that provides pure-function
+implementations for common computations in biophysics.
+
+It is mainly a response to most libraries in the field of biophysics
+all having mutually incompatible in-memory object representations and
+the need to convert between all of them when composing them.
+
+
+* General Purpose Utilities
+
+- [[https://github.com/salotz/dask_scheduler][~dask_scheduler~]] :: Simple command line interface to start a dask
+     scheduling server.
+- [[https://github.com/salotz/bibby][~bibby~]] :: Command line interface to update a local bibtex file from
+     [[https://www.bibsonomy.org/][bibsonomy.org]] for paper and book citations.
+- [[https://github.com/salotz/inkscape_pages][~inkscape_pages~]] :: CLI to turn a multi-layer Inkscape SVG file into a
+     multi-page PDF. I use this for making slide decks.
+- [[https://github.com/salotz/fshank][~fshank~]] :: Python library with nice data structures for representing,
+     parsing, and writing ~fstab~ files. Idea is to configure ~fstab~
+     information in a nicer more forgiving format (like ~toml~).
+- [[https://github.com/salotz/py_rsync][~py_rsync~]] :: Python libray for generating ~rsync~ command
+     strings from python dataclasses. Used in ~refugue~.
+- [[https://github.com/salotz/slurmify][~slurmify~]] :: Generate submission scripts for the SLURM job scheduler
+     from shell scripts that is configurable via ~toml~.
+- [[https://github.com/salotz/python_serialize_test][python ~serialize_test~]] :: Simple utility to quickly benchmark the
+     speed of various python serialization tools on files of your
+     choice.
+- [[https://github.com/salotz/pymatuning][pymatuning]] :: Generate org-mode TODO hierarchies from python
+     modules. I used this to generate a TODO list for writing/auditing
+     docstrings for my large projects.
+
+
+* Personal Productivity
+
+** bim suite
+
+Configurations for users in Unix-like environments (like linux) is a
+major pain point for beginners and advanced users alike.
+
+I have been slowly developing a set of tools to regain some sanity and
+add some essential features.
+
+They are (in order of maturity):
+
+- [[https://github.com/salotz/bimhaw][~bimhaw~]] :: Which is a layer of indirection over shell
+     configurations (i.e. ~.profile~ and ~.bashrc~ files) that is
+     semantically meaningful and allows for componentization and
+     several distinct user profiles.
+- [[https://github.com/salotz/bimker][~bimker~]] :: Because ~$HOME~ is a warzone. A toolset and directory
+     schema for your "dotfiles" and bootstrapping user configurations
+     into new computers and environments.
+- ~bimsec~ :: Tool and flows for managing credentials and secrets
+              across different computers and environments.
+- ~bimtree~ :: Tools, schemas, & flows for managing files and projects
+               across different *domains* (e.g. work, personal, hobby
+               groups).
+
+** refugue
+
+Repo: https://github.com/salotz/refugue
+
+~refugue~ is a tool for managing data synchronizations between a
+personal network of computers and drives.
+
+It allows you to perform synchronizations from any computer (actually
+the more fine-grained concept of a *replica*) by using meaningful *pet
+names* instead of network addresses.
+
+Synchronizations are specified using a small vocabulary of
+well-documented behaviors that are then "compiled" to the underlying
+tool being used to perform transfers (i.e. ~rsync~).
+
+It also simplifies and unifies the process of defining *working sets*
+that are to be present on different machines.  For instance having
+different sets of files on your laptop vs. your servers.
+
+Here is an example:
+
+#+BEGIN_SRC bash
+refugue --sync='' computerA/tree computerB/backup
+#+END_SRC
+
+Where ~computerA/tree~ and ~computerB/bacup~ are file subtree on a
+specific host or disk drive.
+
+Working sets for each are defined in a local versionable configuration
+file and need not be executed on either of the two computers in the
+command (as long as they are reachable via ssh).
+
+** jubeo: Meta-Project Protocol
+
+Repo: https://github.com/salotz/jubeo
+
+The name is stolen from object based systems like Smalltalk and Common
+Lisp's Meta-Object Protocol which is a way to update "living" code
+objects.
+
+This is a tool for updating and maintaining tooling for different
+types of projects (software dev, analytics, website design, etc.).
+
+The overarching goal is to regain some of the original unix-philosophy
+of writing small tools that do one thing, and /work well
+together/. I.e. developing polyrepos (as opposed to monorepos).
+
+The problem is that in modern dev environments there are so many
+things to set up and manage:
+
+- versioning
+- tests
+- releases
+- building documentation
+- running regression tests
+- code formatting
+- type checking
+- managing virtual environments
+
+Which can get tedious very quickly if you have more than a few
+projects to do this all for.
+
+Historically, this was done through makefiles which is a practice
+almost long-forgotten by python devs. And as a result a dizzying
+plethora of repository management tools have come up that try to do
+all of this in one package.
+
+~jubeo~ allows you to configure simple tools in one place (a
+repository and component modules) and then distribute (through simple
+file copying) to many different projects, while allowing you to name
+tasks semantically rather than based on specific tools (i.e. ~build~
+rather than ~python setup.py sdist wheel~).
+
+Furthermore, once tools are copied they belong to the code base and
+are versioned along with it. You aren't adding a dependency on jubeo
+to give you this stuff. All ~jubeo~ does is make it simple to update
+or fix tooling (such as ~build~, ~release~, & ~publish~) that are all
+the same across many different projects.
+
+This makes it much lower friction to just make a new tool (i.e. a
+different package to `pip install`) rather than adding a feature to an
+existing CLI you are familiar with since you won't have to manually
+perform all the boring stuff maintainers do.
+
+In an existing project you would run something similar to get started
+(on a new python package):
+
+#+BEGIN_SRC bash
+jubeo init --upstream=git+https://github.com/salotz/jubeo.git#repos/python .
+pip install -r .jubeo/requirements.txt
+#+END_SRC
+
+Then you should be able to see all the tasks that are available to you:
+#+BEGIN_SRC 
+inv -l
+inv py.build
+#+END_SRC
+
+Then just commit them like you would any other helper script.
+
+
+When you want to update your tools just run:
+
+#+BEGIN_SRC bash
+jubeo update .
+git commit -m "updated jubeo tools"
+#+END_SRC
+
+If you don't like the new changes, just roll back that commit! No more
+figuring out dependency hell for your tooling. Just fix the problem
+and get back to work.
+
+It also allows you to add custom tasks and targets for your project
+which will always be necessary. Just write new ~invoke~ files in the
+~tasks/plugins~ folder and add them to the list in
+~tasks/plugins/__init__.py~
+
+It leverages ~invoke~ and ~doit~ (WIP) to give a uniform command-line
+interface across all tools.
+
+Since a specific directory layout is usually expected (hey we can't
+fix everything!) it is supported by a collection of [[https://github.com/cookiecutter/cookiecutter][cookiecutters]] for
+bootstrapping projects as well:
+
+- [[https://github.com/salotz/meta-cookiecutter][meta-cookiecutter]] :: For generating new cookiecutter projects.
+- [[https://github.com/salotz/jubeo-cookiecutter][jubeo-cookiecutter]] :: For generating new jubeo repos.
+- [[https://github.com/salotz/salotz-py-cookiecutter][salotz-py-cookiecutter]] :: For generating python projects in the way
+     I think is best.
+- [[https://github.com/salotz/analytics-cookiecutter][analytics-cookiecutter]] :: For generating data science projects with
+     pipelines, data management, modules, packaging, and deployment.
+
+
