@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Software Projects | Salotz's Homepage</title>
+<link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
+<link rel="canonical" href="https://salotz.info/pages/software/">
+<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><meta name="author" content="Samuel D. Lotz">
+<meta property="og:site_name" content="Salotz's Homepage">
+<meta property="og:title" content="Software Projects">
+<meta property="og:url" content="https://salotz.info/pages/software/">
+<meta property="og:description" content="PhD Related
+
+
+
+wepy
+
+
+Repo: https://github.com/ADicksonLab/wepy
+
+
+
+wepy is a pure-python framework and library I wrote to support my
+PhD thesis work in doing weighted ensemble simulations of drug
+bind">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2020-04-10T09:33:52-04:00">
+</head>
+<body>
+<a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+
+<!-- Header and menu bar -->
+<div class="container">
+      <header class="blog-header py-3"><div class="row nbb-header align-items-center">
+          <div class="col-md-3 col-xs-2 col-sm-2" style="width: auto;">
+            <button class="navbar-toggler navbar-light bg-light nbb-navbar-toggler" type="button" data-toggle="collapse" data-target=".bs-nav-collapsible" aria-controls="bs-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse bs-nav-collapsible bootblog4-search-form-holder">
+                
+            </div>
+        </div>
+          <div class="col-md-6 col-xs-10 col-sm-10 bootblog4-brand" style="width: auto;">
+            <a class="navbar-brand blog-header-logo text-dark" href="https://salotz.info/">
+
+            <span id="blog-title">Salotz's Homepage</span>
+        </a>
+          </div>
+            <div class="col-md-3 justify-content-end align-items-center bs-nav-collapsible collapse flex-collapse bootblog4-right-nav">
+            <nav class="navbar navbar-light bg-white"><ul class="navbar-nav bootblog4-right-nav">
+<li class="nav-item">
+    <a href="index.org" id="sourcelink" class="nav-link">Source</a>
+    </li>
+
+
+                    
+            </ul></nav>
+</div>
+    </div>
+</header><nav class="navbar navbar-expand-md navbar-light bg-white static-top"><div class="collapse navbar-collapse bs-nav-collapsible" id="bs-navbar">
+            <ul class="navbar-nav nav-fill d-flex w-100">
+<li class="nav-item">
+<a href="../../index.html" class="nav-link">About Me</a>
+                </li>
+<li class="nav-item active">
+<a href="." class="nav-link">Software <span class="sr-only">(active)</span></a>
+                </li>
+<li class="nav-item">
+<a href="../portfolio/" class="nav-link">Analytics Portfolio</a>
+                </li>
+<li class="nav-item">
+<a href="../../blog/" class="nav-link">Blog</a>
+                </li>
+<li class="nav-item">
+<a href="../../categories/" class="nav-link">Tags</a>
+                </li>
+<li class="nav-item">
+<a href="../../rss.xml" class="nav-link">RSS feed</a>
+
+                
+            </li>
+</ul>
+</div>
+<!-- /.navbar-collapse -->
+</nav>
+</div>
+
+<div class="container" id="content" role="main">
+    <div class="body-content">
+        <!--Body content-->
+        
+        
+        
+<article class="post-text storypage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">Software Projects</a></h1>
+
+        
+
+    </header><div class="e-content entry-content" itemprop="articleBody text">
+    <div id="outline-container-orgb30e8bd" class="outline-2">
+<h2 id="orgb30e8bd">PhD Related</h2>
+<div class="outline-text-2" id="text-orgb30e8bd">
+</div>
+<div id="outline-container-orgb92a24f" class="outline-3">
+<h3 id="orgb92a24f">wepy</h3>
+<div class="outline-text-3" id="text-orgb92a24f">
+<p>
+Repo: <a href="https://github.com/ADicksonLab/wepy">https://github.com/ADicksonLab/wepy</a>
+</p>
+
+<p>
+<code>wepy</code> is a pure-python framework and library I wrote to support my
+PhD thesis work in doing <b>weighted ensemble</b> simulations of drug
+binding via the <a href="http://openmm.org/">OpenMM extension</a>.
+</p>
+
+<p>
+The main feature of <code>wepy</code> was to add support for fast prototyping new
+<b>resampling</b> algorithms that are substantially more flexible &amp; complex
+than other libraries allowed for.
+</p>
+
+<p>
+It also has support for a general purpose random-access single-file
+database format in HDF5 that drastically simplifies the organization
+of simulation data as well as making it cross-platform; avoiding bugs
+such as those arising from differences in lexical sorting of file
+names between different OSes.
+</p>
+
+<p>
+<code>wepy</code> simulations are assembled and configured in python and avoids
+the complexities of dealing with various static configuration files
+(which are really only necessary for allowing untrusted users to
+customize behavior).
+</p>
+
+<p>
+<code>wepy</code> is highly customizable while still isolating each component
+making it very simple to extend only the things you need.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org87cf59d" class="outline-3">
+<h3 id="org87cf59d">mastic</h3>
+<div class="outline-text-3" id="text-org87cf59d">
+<p>
+Repo: <a href="https://github.com/ADicksonLab/mastic">https://github.com/ADicksonLab/mastic</a>
+</p>
+
+<p>
+This is a library for profiling arbitrary inter-molecular interactions
+in molecular systems.
+</p>
+
+<p>
+It provides automatic detection of functional groups through <code>rdkit</code>
+but also allows you to define your own definitions for functional
+groups.
+</p>
+
+<p>
+It provides a library of common functional groups for profiling, but
+this is extensible as well.
+</p>
+
+<p>
+Results come as pure-python objects as well as pandas tables which can
+then be exported to any format or database.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org61158d3" class="outline-3">
+<h3 id="org61158d3">geomm</h3>
+<div class="outline-text-3" id="text-org61158d3">
+<p>
+Repo: <a href="https://github.com/ADicksonLab/geomm">https://github.com/ADicksonLab/geomm</a>
+</p>
+
+<p>
+<code>geomm</code> is a python library that provides pure-function
+implementations for common computations in biophysics.
+</p>
+
+<p>
+It is mainly a response to most libraries in the field of biophysics
+all having mutually incompatible in-memory object representations and
+the need to convert between all of them when composing them.
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org2cda251" class="outline-2">
+<h2 id="org2cda251">General Purpose Utilities</h2>
+<div class="outline-text-2" id="text-org2cda251">
+<dl class="org-dl">
+<dt><a href="https://github.com/salotz/dask_scheduler"><code>dask_scheduler</code></a></dt>
+<dd>Simple command line interface to start a dask
+scheduling server.</dd>
+<dt><a href="https://github.com/salotz/bibby"><code>bibby</code></a></dt>
+<dd>Command line interface to update a local bibtex file from
+<a href="https://www.bibsonomy.org/">bibsonomy.org</a> for paper and book citations.</dd>
+<dt><a href="https://github.com/salotz/inkscape_pages"><code>inkscape_pages</code></a></dt>
+<dd>CLI to turn a multi-layer Inkscape SVG file into a
+multi-page PDF. I use this for making slide decks.</dd>
+<dt><a href="https://github.com/salotz/fshank"><code>fshank</code></a></dt>
+<dd>Python library with nice data structures for representing,
+parsing, and writing <code>fstab</code> files. Idea is to configure <code>fstab</code>
+information in a nicer more forgiving format (like <code>toml</code>).</dd>
+<dt><a href="https://github.com/salotz/py_rsync"><code>py_rsync</code></a></dt>
+<dd>Python libray for generating <code>rsync</code> command
+strings from python dataclasses. Used in <code>refugue</code>.</dd>
+<dt><a href="https://github.com/salotz/slurmify"><code>slurmify</code></a></dt>
+<dd>Generate submission scripts for the SLURM job scheduler
+from shell scripts that is configurable via <code>toml</code>.</dd>
+<dt><a href="https://github.com/salotz/python_serialize_test">python <code>serialize_test</code></a></dt>
+<dd>Simple utility to quickly benchmark the
+speed of various python serialization tools on files of your
+choice.</dd>
+<dt><a href="https://github.com/salotz/pymatuning">pymatuning</a></dt>
+<dd>Generate org-mode TODO hierarchies from python
+modules. I used this to generate a TODO list for writing/auditing
+docstrings for my large projects.</dd>
+</dl>
+</div>
+</div>
+
+
+<div id="outline-container-org948c0ab" class="outline-2">
+<h2 id="org948c0ab">Personal Productivity</h2>
+<div class="outline-text-2" id="text-org948c0ab">
+</div>
+<div id="outline-container-org9cee199" class="outline-3">
+<h3 id="org9cee199">bim suite</h3>
+<div class="outline-text-3" id="text-org9cee199">
+<p>
+Configurations for users in Unix-like environments (like linux) is a
+major pain point for beginners and advanced users alike.
+</p>
+
+<p>
+I have been slowly developing a set of tools to regain some sanity and
+add some essential features.
+</p>
+
+<p>
+They are (in order of maturity):
+</p>
+
+<dl class="org-dl">
+<dt><a href="https://github.com/salotz/bimhaw"><code>bimhaw</code></a></dt>
+<dd>Which is a layer of indirection over shell
+configurations (i.e. <code>.profile</code> and <code>.bashrc</code> files) that is
+semantically meaningful and allows for componentization and
+several distinct user profiles.</dd>
+<dt><a href="https://github.com/salotz/bimker"><code>bimker</code></a></dt>
+<dd>Because <code>$HOME</code> is a warzone. A toolset and directory
+schema for your "dotfiles" and bootstrapping user configurations
+into new computers and environments.</dd>
+<dt><code>bimsec</code></dt>
+<dd>Tool and flows for managing credentials and secrets
+across different computers and environments.</dd>
+<dt><code>bimtree</code></dt>
+<dd>Tools, schemas, &amp; flows for managing files and projects
+across different <b>domains</b> (e.g. work, personal, hobby
+groups).</dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-org1421021" class="outline-3">
+<h3 id="org1421021">refugue</h3>
+<div class="outline-text-3" id="text-org1421021">
+<p>
+Repo: <a href="https://github.com/salotz/refugue">https://github.com/salotz/refugue</a>
+</p>
+
+<p>
+<code>refugue</code> is a tool for managing data synchronizations between a
+personal network of computers and drives.
+</p>
+
+<p>
+It allows you to perform synchronizations from any computer (actually
+the more fine-grained concept of a <b>replica</b>) by using meaningful <b>pet
+names</b> instead of network addresses.
+</p>
+
+<p>
+Synchronizations are specified using a small vocabulary of
+well-documented behaviors that are then "compiled" to the underlying
+tool being used to perform transfers (i.e. <code>rsync</code>).
+</p>
+
+<p>
+It also simplifies and unifies the process of defining <b>working sets</b>
+that are to be present on different machines.  For instance having
+different sets of files on your laptop vs. your servers.
+</p>
+
+<p>
+Here is an example:
+</p>
+
+<div class="highlight"><pre><span></span>refugue --sync='' computerA/tree computerB/backup
+</pre></div>
+
+<p>
+Where <code>computerA/tree</code> and <code>computerB/bacup</code> are file subtree on a
+specific host or disk drive.
+</p>
+
+<p>
+Working sets for each are defined in a local versionable configuration
+file and need not be executed on either of the two computers in the
+command (as long as they are reachable via ssh).
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1b6d7b7" class="outline-3">
+<h3 id="org1b6d7b7">jubeo: Meta-Project Protocol</h3>
+<div class="outline-text-3" id="text-org1b6d7b7">
+<p>
+Repo: <a href="https://github.com/salotz/jubeo">https://github.com/salotz/jubeo</a>
+</p>
+
+<p>
+The name is stolen from object based systems like Smalltalk and Common
+Lisp's Meta-Object Protocol which is a way to update "living" code
+objects.
+</p>
+
+<p>
+This is a tool for updating and maintaining tooling for different
+types of projects (software dev, analytics, website design, etc.).
+</p>
+
+<p>
+The overarching goal is to regain some of the original unix-philosophy
+of writing small tools that do one thing, and <i>work well
+together</i>. I.e. developing polyrepos (as opposed to monorepos).
+</p>
+
+<p>
+The problem is that in modern dev environments there are so many
+things to set up and manage:
+</p>
+
+<ul class="org-ul">
+<li>versioning</li>
+<li>tests</li>
+<li>releases</li>
+<li>building documentation</li>
+<li>running regression tests</li>
+<li>code formatting</li>
+<li>type checking</li>
+<li>managing virtual environments</li>
+</ul>
+<p>
+Which can get tedious very quickly if you have more than a few
+projects to do this all for.
+</p>
+
+<p>
+Historically, this was done through makefiles which is a practice
+almost long-forgotten by python devs. And as a result a dizzying
+plethora of repository management tools have come up that try to do
+all of this in one package.
+</p>
+
+<p>
+<code>jubeo</code> allows you to configure simple tools in one place (a
+repository and component modules) and then distribute (through simple
+file copying) to many different projects, while allowing you to name
+tasks semantically rather than based on specific tools (i.e. <code>build</code>
+rather than <code>python setup.py sdist wheel</code>).
+</p>
+
+<p>
+Furthermore, once tools are copied they belong to the code base and
+are versioned along with it. You aren't adding a dependency on jubeo
+to give you this stuff. All <code>jubeo</code> does is make it simple to update
+or fix tooling (such as <code>build</code>, <code>release</code>, &amp; <code>publish</code>) that are all
+the same across many different projects.
+</p>
+
+<p>
+This makes it much lower friction to just make a new tool (i.e. a
+different package to `pip install`) rather than adding a feature to an
+existing CLI you are familiar with since you won't have to manually
+perform all the boring stuff maintainers do.
+</p>
+
+<p>
+In an existing project you would run something similar to get started
+(on a new python package):
+</p>
+
+<div class="highlight"><pre><span></span>jubeo init --upstream=git+https://github.com/salotz/jubeo.git#repos/python .
+pip install -r .jubeo/requirements.txt
+</pre></div>
+
+<p>
+Then you should be able to see all the tasks that are available to you:
+</p>
+<div class="highlight"><pre><span></span>inv -l
+inv py.build
+</pre></div>
+
+<p>
+Then just commit them like you would any other helper script.
+</p>
+
+
+<p>
+When you want to update your tools just run:
+</p>
+
+<div class="highlight"><pre><span></span>jubeo update .
+git commit -m "updated jubeo tools"
+</pre></div>
+
+<p>
+If you don't like the new changes, just roll back that commit! No more
+figuring out dependency hell for your tooling. Just fix the problem
+and get back to work.
+</p>
+
+<p>
+It also allows you to add custom tasks and targets for your project
+which will always be necessary. Just write new <code>invoke</code> files in the
+<code>tasks/plugins</code> folder and add them to the list in
+<code>tasks/plugins/__init__.py</code>
+</p>
+
+<p>
+It leverages <code>invoke</code> and <code>doit</code> (WIP) to give a uniform command-line
+interface across all tools.
+</p>
+
+<p>
+Since a specific directory layout is usually expected (hey we can't
+fix everything!) it is supported by a collection of <a href="https://github.com/cookiecutter/cookiecutter">cookiecutters</a> for
+bootstrapping projects as well:
+</p>
+
+<dl class="org-dl">
+<dt><a href="https://github.com/salotz/meta-cookiecutter">meta-cookiecutter</a></dt>
+<dd>For generating new cookiecutter projects.</dd>
+<dt><a href="https://github.com/salotz/jubeo-cookiecutter">jubeo-cookiecutter</a></dt>
+<dd>For generating new jubeo repos.</dd>
+<dt><a href="https://github.com/salotz/salotz-py-cookiecutter">salotz-py-cookiecutter</a></dt>
+<dd>For generating python projects in the way
+I think is best.</dd>
+<dt><a href="https://github.com/salotz/analytics-cookiecutter">analytics-cookiecutter</a></dt>
+<dd>For generating data science projects with
+pipelines, data management, modules, packaging, and deployment.</dd>
+</dl>
+</div>
+</div>
+</div>
+    </div>
+    
+
+</article><!--End of body content--><footer id="footer">
+            Contents © 2020         <a href="mailto:samuel.lotz@salotz.info">Samuel D. Lotz</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+            
+            
+        </footer>
+</div>
+</div>
+
+
+        <script src="../../assets/js/all-nocdn.js"></script><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+    </script>
+</body>
+</html>
