@@ -6,15 +6,71 @@
     xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <sitemap>
-  <loc>https://salotz.info/galleries/rss.xml</loc>
-  <lastmod>2020-04-10T17:24:00Z</lastmod>
+  <loc>https://salotz.info/categories/blog.xml</loc>
+  <lastmod>2020-10-23T15:52:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://salotz.info/categories/cron.xml</loc>
+  <lastmod>2020-10-23T15:52:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://salotz.info/categories/introduction.xml</loc>
+  <lastmod>2020-10-23T15:52:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://salotz.info/categories/linux.xml</loc>
+  <lastmod>2020-10-23T15:52:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://salotz.info/categories/nikola.xml</loc>
+  <lastmod>2020-10-23T15:52:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://salotz.info/categories/nix.xml</loc>
+  <lastmod>2020-10-23T15:52:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://salotz.info/categories/runit.xml</loc>
+  <lastmod>2020-10-23T15:52:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://salotz.info/categories/scheduling.xml</loc>
+  <lastmod>2020-10-23T15:52:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://salotz.info/categories/snooze.xml</loc>
+  <lastmod>2020-10-23T15:52:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://salotz.info/categories/static-sites.xml</loc>
+  <lastmod>2020-10-23T15:52:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://salotz.info/categories/systemd.xml</loc>
+  <lastmod>2020-10-23T15:52:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://salotz.info/categories/tips.xml</loc>
+  <lastmod>2020-10-23T15:52:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://salotz.info/categories/tricks.xml</loc>
+  <lastmod>2020-10-23T15:52:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://salotz.info/categories/unix.xml</loc>
+  <lastmod>2020-10-23T15:52:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://salotz.info/categories/utilities.xml</loc>
+  <lastmod>2020-10-23T15:52:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://salotz.info/rss.xml</loc>
-  <lastmod>2020-04-10T15:22:00Z</lastmod>
+  <lastmod>2020-10-23T15:52:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://salotz.info/sitemap.xml</loc>
-  <lastmod>2020-04-10T19:22:00Z</lastmod>
+  <lastmod>2020-10-23T15:52:00Z</lastmod>
  </sitemap>
 </sitemapindex>

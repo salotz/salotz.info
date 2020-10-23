@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Salotz's Homepage (Posts about nikola)</title><link>https://salotz.info/</link><description></description><atom:link href="https://salotz.info/categories/nikola.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2020 &lt;a href="mailto:samuel.lotz@salotz.info"&gt;Samuel D. Lotz&lt;/a&gt; </copyright><lastBuildDate>Fri, 23 Oct 2020 15:52:09 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Blog Launch</title><link>https://salotz.info/posts/blog_launch/</link><dc:creator>Samuel D. Lotz</dc:creator><description>&lt;p&gt;
+Here is my obligatory blog launch post where I tell you about how I
+created my blog and so that there is at least one post here ;)
+&lt;/p&gt;
+
+&lt;div id="outline-container-orgb538fc4" class="outline-2"&gt;
+&lt;h2 id="orgb538fc4"&gt;This Blog&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgb538fc4"&gt;
+&lt;p&gt;
+I ended up choosing &lt;a href="https://getnikola.com/"&gt;Nikola&lt;/a&gt; mainly because:
+&lt;/p&gt;
+
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;It's written and extended in Python (my default language)&lt;/li&gt;
+&lt;li&gt;It has pretty good support for Emacs Org-Mode markup via a plugin&lt;/li&gt;
+&lt;li&gt;Simple while still supporting basic blog &amp;amp; general purpose web pages&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;
+Nikola is basically a wrapper around &lt;a href="https://pydoit.org/"&gt;&lt;code&gt;doit&lt;/code&gt;&lt;/a&gt; with special functions for
+web pages.
+&lt;/p&gt;
+
+&lt;p&gt;
+&lt;code&gt;doit&lt;/code&gt; is essentially a python programmable replacement for &lt;code&gt;make&lt;/code&gt;,
+and just about every experience report with static site generators is
+that they are just fancy makefiles. QED
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-org1f903bd" class="outline-2"&gt;
+&lt;h2 id="org1f903bd"&gt;Future Posts&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org1f903bd"&gt;
+&lt;p&gt;
+In future posts I hope to discuss some practical issues around:
+&lt;/p&gt;
+
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;Tools and tips for data science projects as applications and
+pipelines.&lt;/li&gt;
+&lt;li&gt;Managing dependencies, virtualenvs, repository structure, and
+release management for python projects.&lt;/li&gt;
+&lt;li&gt;Setting up and managing personal configuration and infrastructure in
+a linux environment.&lt;/li&gt;
+&lt;li&gt;Software architecture and design.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;
+The goal of my posts will not be tutorials around how to use specific
+tools but rather how they all can fit together and integrate.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-org4fed9ac" class="outline-2"&gt;
+&lt;h2 id="org4fed9ac"&gt;Potential Collaborations&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org4fed9ac"&gt;
+&lt;p&gt;
+Check out my list of &lt;a href="https://salotz.info/pages/projects/"&gt;projects&lt;/a&gt;. I am looking for others to test out and
+critique their design.
+&lt;/p&gt;
+
+&lt;p&gt;
+I also maintain a personal listing of: Request For Comments (RFCs) and
+Proposals For Software (PFS) in this &lt;a href="https://github.com/salotz/rfcs"&gt;repository&lt;/a&gt; (web page to come).
+&lt;/p&gt;
+
+&lt;p&gt;
+Thats it!
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description><category>blog</category><category>introduction</category><category>nikola</category><category>static sites</category><guid>https://salotz.info/posts/blog_launch/</guid><pubDate>Fri, 10 Apr 2020 14:19:54 GMT</pubDate></item></channel></rss>

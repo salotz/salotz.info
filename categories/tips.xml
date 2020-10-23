@@ -1,0 +1,875 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Salotz's Homepage (Posts about tips)</title><link>https://salotz.info/</link><description></description><atom:link href="https://salotz.info/categories/tips.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2020 &lt;a href="mailto:samuel.lotz@salotz.info"&gt;Samuel D. Lotz&lt;/a&gt; </copyright><lastBuildDate>Fri, 23 Oct 2020 21:52:05 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Cron alternative with runit and snooze</title><link>https://salotz.info/posts/runit_snooze/</link><dc:creator>Samuel D. Lotz</dc:creator><description>&lt;p&gt;
+I have tried many times to use &lt;code&gt;cron&lt;/code&gt; effectively, but ultimately this
+ends in failure each time. Lets look at why I find cron onerous and
+a solution I came up with&lt;sup&gt;&lt;a id="fnr.1" class="footref" href="https://salotz.info/posts/runit_snooze/#fn.1"&gt;1&lt;/a&gt;&lt;/sup&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;
+Skip to this &lt;a href="https://salotz.info/posts/runit_snooze/#solution"&gt;section&lt;/a&gt; if you just want to see the solution.
+&lt;/p&gt;
+
+&lt;div id="outline-container-orgefa40c2" class="outline-2"&gt;
+&lt;h2 id="orgefa40c2"&gt;Non-Issues&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgefa40c2"&gt;
+&lt;p&gt;
+Conceptually specifying when to run things with a special syntax
+is not a bad idea and not why I find cron hard to use.
+&lt;/p&gt;
+
+&lt;p&gt;
+Just as a reminder this is what a cron job I found in my system for
+the &lt;code&gt;dma&lt;/code&gt; mail agent:
+&lt;/p&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;*/5 *	* * *	root	[ -x /usr/sbin/dma ] &amp;amp;&amp;amp; /usr/sbin/dma -q1
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;
+The meaning and examples for the timing specs are well known and not
+really an issue here. There are lots of alternatives that try to
+improve on this, this is not one of them (although it is different in
+this regard).
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-org8c9eef7" class="outline-2"&gt;
+&lt;h2 id="org8c9eef7"&gt;Sys-Admin Orientation&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org8c9eef7"&gt;
+&lt;p&gt;
+My first issue with &lt;code&gt;cron&lt;/code&gt; is that it is inseparable (or at least
+practically so) from the base *nix system. That means you can't run it
+as a user as it is meant to be the scheduled thing runner for a
+multi-user system. So while you can have the system run things on
+behalf of you as a user you can't really control it.
+&lt;/p&gt;
+
+
+
+&lt;p&gt;
+In this day and age, multi-user systems are becoming pretty rare
+outside HPCC systems in academia and gov't labs. For most people they
+want to run simple recurring tasks on their desktop, laptop, VPS
+server, or maybe even a homelab server. In all these cases user's are
+usually simply mechanisms for implementing access control and not for
+distinct human entities.
+&lt;/p&gt;
+
+&lt;p&gt;
+This kind of sysadmin oriented baggage is pretty pervasive in *nix
+systems and cron is not alone here.
+&lt;/p&gt;
+
+&lt;p&gt;
+Because cron is so deeply embedded into the lizard brain of *nix it is
+necessary to have a properly running and configured cron for the
+stability of your system.
+&lt;/p&gt;
+
+&lt;p&gt;
+As a reasonably competent user of linux desktops, the thought of
+inadvertently messing up &lt;code&gt;/etc/crontab&lt;/code&gt; and its ilk is enough to keep
+me away from it.
+&lt;/p&gt;
+
+&lt;p&gt;
+For instance where exactly am I supposed to put a cron job? On Ubuntu
+20.04 (KDE Neon actually) I see this in my &lt;code&gt;/etc&lt;/code&gt; dir:
+&lt;/p&gt;
+
+&lt;pre class="example"&gt;
+--&amp;gt; ls /etc/ | grep cron
+anacrontab
+cron.d
+cron.daily
+cron.hourly
+cron.monthly
+crontab
+cron.weekly
+&lt;/pre&gt;
+
+&lt;p&gt;
+Additionally this is highly variable distro to distro.
+&lt;/p&gt;
+
+&lt;p&gt;
+For instance here is part of the &lt;code&gt;man&lt;/code&gt; page for cron on my system:
+&lt;/p&gt;
+
+
+&lt;pre class="example"&gt;
+DEBIAN SPECIFIC
+       Debian introduces some changes to cron that were not originally available  upstream.   The  most
+       significant changes introduced are:
+
+       —      Support for /etc/cron.{hourly,daily,weekly,monthly} via /etc/crontab,
+
+       —      Support for /etc/cron.d (drop-in dir for package crontabs),
+
+       —      PAM support,
+
+       —      SELinux support,
+
+       —      auditlog support,
+
+       —      DST and other time-related changes/fixes,
+
+       —      SGID crontab(1) instead of SUID root,
+
+       —      Debian-specific file locations and commands,
+
+       —      Debian-specific configuration (/etc/default/cron),
+
+       —      numerous other smaller features and fixes.
+
+       Support  for  /etc/cron.hourly,  /etc/cron.daily, /etc/cron.weekly and /etc/cron.monthly is pro‐
+       vided in Debian through the default setting of the /etc/crontab file (see the system-wide  exam‐
+       ple  in crontab(5)).  The default system-wide crontab contains four tasks: run every hour, every
+       day, every week and every month.  Each of these tasks will execute run-parts providing each  one
+       of the directories as an argument.  These tasks are disabled if anacron is installed (except for
+       the hourly task) to prevent conflicts between both daemons.
+&lt;/pre&gt;
+
+&lt;p&gt;
+This goes on for several more paragraphs of neckbeard-speak that I
+don't pretend to understand. Am I running &lt;code&gt;anacron&lt;/code&gt;? Why? What is
+&lt;code&gt;run-parts&lt;/code&gt;? Its obvious a lot of this is for security purposes that
+are important in enterprise environments that a professional sysadmin
+is paid a hefty salary to comprehend.  So there is probably a simple
+answer to this mess, except I don't have direct access to the people
+who made this mess to ask them.
+&lt;/p&gt;
+
+&lt;p&gt;
+This is a scenario where reading the manual leaves me more confused
+than I started. I'll probably get chastised for overcomplicating
+things. In pre-emptive response I will leave this quote from James
+Clear's mailing list I got today:
+&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;
+To simplify before you understand the details is ignorance.
+&lt;/p&gt;
+
+&lt;p&gt;
+To simplify after you understand the details is genius.
+&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;
+I'm in the former category.
+&lt;/p&gt;
+
+&lt;p&gt;
+I would &lt;i&gt;like&lt;/i&gt; to schedule backups to happen everynight, but I would
+rather not upset the fragile balance distro maintainers have made to
+keep your desktop running "smoothly".
+&lt;/p&gt;
+
+&lt;p&gt;
+Cron is simply not meant for a simple user like me.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+&lt;div id="outline-container-org3e5e6dc" class="outline-2"&gt;
+&lt;h2 id="org3e5e6dc"&gt;Control &amp;amp; Supervision&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org3e5e6dc"&gt;
+&lt;p&gt;
+The second major problem I had with cron was the real lack of control
+you have over it. You write text into the file and cron goes off and
+does its thing, just like Ritchie and Thompson intended.
+&lt;/p&gt;
+
+&lt;p&gt;
+Everyone with a modicum of understanding of why databases exist sees
+the obvious issues with inconsistency that this has. So no longer can
+you just edit &lt;code&gt;/etc/crontab&lt;/code&gt; but rather you are supposed to go through
+helper tools (like &lt;code&gt;crontab&lt;/code&gt;) which does all manner of locking and
+gatekeeping to desparately pretend its a database.
+&lt;/p&gt;
+
+&lt;p&gt;
+Using tools that automatically open up editors is another pet-peeve of
+mine since you now are bringing in a lot of other assumptions about
+the configuration of your system. I hope you know how to safely close
+files in &lt;code&gt;nano&lt;/code&gt; and &lt;code&gt;vi&lt;/code&gt;!  Further, I like to keep all my
+configurations in a central configuration directory that I can use
+normal version control etc. How am I supposed to "load" these into the
+cron jobs without manually copy-pasting, at least if your going by the
+"manual". Aren't these systems supposed to be scriptable? &lt;sup&gt;&lt;a id="fnr.2" class="footref" href="https://salotz.info/posts/runit_snooze/#fn.2"&gt;2&lt;/a&gt;&lt;/sup&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
+As we'll get to in the actual solution I'm presenting here, the
+loading, unloading, restarting, pausing etc. of jobs is eerily similar
+to the feature sets used in PID 0 programs like &lt;code&gt;systemd&lt;/code&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;
+Indeed &lt;code&gt;systemd&lt;/code&gt; has a similar timer system, which has much better
+control, but again suffers from being sysadmin oriented. Also writing
+unit files blows. I do it, but I try not to.
+&lt;/p&gt;
+
+&lt;p&gt;
+Back to cron though, the only solution to this I have found is to
+install a program called &lt;a href="https://cronitor.io/"&gt;cronitor&lt;/a&gt;, which is like a freemium tool that
+really isn't that scriptable either due to the (very nice) terminal
+UI. This is useful, but I don't really see this as something I can
+expect to have going into the future on all my systems.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-org2036682" class="outline-2"&gt;
+&lt;h2 id="org2036682"&gt;Observability &amp;amp; Logging Utilities&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org2036682"&gt;
+&lt;p&gt;
+I was able to get through all the issues above through sheer force of
+will, but ultimately I was done in by the necessary interaction of
+cron to two even more obtuse systems in *nix: email and logging.
+&lt;/p&gt;
+
+&lt;p&gt;
+Email is sort of baked into cron and from what I can tell is the main
+way of getting notifications that running things had issues.
+&lt;/p&gt;
+
+&lt;p&gt;
+For instance if your trying to run a script and you got the path wrong
+you'll need a working email server for cron to send a message. And if
+you give a mouse a cookie…
+&lt;/p&gt;
+
+&lt;p&gt;
+Then you'll need to make sure your mail boxes for the users on your
+system are working, you know where they are and you have a client for
+reading them.
+&lt;/p&gt;
+
+&lt;p&gt;
+This seems like a huge dependency to have to just get a message about
+a job having an error in it?
+&lt;/p&gt;
+
+&lt;p&gt;
+Shouldn't there just be a log file I can pop open in a text editor
+(like Ritchie and Thompson intended goddamit)?
+&lt;/p&gt;
+
+&lt;p&gt;
+For me and I'm sure many others, I've never had a need to interact
+with intra-system email. Even on the HPCC systems I worked in for my
+PhD this is basically an unused feature.
+&lt;/p&gt;
+
+
+&lt;p&gt;
+When you do get jobs running without error (and thus no reason to
+email you), you'll want to see their logs too.
+&lt;/p&gt;
+
+&lt;p&gt;
+In cron, its completely up to you to create and manage the lifecycle
+of logs in your system. While in theory this is a good thing since it
+allows you to not be locked into something you hate, in practice for
+non-neckbeards it involves you having detailed knowledge of yet
+another complex subsystem.
+&lt;/p&gt;
+
+&lt;p&gt;
+I simply don't know where to even start here. The cron docs say to use
+&lt;code&gt;rsyslogd&lt;/code&gt;, which I don't know how to use. Furthermore, my system is
+using systemd which has nice commands that show you the latest in the
+logs. Is this subsystem disjoint? It wouldn't suprise me that they
+would jump through different calcified hoops to keep 40 year old
+things running.
+&lt;/p&gt;
+
+&lt;p&gt;
+Again there is probably a simple answer to all this, but its one that
+reading the man page can't get you. I don't log a lot of stuff, but
+mistakes happen and logs can fill up a &lt;code&gt;/&lt;/code&gt; partition scarily easy.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+&lt;div id="outline-container-org217fe06" class="outline-2"&gt;
+&lt;h2 id="org217fe06"&gt;Runit tutorial&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org217fe06"&gt;
+&lt;p&gt;
+I've contemplated and even tried a few alternatives to cron. This one
+was discovered while throwing stones at other birds. I was pleasantly
+surprised.
+&lt;/p&gt;
+
+&lt;p&gt;
+Basically it boils down to using a process supervisor called &lt;a href="http://smarden.org/runit/"&gt;runit&lt;/a&gt;
+and a fancy big brother to the unix &lt;code&gt;sleep&lt;/code&gt; command called &lt;a href="https://github.com/leahneukirchen/snooze"&gt;snooze&lt;/a&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;
+Runit was originally meant to be a replacement for older init systems
+like &lt;code&gt;sysvinit&lt;/code&gt; that is cross-platform as well as very simple and not
+requiring many libraries. This was to suite it as part of the core
+system to bootstrap everything else (think cron and &lt;code&gt;sshd&lt;/code&gt; etc.).
+&lt;/p&gt;
+
+&lt;p&gt;
+While these are nice characteristics they aren't killer for us
+here. However, nowadays its pretty popular with the anti-systemd
+crowd. Its an option for init systems in Gentoo and others and is the
+default in Void linux. Besides its simplicity it is pretty easy to get
+up and configured and you just run a few shell scripts to get
+everything going.
+&lt;/p&gt;
+
+&lt;p&gt;
+I have a few complaints
+&lt;/p&gt;
+
+&lt;ol class="org-ol"&gt;
+&lt;li&gt;the documentation is kind of nonlinear and doesn't give you a
+walkthrough of how to use the whole system &lt;sup&gt;&lt;a id="fnr.3" class="footref" href="https://salotz.info/posts/runit_snooze/#fn.3"&gt;3&lt;/a&gt;&lt;/sup&gt;.&lt;/li&gt;
+&lt;li&gt;commands are disjointed and spread between a number of executables
+and use of standard unix commands like &lt;code&gt;ln&lt;/code&gt; and &lt;code&gt;rm&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;
+The second point is actually a feature where each of the little
+components can be used standalone. However, this makes it a little
+more confusing to wrap your head around and I found myself constantly
+reviewing my notes to know which command to use.
+&lt;/p&gt;
+
+&lt;p&gt;
+I solved this with a few shell functions, but I would like to see a
+wrapper CLI to make it a little centralized conceptually (and to add a
+few convenience features) for those that would want it.
+&lt;/p&gt;
+
+&lt;p&gt;
+Reading these articles also helped in understanding it:
+&lt;/p&gt;
+
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;&lt;a href="https://www.mikeperham.com/2014/07/07/use-runit/"&gt;https://www.mikeperham.com/2014/07/07/use-runit/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://rubyists.github.io/2011/05/02/runit-for-ruby-and-everything-else.html"&gt;https://rubyists.github.io/2011/05/02/runit-for-ruby-and-everything-else.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;
+Even after reading these I had to muck around and figure a bunch of
+little details out so I thought I would throw my own little tutorial
+on the pile to hopefully save some people's time and make runit a
+little more approachable.
+&lt;/p&gt;
+
+&lt;p&gt;
+Luckily on Ubuntu 20.04 its really easy to get runit installed and
+running as a systemd service. Just install using apt:
+&lt;/p&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt install runit
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;
+This even starts the service:
+&lt;/p&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo systemctl status runit
+sudo journalctl -u runit
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;
+Normally there are 3 &lt;i&gt;stages&lt;/i&gt; (i.e. states) runit has:
+&lt;/p&gt;
+
+&lt;ol class="org-ol"&gt;
+&lt;li&gt;Single run tasks on startup&lt;/li&gt;
+&lt;li&gt;Process supervision: starting, stopping, restarting services&lt;/li&gt;
+&lt;li&gt;Shutting services down as the system goes down&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;
+Because we aren't using runit as a PID 0 init system, we only care
+about stage 2 &amp;amp; 3. The &lt;code&gt;apt&lt;/code&gt; installation takes care of this for us
+thankfully.
+&lt;/p&gt;
+
+&lt;p&gt;
+So you should see the following directories appear:
+&lt;/p&gt;
+
+&lt;dl class="org-dl"&gt;
+&lt;dt&gt;&lt;code&gt;/etc/runit&lt;/code&gt;&lt;/dt&gt;&lt;dd&gt;stages and runlevel stuff, ignore this (for now).&lt;/dd&gt;
+&lt;dt&gt;&lt;code&gt;/etc/sv&lt;/code&gt;&lt;/dt&gt;&lt;dd&gt;The services directory, this is where you author things.&lt;/dd&gt;
+&lt;dt&gt;&lt;code&gt;/etc/service&lt;/code&gt;&lt;/dt&gt;&lt;dd&gt;This is where "enabled" services are put.&lt;/dd&gt;
+&lt;/dl&gt;
+
+&lt;p&gt;
+I'll call these different directories by the environment variable I
+refer to them as. I put this in my &lt;code&gt;~/.profile&lt;/code&gt;:
+&lt;/p&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;## runit known env variables&lt;/span&gt;
+
+&lt;span class="c1"&gt;# the active service directory to query for state, this is what it is&lt;/span&gt;
+&lt;span class="c1"&gt;# default, but I like to set so its easier for me to disable services&lt;/span&gt;
+&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;SVDIR&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"/etc/service"&lt;/span&gt;
+
+&lt;span class="c1"&gt;# SNIPPET: the normal wait time&lt;/span&gt;
+&lt;span class="c1"&gt;# export SVWAIT=7&lt;/span&gt;
+
+&lt;span class="c1"&gt;## my vars, not recognized by any runit tools&lt;/span&gt;
+
+&lt;span class="c1"&gt;# this is the standard directory of where services are put for the&lt;/span&gt;
+&lt;span class="c1"&gt;# system. The SerVice LIBrary&lt;/span&gt;
+&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;SVLIB&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"/etc/sv"&lt;/span&gt;
+
+&lt;span class="c1"&gt;# log dir&lt;/span&gt;
+&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;SVLOG_SYS_DIR&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"/var/local/log/runit"&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;
+To define a &lt;b&gt;service&lt;/b&gt; you make a directory in &lt;code&gt;SVLIB&lt;/code&gt; with some
+specially named shell scripts. Mine has these directories in it:
+&lt;/p&gt;
+
+&lt;pre class="example"&gt;
+--&amp;gt; ls $SVLIB
+backup  hello  printer_live  recollindex  test_env
+&lt;/pre&gt;
+
+&lt;p&gt;
+Each one is a specific service. Lets first look at &lt;code&gt;hello&lt;/code&gt; to get a
+simple picture of what these are:
+&lt;/p&gt;
+
+&lt;pre class="example"&gt;
+--&amp;gt; ls $SVLIB/hello
+finish  log  run  supervise
+&lt;/pre&gt;
+
+&lt;p&gt;
+The most important one is &lt;code&gt;run&lt;/code&gt; which is a shell script:
+&lt;/p&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/sh&lt;/span&gt;
+
+&lt;span class="c1"&gt;# run the service&lt;/span&gt;
+&lt;span class="k"&gt;while&lt;/span&gt; :
+&lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"Hello"&lt;/span&gt;
+    sleep &lt;span class="m"&gt;2&lt;/span&gt;
+&lt;span class="k"&gt;done&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;
+This just prints "Hello" to stdout and then waits 2 seconds.
+&lt;/p&gt;
+
+&lt;p&gt;
+This service isn't being run yet. For that you need to put it into the
+&lt;code&gt;SVDIR&lt;/code&gt;:
+&lt;/p&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo ln -s -f &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="nv"&gt;$SVLIB&lt;/span&gt;&lt;span class="s2"&gt;/hello"&lt;/span&gt; &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="nv"&gt;$SVDIR&lt;/span&gt;&lt;span class="s2"&gt;/"&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;
+You can check the status of the service with the &lt;code&gt;sv&lt;/code&gt; command:
+&lt;/p&gt;
+
+&lt;pre class="example"&gt;
+--&amp;gt; sudo sv status $SVDIR/hello
+run: /etc/service/hello: (pid 664634) 193s
+&lt;/pre&gt;
+
+&lt;p&gt;
+You can check the status of all services similarly:
+&lt;/p&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo sv status &lt;span class="nv"&gt;$SVDIR&lt;/span&gt;/*
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;
+If you see this:
+&lt;/p&gt;
+
+&lt;pre class="example"&gt;
+--&amp;gt; sudo sv status $SVDIR/hello
+down: /etc/service/hello: 1s, normally up, want up
+&lt;/pre&gt;
+
+&lt;p&gt;
+There is something wrong with your run script.
+&lt;/p&gt;
+
+&lt;p&gt;
+Looking at &lt;code&gt;sudo systemctl status runit&lt;/code&gt; and &lt;code&gt;sudo journalctl -u
+runit&lt;/code&gt; could usually help me figure the issue out (no email!!!).
+&lt;/p&gt;
+
+&lt;p&gt;
+Once its working you should see the "Hello"s on the log for runit if
+you aren't logging this service:
+&lt;/p&gt;
+
+&lt;pre class="example"&gt;
+--&amp;gt; sudo journalctl -u runit | tail
+Oct 23 16:49:30 ostrich 2[664634]: Hello
+Oct 23 16:49:32 ostrich 2[664634]: Hello
+Oct 23 16:49:34 ostrich 2[664634]: Hello
+Oct 23 16:49:36 ostrich 2[664634]: Hello
+Oct 23 16:49:38 ostrich 2[664634]: Hello
+Oct 23 16:49:40 ostrich 2[664634]: Hello
+Oct 23 16:49:42 ostrich 2[664634]: Hello
+Oct 23 16:49:44 ostrich 2[664634]: Hello
+Oct 23 16:49:46 ostrich 2[664634]: Hello
+Oct 23 16:49:48 ostrich 2[664634]: Hello
+&lt;/pre&gt;
+
+&lt;p&gt;
+Next you'll have the &lt;code&gt;finish&lt;/code&gt; script which is just what should be run
+at the end of the script:
+&lt;/p&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/sh&lt;/span&gt;
+
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"Shutting Down"&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;
+We don't have anything to do really so we just write a message. But
+you could do cleanup stuff here if you want.
+&lt;/p&gt;
+
+&lt;p&gt;
+Last the logging spec. This is a subdirectory called &lt;code&gt;log&lt;/code&gt;:
+&lt;/p&gt;
+
+&lt;pre class="example"&gt;
+--&amp;gt; tree $SVLIB/hello/log
+/etc/sv/hello/log
+├── run
+└── supervise [error opening dir]
+
+1 directory, 1 file
+&lt;/pre&gt;
+
+&lt;p&gt;
+Where again the &lt;code&gt;run&lt;/code&gt; is a shell script:
+&lt;/p&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/sh&lt;/span&gt;
+
+&lt;span class="nb"&gt;exec&lt;/span&gt; svlogd -tt /var/local/log/runit/hello
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;
+To keep things simple this is what you want. In general you could swap
+out different logging daemons other than &lt;code&gt;svlogd&lt;/code&gt; (which comes with
+runit), but I don't see a reason to and this Just Works™. Basically
+runit will create this as a separate service, but just knows how to
+pipe around outputs now.
+&lt;/p&gt;
+
+&lt;p&gt;
+If you add these and then reload the services:
+&lt;/p&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo sv reload &lt;span class="nv"&gt;$SVDIR&lt;/span&gt;/hello
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;
+You'll stop seeing "Hello" in the runit system log, and start seeing
+it in the log file we configured:
+&lt;/p&gt;
+
+&lt;pre class="example"&gt;
+sudo less +F "$SVLOG_SYS_DIR/hello/current"
+# or
+sudo tail -f "$SVLOG_SYS_DIR/hello/current"
+&lt;/pre&gt;
+
+&lt;p&gt;
+Before we go over configuring the logging daemon (that &lt;code&gt;sysvlogd&lt;/code&gt;
+thing we ran in &lt;code&gt;log/run&lt;/code&gt;) I should mention all those &lt;code&gt;supervise&lt;/code&gt; dirs
+that were laying around.
+&lt;/p&gt;
+
+&lt;p&gt;
+These basically are the locks and other control data that runit uses
+to manage the services. Don't mess with them. They are owned by root
+anyways. One thing you can do if you think you messed things up is to
+disable the service and remove them all to start fresh:
+&lt;/p&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo rm -rf &lt;span class="nv"&gt;$SVDIR&lt;/span&gt;/hello
+rm -rf &lt;span class="nv"&gt;$SVLIB&lt;/span&gt;/hello/supervise
+rm -rf &lt;span class="nv"&gt;$SVLIB&lt;/span&gt;/hello/log/supervise
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;
+Now one last thing is to configure the log. This file doesn't go in
+the service directory (&lt;code&gt;SVLIB&lt;/code&gt;) but the directory where the logs
+are. So make this file &lt;code&gt;SVLOG_SYS_DIR/hello/config&lt;/code&gt; and it should have
+something like this:
+&lt;/p&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# max size in bytes
+s100000
+
+# keep max of 10 files
+n10
+
+# minimum of 5 files
+N5
+
+# rotate every number of seconds
+t86400
+
+# prepend each log message with the characters
+pHELLO::
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;
+This lets you rotate logs and control file sizes. Its a really not
+nice file format but I will forgive them considering they aren't using
+any libraries for TOML or YAML parsing or such things. Again something
+I would improve on for non PID 0 usage.
+&lt;/p&gt;
+
+&lt;p&gt;
+With this all in place you'll see something like this in
+&lt;code&gt;SVLOG_SYS_DIR/hello&lt;/code&gt;:
+&lt;/p&gt;
+
+&lt;pre class="example"&gt;
+--&amp;gt; sudo tree $SVLOG_SYS_DIR/hello
+/var/local/log/runit/hello
+├── @400000005f929f2c12d2041c.s
+├── @400000005f92b3043a84c42c.s
+├── @400000005f92c6dd22d71b04.s
+├── @400000005f92dab60d0ce77c.s
+├── @400000005f92ee8f37dec1dc.s
+├── @400000005f93026921e78ae4.s
+├── @400000005f931643127f5bf4.s
+├── @400000005f932a1d27cdd3b4.s
+├── @400000005f933df70f77ffc4.s
+├── @400000005f933e0a239542b4.s
+├── config
+├── current
+└── lock
+&lt;/pre&gt;
+
+&lt;p&gt;
+Where those ID named files are the rotated logs.
+&lt;/p&gt;
+
+
+&lt;p&gt;
+Now that we're done with the runit tutorial lets show you how to make
+a timer service that acts like a cron job.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-orgf9b7769" class="outline-2"&gt;
+&lt;h2 id="solution"&gt;&lt;a id="orgf9b7769"&gt;&lt;/a&gt;Timer Services With Runit and Snooze&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-solution"&gt;
+&lt;p&gt;
+&lt;code&gt;snooze&lt;/code&gt; was also available in the Ubuntu package index so we just
+install with apt:
+&lt;/p&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt install snooze
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;
+Otherwise its very basic C so should be trivial to compile and
+install.
+&lt;/p&gt;
+
+&lt;p&gt;
+First lets just right a timer script that runs a command every 40
+seconds seconds with &lt;code&gt;sleep&lt;/code&gt; and then we can just replace &lt;code&gt;sleep&lt;/code&gt; with
+&lt;code&gt;snooze&lt;/code&gt;. Our &lt;code&gt;run&lt;/code&gt; script is then:
+&lt;/p&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/sh&lt;/span&gt;
+
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"Sleeping until time to run"&lt;/span&gt;
+sleep &lt;span class="m"&gt;40&lt;/span&gt;
+
+/home/user/.local/bin/run_thing
+
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"Finished with task"&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;
+Because we are running this script as a service and the job of a
+service manager is to restart failing services, this script will just
+run over and over. There really wasn't a need for the while loop in
+our &lt;code&gt;hello&lt;/code&gt; example.
+&lt;/p&gt;
+
+&lt;p&gt;
+Now to make this "cron-like" we replace &lt;code&gt;sleep&lt;/code&gt; with &lt;code&gt;snooze&lt;/code&gt;:
+&lt;/p&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/sh&lt;/span&gt;
+
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"Sleeping until time to run"&lt;/span&gt;
+snooze
+
+/home/user/.local/bin/run_thing
+
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"Finished with task"&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;
+Where the default of &lt;code&gt;snooze&lt;/code&gt; is just to block until midnight every
+night (that is hour zero). So basically its just calculating how long
+it is until midnight and sleeping until then. Pretty simple right?
+Once snoozing is over the command will run the task will terminate,
+get restarted and then will snooze again until next time.
+&lt;/p&gt;
+
+&lt;p&gt;
+You can see all the options for configuring when &lt;code&gt;snooze&lt;/code&gt; will sleep
+until in its docs and man page (this one is actually readable). But
+for instance you can set it sleep until 3 AM on Mondays and Thursdays:
+&lt;/p&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;snooze -w1,4 -H3 
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;
+Something else I like to do is have it run a number of jobs in serial
+as a cycle. Where you would have to have multiple cron jobs to achieve
+this you can do it in one script with this method.
+&lt;/p&gt;
+
+&lt;p&gt;
+I have a two print jobs every week to keep the heads from drying
+out. Black and white on Monday and color on Thursday at noon.
+&lt;/p&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/sh&lt;/span&gt;
+
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"Snoozing until time to print"&lt;/span&gt;
+snooze -w1 -H12
+
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"Printing black and white test page"&lt;/span&gt;
+
+&lt;span class="c1"&gt;# black and white&lt;/span&gt;
+lp /home/salotz/testpage_bw.pdf
+
+
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"Snoozing until next print job"&lt;/span&gt;
+snooze -w4 -H12
+
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"Printing RBG color test page"&lt;/span&gt;
+
+&lt;span class="c1"&gt;# color: RBG&lt;/span&gt;
+lp /home/salotz/testpage_color_rbg.pdf
+
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"End of run script job cycle"&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;
+With cron you'd have something like &lt;sup&gt;&lt;a id="fnr.4" class="footref" href="https://salotz.info/posts/runit_snooze/#fn.4"&gt;4&lt;/a&gt;&lt;/sup&gt;:
+&lt;/p&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;0 12 * * 1 salotz lp /home/salotz/testpage_bw.pdf
+0 12 * * 4 salotz lp /home/salotz/testpage_color_rbg.pdf
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;
+So the syntax for snooze is actually pretty similar and perhaps a
+little cleaner and semantic.
+&lt;/p&gt;
+
+&lt;p&gt;
+So just to review: By avoiding cron we've avoided some of the most
+difficult and finnicky sysadmin tasks in linux, namely email and
+logging, and traded them for runit. I think its a fair trade and as
+we've seen setting up runit is trivial in Ubuntu (and likely other
+distros).
+&lt;/p&gt;
+
+&lt;p&gt;
+I can definitely see now why runit has fierce supporters. I'll
+definitely be using it for situations I would normally use systemd as
+well. While I'm not going to be running Void linux on my desktop any
+time soon its a good candidate for inside of containers.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-org9457763" class="outline-2"&gt;
+&lt;h2 id="org9457763"&gt;Final Notes&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org9457763"&gt;
+&lt;p&gt;
+As I mentioned I am not a grey-neckbeard and so if I've made any gross
+oversights in my claims, please let me know in the comments. I would
+love to like cron more.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-org98a5fa4" class="outline-2"&gt;
+&lt;h2 id="org98a5fa4"&gt;Comments&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org98a5fa4"&gt;
+&lt;p&gt;
+Comments are implemented as a mailing list hosted on sourcehut:
+&lt;a href="https://lists.sr.ht/~salotz/salotz.info_comments-section"&gt;https://lists.sr.ht/~salotz/salotz.info_comments-section&lt;/a&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
+Comments are for the whole website so start your subject line with:
+&lt;code&gt;[runit_snooze]&lt;/code&gt; for this post.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="footnotes"&gt;
+&lt;h2 class="footnotes"&gt;Footnotes: &lt;/h2&gt;
+&lt;div id="text-footnotes"&gt;
+
+&lt;div class="footdef"&gt;&lt;sup&gt;&lt;a id="fn.1" class="footnum" href="https://salotz.info/posts/runit_snooze/#fnr.1"&gt;1&lt;/a&gt;&lt;/sup&gt; &lt;div class="footpara"&gt;&lt;p class="footpara"&gt;
+Well, the idea was hinted at in the &lt;code&gt;snooze&lt;/code&gt; README but I put
+it together.
+&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class="footdef"&gt;&lt;sup&gt;&lt;a id="fn.2" class="footnum" href="https://salotz.info/posts/runit_snooze/#fnr.2"&gt;2&lt;/a&gt;&lt;/sup&gt; &lt;div class="footpara"&gt;&lt;p class="footpara"&gt;
+Every shell script is a scar:
+&lt;/p&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;master_tab&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;cat &lt;span class="s"&gt;&amp;lt;&amp;lt; EOF&lt;/span&gt;
+&lt;span class="s"&gt;$(cat $CONFIGS_LIB_DIR/cron/header.crontab)&lt;/span&gt;
+&lt;span class="s"&gt;$(cat $CONFIGS_LIB_DIR/cron/misc.crontab)&lt;/span&gt;
+&lt;span class="s"&gt;$(cat $CONFIGS_LIB_DIR/cron/my.crontab)&lt;/span&gt;
+&lt;span class="s"&gt;EOF&lt;/span&gt;
+&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+
+&lt;span class="c1"&gt;# then write to the crontab file after cleaning it out&lt;/span&gt;
+&lt;span class="o"&gt;(&lt;/span&gt;crontab -r &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; crontab -l &lt;span class="m"&gt;2&lt;/span&gt;&amp;gt;/dev/null&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="nv"&gt;$master_tab&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; crontab -
+&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class="footdef"&gt;&lt;sup&gt;&lt;a id="fn.3" class="footnum" href="https://salotz.info/posts/runit_snooze/#fnr.3"&gt;3&lt;/a&gt;&lt;/sup&gt; &lt;div class="footpara"&gt;&lt;p class="footpara"&gt;
+It only has How-To Guides and Reference according to this classification: &lt;a href="https://documentation.divio.com/"&gt;https://documentation.divio.com/&lt;/a&gt;
+&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class="footdef"&gt;&lt;sup&gt;&lt;a id="fn.4" class="footnum" href="https://salotz.info/posts/runit_snooze/#fnr.4"&gt;4&lt;/a&gt;&lt;/sup&gt; &lt;div class="footpara"&gt;&lt;p class="footpara"&gt;
+No I didn't do that myself, of course I used this &lt;a href="https://crontab.guru/"&gt;https://crontab.guru/&lt;/a&gt;. 
+&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
+
+
+&lt;/div&gt;
+&lt;/div&gt;</description><category>*nix</category><category>cron</category><category>linux</category><category>runit</category><category>scheduling</category><category>snooze</category><category>systemd</category><category>tips</category><category>tricks</category><category>unix</category><category>utilities</category><guid>https://salotz.info/posts/runit_snooze/</guid><pubDate>Fri, 23 Oct 2020 15:16:36 GMT</pubDate></item></channel></rss>
