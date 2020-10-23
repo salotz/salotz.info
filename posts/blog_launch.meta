@@ -2,8 +2,8 @@
 title = "Blog Launch"
 slug = "blog_launch"
 date = "2020-04-10 10:19:54 UTC-04:00"
-tags = ""
+tags = "blog, nikola, static sites, introduction"
 link = ""
-description = ""
+description = "This is an introduction to my blog which goes over how its made."
 type = "text"
 +++

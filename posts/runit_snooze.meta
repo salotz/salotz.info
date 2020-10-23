@@ -1,0 +1,9 @@
++++
+title = "Cron alternative with runit and snooze"
+slug = "runit_snooze"
+date = "2020-10-23 11:16:36 UTC-04:00"
+tags = "scheduling, cron, runit, snooze, linux, *nix, unix, utilities, tips, tricks, systemd"
+link = ""
+description = "A post describing how I am using a combination of the runit service manager and the snooze utility to make a poor man's version of cron that is simpler and easier to administer."
+type = "text"
++++

@@ -1,0 +1,76 @@
+* Instructions
+
+
+You'll need nikola installed. We aren't using anything custom in the
+env so pipx install should do:
+
+#+begin_src bash
+pipx install Nikola[extras]
+#+end_src
+
+Then just build the page:
+
+#+begin_src bash
+nikola build
+#+end_src
+
+Preview and autobuild:
+
+#+begin_src bash
+nikola auto
+#+end_src
+
+
+
+** Writing Posts
+
+To add new posts just use their command. You can always do it manually
+but it will get dates and stuff for you done well.
+
+#+begin_src bash
+nikola new_post -2 -f orgmode -t "my post name"
+#+end_src
+
+I use the TOML format for metadata. Should look like this:
+
+#+begin_src fundamental
+  +++
+  title = "Cron alternative with runit and snooze"
+  slug = "runit_snooze"
+  date = "2020-10-23 11:16:36 UTC-04:00"
+  tags = "tagA, tagB"
+  link = ""
+  description = ""
+  type = "text"
+  +++
+#+end_src
+
+Where the ~+++~ is for nikola using the Hugo style, since it basically
+will do a textual inclusion to the top of the post files.
+
+See here for full docs: [[https://getnikola.com/handbook.html#metadata-fields][The Nikola Handbook | Nikola]]
+
+Points:
+
+- Choose the slug to be nice
+- Tags are comma separated
+- link is unused
+- description is used in <meta> tags for SEO
+- type is:
+  - 'text' :: normal long post
+  - 'micro' :: for small posts in a big serif font
+
+
+** Publishing
+
+Make sure ~ghp-import~ is installed in the nikola env. For pipx:
+
+#+begin_src bash
+pipx inject Nikola ghp-import
+#+end_src
+
+Publish to ~salotz.info~.
+
+
+
+
