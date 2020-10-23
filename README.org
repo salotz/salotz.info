@@ -66,10 +66,15 @@ Points:
 Make sure ~ghp-import~ is installed in the nikola env. For pipx:
 
 #+begin_src bash
-pipx inject Nikola ghp-import
+pipx install ghp-import
 #+end_src
 
-Publish to ~salotz.info~.
+Publish to ~salotz.info~ which is configured in ~conf.py~:
+
+#+begin_src bash
+  keychain_login
+  nikola github_deploy
+#+end_src
 
 
 
