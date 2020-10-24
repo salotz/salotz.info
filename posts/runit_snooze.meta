@@ -6,4 +6,5 @@ tags = "scheduling, cron, runit, snooze, linux, *nix, unix, utilities, tips, tri
 link = ""
 description = "A post describing how I am using a combination of the runit service manager and the snooze utility to make a poor man's version of cron that is simpler and easier to administer."
 type = "text"
+devto = "yes"
 +++

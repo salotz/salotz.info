@@ -63,6 +63,8 @@ Points:
 
 ** Publishing
 
+*** Personal Website
+
 Make sure ~ghp-import~ is installed in the nikola env. For pipx:
 
 #+begin_src bash
@@ -76,6 +78,21 @@ Publish to ~salotz.info~ which is configured in ~conf.py~:
   nikola github_deploy
 #+end_src
 
+*** Dev.to
 
+Cross post here sometimes.
 
+Install plugin:
 
+#+begin_src bash
+  nikola plugin -i devto
+  pipx inject Nikola pydevto pypandoc
+#+end_src
+
+Add the token to JSON.
+
+Mark the articel metadata:
+
+#+begin_src fundamental
+    devto = "yes"
+#+end_src
