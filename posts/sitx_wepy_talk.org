@@ -1,0 +1,25 @@
+
+I was lucky enough to be able to present my work this week at Silicon
+Therapeutics, thanks for having me!
+
+I've made the slides available in this repository on gitlab
+[[https://gitlab.com/salotz/presentation.sitx_interview_2020-12/-/raw/master/presentation.pdf][at this location as a PDF]].
+
+Presentation roughly covers these topics:
+
+- Kinetics oriented drug design
+- Description of the Weighted Ensemble (WE) class of enhanced sampling
+  algorithms
+- Motivation and design of the [[https://github.com/ADicksonLab/wepy][wepy]] framework for performing and
+  analyzing WE simulations as well as prototyping new methods.
+- Results for my PhD research into ligand unbinding transition state
+  structure for clinically relevant target soluble epoxide hydrolase.
+
+* Comments
+
+Comments are implemented as a mailing list hosted on sourcehut:
+https://lists.sr.ht/~salotz/salotz.info_comments-section
+
+Comments are for the whole website so start your subject line with:
+~[sitx_wepy_talk]~ for this post.
+
