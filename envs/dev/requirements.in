@@ -1,0 +1,13 @@
+Nikola[extras]
+
+
+# nikola plugins
+
+## for cross publishing on dev.to
+pydevto
+
+## for converting org mode files
+pypandoc
+
+# for publishing on github pages
+ghp-import
