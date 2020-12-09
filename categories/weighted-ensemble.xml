@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Salotz's Homepage (Posts about weighted-ensemble)</title><link>https://salotz.info/</link><description></description><atom:link href="https://salotz.info/categories/weighted-ensemble.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2020 &lt;a href="mailto:samuel.lotz@salotz.info"&gt;Samuel D. Lotz&lt;/a&gt; </copyright><lastBuildDate>Wed, 09 Dec 2020 23:26:52 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Presentation at Silicon Therapeutics</title><link>https://salotz.info/posts/sitx_wepy_talk/</link><dc:creator>Samuel D. Lotz</dc:creator><description>&lt;p&gt;
+I was lucky enough to be able to present my work this week at Silicon
+Therapeutics, thanks for having me!
+&lt;/p&gt;
+
+&lt;p&gt;
+I've made the slides available in this repository on gitlab
+&lt;a href="https://gitlab.com/salotz/presentation.sitx_interview_2020-12/-/raw/master/presentation.pdf"&gt;at this location as a PDF&lt;/a&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;
+Presentation roughly covers these topics:
+&lt;/p&gt;
+
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;Kinetics oriented drug design&lt;/li&gt;
+&lt;li&gt;Description of the Weighted Ensemble (WE) class of enhanced sampling
+algorithms&lt;/li&gt;
+&lt;li&gt;Motivation and design of the &lt;a href="https://github.com/ADicksonLab/wepy"&gt;wepy&lt;/a&gt; framework for performing and
+analyzing WE simulations as well as prototyping new methods.&lt;/li&gt;
+&lt;li&gt;Results for my PhD research into ligand unbinding transition state
+structure for clinically relevant target soluble epoxide hydrolase.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div id="outline-container-org1076128" class="outline-2"&gt;
+&lt;h2 id="org1076128"&gt;Comments&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org1076128"&gt;
+&lt;p&gt;
+Comments are implemented as a mailing list hosted on sourcehut:
+&lt;a href="https://lists.sr.ht/~salotz/salotz.info_comments-section"&gt;https://lists.sr.ht/~salotz/salotz.info_comments-section&lt;/a&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
+Comments are for the whole website so start your subject line with:
+&lt;code&gt;[sitx_wepy_talk]&lt;/code&gt; for this post.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description><category>enhanced-sampling</category><category>molecular-dynamics</category><category>presentation</category><category>research</category><category>talk</category><category>weighted-ensemble</category><category>wepy</category><guid>https://salotz.info/posts/sitx_wepy_talk/</guid><pubDate>Wed, 09 Dec 2020 18:17:06 GMT</pubDate></item></channel></rss>

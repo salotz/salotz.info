@@ -77,7 +77,56 @@
     
         
     <div class="postindex">
-            <article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="../posts/runit_snooze/" class="u-url">Cron alternative with runit and snooze</a></h1>
+            <article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="../posts/sitx_wepy_talk/" class="u-url">Presentation at Silicon Therapeutics</a></h1>
+                <div class="metadata">
+                    <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
+                        Samuel D. Lotz
+                    </span></p>
+            <p class="dateline">
+            <a href="../posts/sitx_wepy_talk/" rel="bookmark">
+            <time class="published dt-published" datetime="2020-12-09T13:17:06-05:00" itemprop="datePublished" title="2020-12-09 13:17">2020-12-09 13:17</time></a>
+            </p>
+                </div>
+            </header><div class="e-content entry-content">
+                    <p>
+I was lucky enough to be able to present my work this week at Silicon
+Therapeutics, thanks for having me!
+</p>
+
+<p>
+I've made the slides available in this repository on gitlab
+<a href="https://gitlab.com/salotz/presentation.sitx_interview_2020-12/-/raw/master/presentation.pdf">at this location as a PDF</a>.
+</p>
+
+<p>
+Presentation roughly covers these topics:
+</p>
+
+<ul class="org-ul">
+<li>Kinetics oriented drug design</li>
+<li>Description of the Weighted Ensemble (WE) class of enhanced sampling
+algorithms</li>
+<li>Motivation and design of the <a href="https://github.com/ADicksonLab/wepy">wepy</a> framework for performing and
+analyzing WE simulations as well as prototyping new methods.</li>
+<li>Results for my PhD research into ligand unbinding transition state
+structure for clinically relevant target soluble epoxide hydrolase.</li>
+</ul>
+<div id="outline-container-org1076128" class="outline-2">
+<h2 id="org1076128">Comments</h2>
+<div class="outline-text-2" id="text-org1076128">
+<p>
+Comments are implemented as a mailing list hosted on sourcehut:
+<a href="https://lists.sr.ht/~salotz/salotz.info_comments-section">https://lists.sr.ht/~salotz/salotz.info_comments-section</a>
+</p>
+
+<p>
+Comments are for the whole website so start your subject line with:
+<code>[sitx_wepy_talk]</code> for this post.
+</p>
+</div>
+</div>
+                </div>
+            </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="../posts/runit_snooze/" class="u-url">Cron alternative with runit and snooze</a></h1>
                 <div class="metadata">
                     <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
                         Samuel D. Lotz
@@ -98,9 +147,9 @@ a solution I came up with<sup><a id="fnr.1" class="footref" href="../posts/runit
 Skip to this <a href="../posts/runit_snooze/#solution">section</a> if you just want to see the solution.
 </p>
 
-<div id="outline-container-orgefa40c2" class="outline-2">
-<h2 id="orgefa40c2">Non-Issues</h2>
-<div class="outline-text-2" id="text-orgefa40c2">
+<div id="outline-container-org8d88be1" class="outline-2">
+<h2 id="org8d88be1">Non-Issues</h2>
+<div class="outline-text-2" id="text-org8d88be1">
 <p>
 Conceptually specifying when to run things with a special syntax
 is not a bad idea and not why I find cron hard to use.
@@ -123,9 +172,9 @@ this regard).
 </div>
 </div>
 
-<div id="outline-container-org8c9eef7" class="outline-2">
-<h2 id="org8c9eef7">Sys-Admin Orientation</h2>
-<div class="outline-text-2" id="text-org8c9eef7">
+<div id="outline-container-org097bc2d" class="outline-2">
+<h2 id="org097bc2d">Sys-Admin Orientation</h2>
+<div class="outline-text-2" id="text-org097bc2d">
 <p>
 My first issue with <code>cron</code> is that it is inseparable (or at least
 practically so) from the base *nix system. That means you can't run it
@@ -264,9 +313,9 @@ Cron is simply not meant for a simple user like me.
 </div>
 
 
-<div id="outline-container-org3e5e6dc" class="outline-2">
-<h2 id="org3e5e6dc">Control &amp; Supervision</h2>
-<div class="outline-text-2" id="text-org3e5e6dc">
+<div id="outline-container-org0f8ca3a" class="outline-2">
+<h2 id="org0f8ca3a">Control &amp; Supervision</h2>
+<div class="outline-text-2" id="text-org0f8ca3a">
 <p>
 The second major problem I had with cron was the real lack of control
 you have over it. You write text into the file and cron goes off and
@@ -313,9 +362,9 @@ expect to have going into the future on all my systems.
 </div>
 </div>
 
-<div id="outline-container-org2036682" class="outline-2">
-<h2 id="org2036682">Observability &amp; Logging Utilities</h2>
-<div class="outline-text-2" id="text-org2036682">
+<div id="outline-container-org0401f28" class="outline-2">
+<h2 id="org0401f28">Observability &amp; Logging Utilities</h2>
+<div class="outline-text-2" id="text-org0401f28">
 <p>
 I was able to get through all the issues above through sheer force of
 will, but ultimately I was done in by the necessary interaction of
@@ -387,9 +436,9 @@ mistakes happen and logs can fill up a <code>/</code> partition scarily easy.
 </div>
 
 
-<div id="outline-container-org217fe06" class="outline-2">
-<h2 id="org217fe06">Runit tutorial</h2>
-<div class="outline-text-2" id="text-org217fe06">
+<div id="outline-container-org1a9743f" class="outline-2">
+<h2 id="org1a9743f">Runit tutorial</h2>
+<div class="outline-text-2" id="text-org1a9743f">
 <p>
 I've contemplated and even tried a few alternatives to cron. This one
 was discovered while throwing stones at other birds. I was pleasantly
@@ -767,9 +816,9 @@ a timer service that acts like a cron job.
 </div>
 </div>
 
-<div id="outline-container-orgf9b7769" class="outline-2">
+<div id="outline-container-orgdc1ec7e" class="outline-2">
 <h2 id="solution">
-<a id="orgf9b7769"></a>Timer Services With Runit and Snooze</h2>
+<a id="orgdc1ec7e"></a>Timer Services With Runit and Snooze</h2>
 <div class="outline-text-2" id="text-solution">
 <p>
 <code>snooze</code> was also available in the Ubuntu package index so we just
@@ -901,9 +950,9 @@ time soon its a good candidate for inside of containers.
 </div>
 </div>
 
-<div id="outline-container-org9457763" class="outline-2">
-<h2 id="org9457763">Final Notes</h2>
-<div class="outline-text-2" id="text-org9457763">
+<div id="outline-container-org41795b8" class="outline-2">
+<h2 id="org41795b8">Final Notes</h2>
+<div class="outline-text-2" id="text-org41795b8">
 <p>
 As I mentioned I am not a grey-neckbeard and so if I've made any gross
 oversights in my claims, please let me know in the comments. I would
@@ -912,9 +961,9 @@ love to like cron more.
 </div>
 </div>
 
-<div id="outline-container-org98a5fa4" class="outline-2">
-<h2 id="org98a5fa4">Comments</h2>
-<div class="outline-text-2" id="text-org98a5fa4">
+<div id="outline-container-org1bd3e92" class="outline-2">
+<h2 id="org1bd3e92">Comments</h2>
+<div class="outline-text-2" id="text-org1bd3e92">
 <p>
 Comments are implemented as a mailing list hosted on sourcehut:
 <a href="https://lists.sr.ht/~salotz/salotz.info_comments-section">https://lists.sr.ht/~salotz/salotz.info_comments-section</a>
@@ -1078,9 +1127,7 @@ Thats it!
         <script src="../assets/js/all-nocdn.js"></script><script>
     baguetteBox.run('div#content', {
         ignoreClass: 'islink',
-        captions: function(element) {
-            return element.getElementsByTagName('img')[0].alt;
-    }});
+        captions: function(element){var i=element.getElementsByTagName('img')[0];return i===undefined?'':i.alt;}});
     </script>
 </body>
 </html>

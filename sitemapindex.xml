@@ -11,7 +11,11 @@
  </sitemap>
  <sitemap>
   <loc>https://salotz.info/categories/cron.xml</loc>
-  <lastmod>2020-10-23T15:52:00Z</lastmod>
+  <lastmod>2020-12-09T23:21:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://salotz.info/categories/enhanced-sampling.xml</loc>
+  <lastmod>2020-12-09T23:26:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://salotz.info/categories/introduction.xml</loc>
@@ -19,7 +23,11 @@
  </sitemap>
  <sitemap>
   <loc>https://salotz.info/categories/linux.xml</loc>
-  <lastmod>2020-10-23T15:52:00Z</lastmod>
+  <lastmod>2020-12-09T23:21:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://salotz.info/categories/molecular-dynamics.xml</loc>
+  <lastmod>2020-12-09T23:26:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://salotz.info/categories/nikola.xml</loc>
@@ -27,19 +35,31 @@
  </sitemap>
  <sitemap>
   <loc>https://salotz.info/categories/nix.xml</loc>
-  <lastmod>2020-10-23T15:52:00Z</lastmod>
+  <lastmod>2020-12-09T23:21:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://salotz.info/categories/presentation-talk-wepy-weighted-ensemble-enhanced-sampling-research-molecular-dynamics.xml</loc>
+  <lastmod>2020-12-09T23:24:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://salotz.info/categories/presentation.xml</loc>
+  <lastmod>2020-12-09T23:26:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://salotz.info/categories/research.xml</loc>
+  <lastmod>2020-12-09T23:26:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://salotz.info/categories/runit.xml</loc>
-  <lastmod>2020-10-23T15:52:00Z</lastmod>
+  <lastmod>2020-12-09T23:21:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://salotz.info/categories/scheduling.xml</loc>
-  <lastmod>2020-10-23T15:52:00Z</lastmod>
+  <lastmod>2020-12-09T23:21:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://salotz.info/categories/snooze.xml</loc>
-  <lastmod>2020-10-23T15:52:00Z</lastmod>
+  <lastmod>2020-12-09T23:21:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://salotz.info/categories/static-sites.xml</loc>
@@ -47,30 +67,42 @@
  </sitemap>
  <sitemap>
   <loc>https://salotz.info/categories/systemd.xml</loc>
-  <lastmod>2020-10-23T15:52:00Z</lastmod>
+  <lastmod>2020-12-09T23:21:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://salotz.info/categories/talk.xml</loc>
+  <lastmod>2020-12-09T23:26:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://salotz.info/categories/tips.xml</loc>
-  <lastmod>2020-10-23T15:52:00Z</lastmod>
+  <lastmod>2020-12-09T23:21:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://salotz.info/categories/tricks.xml</loc>
-  <lastmod>2020-10-23T15:52:00Z</lastmod>
+  <lastmod>2020-12-09T23:21:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://salotz.info/categories/unix.xml</loc>
-  <lastmod>2020-10-23T15:52:00Z</lastmod>
+  <lastmod>2020-12-09T23:21:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://salotz.info/categories/utilities.xml</loc>
-  <lastmod>2020-10-23T15:52:00Z</lastmod>
+  <lastmod>2020-12-09T23:21:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://salotz.info/categories/weighted-ensemble.xml</loc>
+  <lastmod>2020-12-09T23:26:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://salotz.info/categories/wepy.xml</loc>
+  <lastmod>2020-12-09T23:26:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://salotz.info/rss.xml</loc>
-  <lastmod>2020-10-23T15:52:00Z</lastmod>
+  <lastmod>2020-12-09T23:26:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://salotz.info/sitemap.xml</loc>
-  <lastmod>2020-10-23T15:52:00Z</lastmod>
+  <lastmod>2020-12-09T23:26:00Z</lastmod>
  </sitemap>
 </sitemapindex>

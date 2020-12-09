@@ -76,18 +76,25 @@
 <li class="list-inline-item"><a class="reference badge badge-secondary" href="nix/">*nix</a></li>
             <li class="list-inline-item"><a class="reference badge badge-secondary" href="blog/">blog</a></li>
             <li class="list-inline-item"><a class="reference badge badge-secondary" href="cron/">cron</a></li>
+            <li class="list-inline-item"><a class="reference badge badge-secondary" href="enhanced-sampling/">enhanced-sampling</a></li>
             <li class="list-inline-item"><a class="reference badge badge-secondary" href="introduction/">introduction</a></li>
             <li class="list-inline-item"><a class="reference badge badge-secondary" href="linux/">linux</a></li>
+            <li class="list-inline-item"><a class="reference badge badge-secondary" href="molecular-dynamics/">molecular-dynamics</a></li>
             <li class="list-inline-item"><a class="reference badge badge-secondary" href="nikola/">nikola</a></li>
+            <li class="list-inline-item"><a class="reference badge badge-secondary" href="presentation/">presentation</a></li>
+            <li class="list-inline-item"><a class="reference badge badge-secondary" href="research/">research</a></li>
             <li class="list-inline-item"><a class="reference badge badge-secondary" href="runit/">runit</a></li>
             <li class="list-inline-item"><a class="reference badge badge-secondary" href="scheduling/">scheduling</a></li>
             <li class="list-inline-item"><a class="reference badge badge-secondary" href="snooze/">snooze</a></li>
             <li class="list-inline-item"><a class="reference badge badge-secondary" href="static-sites/">static sites</a></li>
             <li class="list-inline-item"><a class="reference badge badge-secondary" href="systemd/">systemd</a></li>
+            <li class="list-inline-item"><a class="reference badge badge-secondary" href="talk/">talk</a></li>
             <li class="list-inline-item"><a class="reference badge badge-secondary" href="tips/">tips</a></li>
             <li class="list-inline-item"><a class="reference badge badge-secondary" href="tricks/">tricks</a></li>
             <li class="list-inline-item"><a class="reference badge badge-secondary" href="unix/">unix</a></li>
             <li class="list-inline-item"><a class="reference badge badge-secondary" href="utilities/">utilities</a></li>
+            <li class="list-inline-item"><a class="reference badge badge-secondary" href="weighted-ensemble/">weighted-ensemble</a></li>
+            <li class="list-inline-item"><a class="reference badge badge-secondary" href="wepy/">wepy</a></li>
     </ul>
 <!--End of body content--><footer id="footer">
             Contents © 2020         <a href="mailto:samuel.lotz@salotz.info">Samuel D. Lotz</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
@@ -101,9 +108,7 @@
         <script src="../assets/js/all-nocdn.js"></script><script>
     baguetteBox.run('div#content', {
         ignoreClass: 'islink',
-        captions: function(element) {
-            return element.getElementsByTagName('img')[0].alt;
-    }});
+        captions: function(element){var i=element.getElementsByTagName('img')[0];return i===undefined?'':i.alt;}});
     </script>
 </body>
 </html>
