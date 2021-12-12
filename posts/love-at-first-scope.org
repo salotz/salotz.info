@@ -1,0 +1,70 @@
+Last year I stumbled upon a fairly obscure programming language called
+[[http://scopes.rocks][Scopes]] through an [[http://www.gingerbill.org/article/2019/05/13/a-reply-to-the-road-to-zig/][article]] by the creator of the Odin programming
+language.
+
+Scopes is the passion project of game dev Leonard Ritter (Studio:
+[[https://duangle.com/][duangle]]), and seems to be wrought out of Leonard's goal of creating an
+extremely ambitious video game called "Nowhere".
+
+I was far too busy at the time (finishing my PhD) to dig into the
+language at any depth but I guess something about the simple pitch of
+features on the README really stuck with me.
+
+** Searching for a Better Way
+
+As an advanced and professional Python programmer I've been steadily
+doing market research to decide what other technologies (including
+programming languages) I should add to my repetoire.
+
+One of these categories is a language to do high-performance and
+low-level programming with. This field is dominated by C/C++ and
+increasingly Rust.
+
+Hating on C/C++ is pretty commonplace these days so I'll save you my
+lukewarm takes on it.
+
+That leaves Rust, but I just don't get excited about Rust.
+
+For all the hype I find it interesting that there is a similar
+low-level but safe language subset of Ada called Spark which is
+actually much more attractive.
+
+But for whatever reason Ada isn't cool enough for people and so it is
+handily ignored as a competitor to C/C++ and Rust.
+
+Even when looking at younger, sexier languages like Zig and Odin which
+are actually getting some traction Ada seems to be the better bet due
+to its maturity and overall design.
+
+While Ada is attractive from a technical perspective the unpopularity
+among open source definitely shows as there are almost as few
+libraries for it as much younger languages.
+
+This however seemed to be changing and I was fairly set on starting to
+learn Ada as my new low-level language of choice.
+
+However, I did have some reservations as I found certain features of
+Zig such as being able to transparently import and compile C programs
+as a core feature of the language.
+
+If there is one thing you can admire about C is that its distribution
+is ubiquitous and most foundational technologies are either written in
+C or have implementations in C.
+
+So for a language with few libraries piggy-backing on the C ecosystem
+can have huge advantages for a young language.
+
+Of course most languages (including Ada) can interface with C, but
+this requires fiddling with everyone's least favorite part of any of
+these languages: the build system.
+
+Any time spent not dealing with the build system is time well spent.
+
+** Scopes from Stage Left
+
+This brings us back to Scopes.
+
+Almost all of the newer languages above leverage the powerful LLVM
+system for building their languages on top of.
+
+
