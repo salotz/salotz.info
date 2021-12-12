@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Salotz's Homepage (Posts about cron)</title><link>https://salotz.info/</link><description></description><atom:link href="https://salotz.info/categories/cron.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2020 &lt;a href="mailto:samuel.lotz@salotz.info"&gt;Samuel D. Lotz&lt;/a&gt; </copyright><lastBuildDate>Wed, 09 Dec 2020 23:21:32 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Cron alternative with runit and snooze</title><link>https://salotz.info/posts/runit_snooze/</link><dc:creator>Samuel D. Lotz</dc:creator><description>&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Salotz's Homepage (Posts about cron)</title><link>https://salotz.info/</link><description></description><atom:link href="https://salotz.info/categories/cron.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2021 &lt;a href="mailto:samuel.lotz@salotz.info"&gt;Samuel D. Lotz&lt;/a&gt; </copyright><lastBuildDate>Sun, 12 Dec 2021 03:13:04 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Cron alternative with runit and snooze</title><link>https://salotz.info/posts/runit_snooze/</link><dc:creator>Samuel D. Lotz</dc:creator><description>&lt;p&gt;
 I have tried many times to use &lt;code&gt;cron&lt;/code&gt; effectively, but ultimately this
 ends in failure each time. Lets look at why I find cron onerous and
 a solution I came up with&lt;sup&gt;&lt;a id="fnr.1" class="footref" href="https://salotz.info/posts/runit_snooze/#fn.1"&gt;1&lt;/a&gt;&lt;/sup&gt;.
@@ -9,9 +9,9 @@ a solution I came up with&lt;sup&gt;&lt;a id="fnr.1" class="footref" href="https
 Skip to this &lt;a href="https://salotz.info/posts/runit_snooze/#solution"&gt;section&lt;/a&gt; if you just want to see the solution.
 &lt;/p&gt;
 
-&lt;div id="outline-container-org8d88be1" class="outline-2"&gt;
-&lt;h2 id="org8d88be1"&gt;Non-Issues&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org8d88be1"&gt;
+&lt;div id="outline-container-org706d712" class="outline-2"&gt;
+&lt;h2 id="org706d712"&gt;Non-Issues&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org706d712"&gt;
 &lt;p&gt;
 Conceptually specifying when to run things with a special syntax
 is not a bad idea and not why I find cron hard to use.
@@ -34,9 +34,9 @@ this regard).
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org097bc2d" class="outline-2"&gt;
-&lt;h2 id="org097bc2d"&gt;Sys-Admin Orientation&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org097bc2d"&gt;
+&lt;div id="outline-container-orgc97bc32" class="outline-2"&gt;
+&lt;h2 id="orgc97bc32"&gt;Sys-Admin Orientation&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgc97bc32"&gt;
 &lt;p&gt;
 My first issue with &lt;code&gt;cron&lt;/code&gt; is that it is inseparable (or at least
 practically so) from the base *nix system. That means you can't run it
@@ -175,9 +175,9 @@ Cron is simply not meant for a simple user like me.
 &lt;/div&gt;
 
 
-&lt;div id="outline-container-org0f8ca3a" class="outline-2"&gt;
-&lt;h2 id="org0f8ca3a"&gt;Control &amp;amp; Supervision&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org0f8ca3a"&gt;
+&lt;div id="outline-container-org4747d26" class="outline-2"&gt;
+&lt;h2 id="org4747d26"&gt;Control &amp;amp; Supervision&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org4747d26"&gt;
 &lt;p&gt;
 The second major problem I had with cron was the real lack of control
 you have over it. You write text into the file and cron goes off and
@@ -225,9 +225,9 @@ expect to have going into the future on all my systems.
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org0401f28" class="outline-2"&gt;
-&lt;h2 id="org0401f28"&gt;Observability &amp;amp; Logging Utilities&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org0401f28"&gt;
+&lt;div id="outline-container-org2fcd52e" class="outline-2"&gt;
+&lt;h2 id="org2fcd52e"&gt;Observability &amp;amp; Logging Utilities&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org2fcd52e"&gt;
 &lt;p&gt;
 I was able to get through all the issues above through sheer force of
 will, but ultimately I was done in by the necessary interaction of
@@ -299,9 +299,9 @@ mistakes happen and logs can fill up a &lt;code&gt;/&lt;/code&gt; partition scar
 &lt;/div&gt;
 
 
-&lt;div id="outline-container-org1a9743f" class="outline-2"&gt;
-&lt;h2 id="org1a9743f"&gt;Runit tutorial&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org1a9743f"&gt;
+&lt;div id="outline-container-org65bb60d" class="outline-2"&gt;
+&lt;h2 id="org65bb60d"&gt;Runit tutorial&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org65bb60d"&gt;
 &lt;p&gt;
 I've contemplated and even tried a few alternatives to cron. This one
 was discovered while throwing stones at other birds. I was pleasantly
@@ -680,8 +680,8 @@ a timer service that acts like a cron job.
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgdc1ec7e" class="outline-2"&gt;
-&lt;h2 id="solution"&gt;&lt;a id="orgdc1ec7e"&gt;&lt;/a&gt;Timer Services With Runit and Snooze&lt;/h2&gt;
+&lt;div id="outline-container-org2266a3f" class="outline-2"&gt;
+&lt;h2 id="solution"&gt;Timer Services With Runit and Snooze&lt;/h2&gt;
 &lt;div class="outline-text-2" id="text-solution"&gt;
 &lt;p&gt;
 &lt;code&gt;snooze&lt;/code&gt; was also available in the Ubuntu package index so we just
@@ -813,9 +813,9 @@ time soon its a good candidate for inside of containers.
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org41795b8" class="outline-2"&gt;
-&lt;h2 id="org41795b8"&gt;Final Notes&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org41795b8"&gt;
+&lt;div id="outline-container-orgbd3536e" class="outline-2"&gt;
+&lt;h2 id="orgbd3536e"&gt;Final Notes&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgbd3536e"&gt;
 &lt;p&gt;
 As I mentioned I am not a grey-neckbeard and so if I've made any gross
 oversights in my claims, please let me know in the comments. I would
@@ -824,9 +824,9 @@ love to like cron more.
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org1bd3e92" class="outline-2"&gt;
-&lt;h2 id="org1bd3e92"&gt;Comments&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org1bd3e92"&gt;
+&lt;div id="outline-container-org03dd2a2" class="outline-2"&gt;
+&lt;h2 id="org03dd2a2"&gt;Comments&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org03dd2a2"&gt;
 &lt;p&gt;
 Comments are implemented as a mailing list hosted on sourcehut:
 &lt;a href="https://lists.sr.ht/~salotz/salotz.info_comments-section"&gt;https://lists.sr.ht/~salotz/salotz.info_comments-section&lt;/a&gt;
