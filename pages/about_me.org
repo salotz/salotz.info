@@ -1,9 +1,8 @@
 
 ** Bio
 
-My name is Samuel Lotz and I am a PhD graduate student at Michigan
-State University in the Biochemistry & Molecular Biology Dept. under
-Dr. Alex Dickson.
+My name is Samuel Lotz and I am a Senior Research Engineer at Roivant
+Discovery.
 
 I am a data scientist with experience in programming high-level data
 intensive libraries and analytics pipelines in Python.
