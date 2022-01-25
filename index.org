@@ -18,3 +18,7 @@ intensive libraries and analytics pipelines in Python.
 |----------+-----------------------|
 | ORCID    | [[https://orcid.org/0000-0001-6159-615X][0000-0001-6159-615X]]   |
 
+** Tip Jar
+
+- [[https:///paypal.me/salotz][paypal.me/salotz]]
+- [[https://ko-fi.com/salotz][ko-fi.com/salotz]]
