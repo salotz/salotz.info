@@ -20,5 +20,5 @@ intensive libraries and analytics pipelines in Python.
 
 ** Tip Jar
 
-- [[paypal.me/salotz][paypal.me/salotz]]
+- [[https:///paypal.me/salotz][paypal.me/salotz]]
 - [[https://ko-fi.com/salotz][ko-fi.com/salotz]]
