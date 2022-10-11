@@ -2,9 +2,10 @@ bootstrap:
 	# install Nikola
 	pipx install --force Nikola[extras]
 	# add extra dependencies
-	pipx inject Nikola[extras] ghp-import
 	pipx inject Nikola[extras] pypandoc
 	pipx inject Nikola[extras] pydevto
+	# ghp-import as a standalone tool
+	pipx install --force ghp-import
 	# install plugins
 	nikola plugin -i devto
 .PHONY: bootstrap
