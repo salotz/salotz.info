@@ -2,19 +2,19 @@
 ** Bio
 
 My name is Samuel Lotz and I am a Senior Research Engineer at Roivant
-Discovery.
+Sciences under the Vant Tech team specializing in the full spectrum of
+industrial grade scientific software development.
 
-I am a data scientist with experience in programming high-level data
-intensive libraries and analytics pipelines in Python.
+
 
 ** Social Media
 
-| Github   | [[https://github.com/salotz][~salotz~]]              |
-| Gitlab   | [[https://gitlab.com/salotz][~salotz~]]              |
+| Github   | [[https://github.com/salotz][salotz]]               |
+| Gitlab   | [[https://gitlab.com/salotz][salotz]]                |
 |----------+-----------------------|
 | dev.to   | https://dev.to/salotz |
 |----------+-----------------------|
-| LinkedIn | [[https://www.linkedin.com/in/salotz/][~salotz~]]              |
+| LinkedIn | [[https://www.linkedin.com/in/salotz/][salotz]]                |
 |----------+-----------------------|
 | ORCID    | [[https://orcid.org/0000-0001-6159-615X][0000-0001-6159-615X]]   |
 

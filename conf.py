@@ -75,8 +75,8 @@ TRANSLATIONS_PATTERN = '{path}.{lang}.{ext}'
 NAVIGATION_LINKS = {
     DEFAULT_LANG: (
         ("/index.html", "About Me"),
-        ("/pages/software/", "Software"),
-        ("/pages/portfolio/", "Analytics Portfolio"),
+        ("/pages/software/", "Open Source"),
+        ("/pages/portfolio/", "Portfolio"),
         ("/blog/", "Blog"),
         # ("/archive.html", "Archive"),
         ("/categories/", "Tags"),

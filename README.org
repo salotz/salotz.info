@@ -1,26 +1,11 @@
 * Instructions
 
-
-You'll need nikola installed. We aren't using anything custom in the
-env so pipx install should do:
-
-#+begin_src bash
-pipx install Nikola[extras]
+#+begin_src sh
+  make bootstrap
+  make auto
+  # edit...
+  make deploy
 #+end_src
-
-Then just build the page:
-
-#+begin_src bash
-nikola build
-#+end_src
-
-Preview and autobuild:
-
-#+begin_src bash
-nikola auto
-#+end_src
-
-
 
 ** Writing Posts
 
@@ -61,6 +46,7 @@ Points:
   - 'micro' :: for small posts in a big serif font
 
 
+
 ** Publishing
 
 *** Personal Website
@@ -78,21 +64,11 @@ Publish to ~salotz.info~ which is configured in ~conf.py~:
   nikola github_deploy
 #+end_src
 
-*** Dev.to
+*** dev.to
 
-Cross post here sometimes.
-
-Install plugin:
-
-#+begin_src bash
-  nikola plugin -i devto
-  pipx inject Nikola pydevto pypandoc
-#+end_src
-
-Add the token to JSON.
-
-Mark the articel metadata:
+If you want to cross-post here add this to the metadata:
 
 #+begin_src fundamental
     devto = "yes"
 #+end_src
+

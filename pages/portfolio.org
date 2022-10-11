@@ -1,4 +1,18 @@
 
+* Roivant Sciences
+
+I work closely with computational scientists on drug discovery teams
+to develop simulation and ML pipelines. This includes bespoke
+solutions and general libraries for performing highly scalable
+analysis platforms tuned for massive simulation data.
+
+In addition I have worked on various aspects of DevOps, workflow
+orchestration, and data engineering in a a cloud-HPC hybrid
+organization.
+
+This has included extensive experience with package management,
+deployment, and compilation of complex sets of dependencies via the
+excellent [[https://spack.io/][Spack]] package manager.
 
 * PhD Related
 

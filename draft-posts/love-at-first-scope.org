@@ -14,7 +14,7 @@ features on the README really stuck with me.
 
 As an advanced and professional Python programmer I've been steadily
 doing market research to decide what other technologies (including
-programming languages) I should add to my repetoire.
+programming languages) I should add to my repertoire.
 
 One of these categories is a language to do high-performance and
 low-level programming with. This field is dominated by C/C++ and
