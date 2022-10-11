@@ -1,6 +1,5 @@
 
-
-* PhD Related
+* Scientific
 
 ** wepy
 
@@ -28,6 +27,18 @@ customize behavior).
 ~wepy~ is highly customizable while still isolating each component
 making it very simple to extend only the things you need.
 
+** geomm
+
+Repo: https://github.com/ADicksonLab/geomm
+
+~geomm~ is a python library that provides pure-function
+implementations for common computations in biophysics.
+
+It is mainly a response to most libraries in the field of biophysics
+all having mutually incompatible in-memory object representations and
+the need to convert between all of them when composing them.
+
+
 ** mastic
 
 Repo: https://github.com/ADicksonLab/mastic
@@ -45,40 +56,53 @@ this is extensible as well.
 Results come as pure-python objects as well as pandas tables which can
 then be exported to any format or database.
 
-** geomm
+* Multimedia
 
-Repo: https://github.com/ADicksonLab/geomm
+In my spare time I mostly enjoy programming in the [[http://scopes.rocks][Scopes]] programming
+language as a alternative to C/C++ or Rust for multimedia
+applications.
 
-~geomm~ is a python library that provides pure-function
-implementations for common computations in biophysics.
+See the [[https://github.com/salotz/scopes-demos][scopes-demos]] for some demonstrations of it in action.
 
-It is mainly a response to most libraries in the field of biophysics
-all having mutually incompatible in-memory object representations and
-the need to convert between all of them when composing them.
+If your interested also check out my (WIP) third party user guide to
+programming in Scopes, especially oriented towards those coming from
+dynamic languages like Python: [[https://github.com/salotz/scopes-newbs][scopes-newbs]].
+
+Some other things I maintain related to Scopes:
+
+- [[https://github.com/salotz/scopes-lib_copier-template][scopes library template]] :: This is a template managed by the [[https://github.com/copier-org/copier/][copier]]
+  templating tool that will automatically generate a Scopes library
+  project and keep it up to date that utilizes Spack for package
+  management.
+
+- [[https://github.com/salotz/raylib-scopes][scopes-raylib]] :: Scopes bindings to [[https://github.com/raysan5/raylib][raylib]] game development toolkit.
+
+- [[https://github.com/salotz/scopes-chipmunk2d][scopes-chipmunk2d]] :: Scopes bindings to the [[https://github.com/slembcke/Chipmunk2D][chipmunk2d]] 2D physics
+  library.
+
+- [[https://github.com/salotz/ob-scopes][ob-scopes]] :: Org-babel code execution and code blocks for
+  emacs. Allows you to execute scopes code directly in Org-mode
+  files. This is utilized in ~scopes-newbs~.
+
+I also maintain a [[https://spack.io][Spack]] repository of packages oriented towards
+multimedia and Scopes development called, [[https://github.com/salotz/snailpacks][snailpacks]]. This repo also
+has many examples of integrating Spack as a package manager into your
+build system scripts.
+
 
 
 * General Purpose Utilities
 
-- [[https://github.com/salotz/dask_scheduler][~dask_scheduler~]] :: Simple command line interface to start a dask
-     scheduling server.
 - [[https://github.com/salotz/bibby][~bibby~]] :: Command line interface to update a local bibtex file from
      [[https://www.bibsonomy.org/][bibsonomy.org]] for paper and book citations.
 - [[https://github.com/salotz/inkscape_pages][~inkscape_pages~]] :: CLI to turn a multi-layer Inkscape SVG file into a
      multi-page PDF. I use this for making slide decks.
-- [[https://github.com/salotz/fshank][~fshank~]] :: Python library with nice data structures for representing,
-     parsing, and writing ~fstab~ files. Idea is to configure ~fstab~
-     information in a nicer more forgiving format (like ~toml~).
-- [[https://github.com/salotz/py_rsync][~py_rsync~]] :: Python libray for generating ~rsync~ command
-     strings from python dataclasses. Used in ~refugue~.
-- [[https://github.com/salotz/slurmify][~slurmify~]] :: Generate submission scripts for the SLURM job scheduler
-     from shell scripts that is configurable via ~toml~.
 - [[https://github.com/salotz/python_serialize_test][python ~serialize_test~]] :: Simple utility to quickly benchmark the
      speed of various python serialization tools on files of your
      choice.
 - [[https://github.com/salotz/pymatuning][pymatuning]] :: Generate org-mode TODO hierarchies from python
      modules. I used this to generate a TODO list for writing/auditing
      docstrings for my large projects.
-
 
 * Personal Productivity
 
@@ -88,22 +112,11 @@ Configurations for users in Unix-like environments (like linux) is a
 major pain point for beginners and advanced users alike.
 
 I have been slowly developing a set of tools to regain some sanity and
-add some essential features.
+add some essential features. The main product of the suite thus far is [[https://github.com/salotz/bimhaw][~bimhaw~]].
 
-They are (in order of maturity):
-
-- [[https://github.com/salotz/bimhaw][~bimhaw~]] :: Which is a layer of indirection over shell
-     configurations (i.e. ~.profile~ and ~.bashrc~ files) that is
-     semantically meaningful and allows for componentization and
-     several distinct user profiles.
-- [[https://github.com/salotz/bimker][~bimker~]] :: Because ~$HOME~ is a warzone. A toolset and directory
-     schema for your "dotfiles" and bootstrapping user configurations
-     into new computers and environments.
-- ~bimsec~ :: Tool and flows for managing credentials and secrets
-              across different computers and environments.
-- ~bimtree~ :: Tools, schemas, & flows for managing files and projects
-               across different *domains* (e.g. work, personal, hobby
-               groups).
+~bimhaw~ provides layer of indirection over shell configurations
+(i.e. ~.profile~ and ~.bashrc~ files) that is semantically meaningful
+and allows for componentization and several distinct user profiles.
 
 ** refugue
 
@@ -225,15 +238,5 @@ which will always be necessary. Just write new ~invoke~ files in the
 It leverages ~invoke~ and ~doit~ (WIP) to give a uniform command-line
 interface across all tools.
 
-Since a specific directory layout is usually expected (hey we can't
-fix everything!) it is supported by a collection of [[https://github.com/cookiecutter/cookiecutter][cookiecutters]] for
-bootstrapping projects as well:
-
-- [[https://github.com/salotz/meta-cookiecutter][meta-cookiecutter]] :: For generating new cookiecutter projects.
-- [[https://github.com/salotz/jubeo-cookiecutter][jubeo-cookiecutter]] :: For generating new jubeo repos.
-- [[https://github.com/salotz/salotz-py-cookiecutter][salotz-py-cookiecutter]] :: For generating python projects in the way
-     I think is best.
-- [[https://github.com/salotz/analytics-cookiecutter][analytics-cookiecutter]] :: For generating data science projects with
-     pipelines, data management, modules, packaging, and deployment.
 
 

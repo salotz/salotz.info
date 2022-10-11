@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="Salotz's Homepage">
 <meta property="og:title" content="Software Projects">
 <meta property="og:url" content="https://salotz.info/pages/software/">
-<meta property="og:description" content="PhD Related
+<meta property="og:description" content="Scientific
 
 
 
@@ -27,7 +27,7 @@ Repo: https://github.com/ADicksonLab/wepy
 
 wepy is a pure-python framework and library I wrote to support my
 PhD thesis work in doing weighted ensemble simulations of drug
-bind">
+bindi">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2020-04-10T09:33:52-04:00">
 </head>
@@ -68,10 +68,10 @@ bind">
 <a href="../../index.html" class="nav-link">About Me</a>
                 </li>
 <li class="nav-item active">
-<a href="." class="nav-link">Software <span class="sr-only">(active)</span></a>
+<a href="." class="nav-link">Open Source <span class="sr-only">(active)</span></a>
                 </li>
 <li class="nav-item">
-<a href="../portfolio/" class="nav-link">Analytics Portfolio</a>
+<a href="../portfolio/" class="nav-link">Portfolio</a>
                 </li>
 <li class="nav-item">
 <a href="../../blog/" class="nav-link">Blog</a>
@@ -101,13 +101,13 @@ bind">
         
 
     </header><div class="e-content entry-content" itemprop="articleBody text">
-    <div id="outline-container-orgb2fb46d" class="outline-2">
-<h2 id="orgb2fb46d">PhD Related</h2>
-<div class="outline-text-2" id="text-orgb2fb46d">
+    <div id="outline-container-org011ff1e" class="outline-2">
+<h2 id="org011ff1e">Scientific</h2>
+<div class="outline-text-2" id="text-org011ff1e">
 </div>
-<div id="outline-container-orgc13f560" class="outline-3">
-<h3 id="orgc13f560">wepy</h3>
-<div class="outline-text-3" id="text-orgc13f560">
+<div id="outline-container-org6b4a5ac" class="outline-3">
+<h3 id="org6b4a5ac">wepy</h3>
+<div class="outline-text-3" id="text-org6b4a5ac">
 <p>
 Repo: <a href="https://github.com/ADicksonLab/wepy">https://github.com/ADicksonLab/wepy</a>
 </p>
@@ -146,9 +146,30 @@ making it very simple to extend only the things you need.
 </div>
 </div>
 
-<div id="outline-container-org91d868f" class="outline-3">
-<h3 id="org91d868f">mastic</h3>
-<div class="outline-text-3" id="text-org91d868f">
+<div id="outline-container-org0a5a2e7" class="outline-3">
+<h3 id="org0a5a2e7">geomm</h3>
+<div class="outline-text-3" id="text-org0a5a2e7">
+<p>
+Repo: <a href="https://github.com/ADicksonLab/geomm">https://github.com/ADicksonLab/geomm</a>
+</p>
+
+<p>
+<code>geomm</code> is a python library that provides pure-function
+implementations for common computations in biophysics.
+</p>
+
+<p>
+It is mainly a response to most libraries in the field of biophysics
+all having mutually incompatible in-memory object representations and
+the need to convert between all of them when composing them.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orgc9eace3" class="outline-3">
+<h3 id="orgc9eace3">mastic</h3>
+<div class="outline-text-3" id="text-orgc9eace3">
 <p>
 Repo: <a href="https://github.com/ADicksonLab/mastic">https://github.com/ADicksonLab/mastic</a>
 </p>
@@ -175,52 +196,71 @@ then be exported to any format or database.
 </p>
 </div>
 </div>
+</div>
 
-<div id="outline-container-orgf7c2fa4" class="outline-3">
-<h3 id="orgf7c2fa4">geomm</h3>
-<div class="outline-text-3" id="text-orgf7c2fa4">
+<div id="outline-container-org94d5bd3" class="outline-2">
+<h2 id="org94d5bd3">Multimedia</h2>
+<div class="outline-text-2" id="text-org94d5bd3">
 <p>
-Repo: <a href="https://github.com/ADicksonLab/geomm">https://github.com/ADicksonLab/geomm</a>
+In my spare time I mostly enjoy programming in the <a href="http://scopes.rocks">Scopes</a> programming
+language as a alternative to C/C++ or Rust for multimedia
+applications.
 </p>
 
 <p>
-<code>geomm</code> is a python library that provides pure-function
-implementations for common computations in biophysics.
+See the <a href="https://github.com/salotz/scopes-demos">scopes-demos</a> for some demonstrations of it in action.
 </p>
 
 <p>
-It is mainly a response to most libraries in the field of biophysics
-all having mutually incompatible in-memory object representations and
-the need to convert between all of them when composing them.
+If your interested also check out my (WIP) third party user guide to
+programming in Scopes, especially oriented towards those coming from
+dynamic languages like Python: <a href="https://github.com/salotz/scopes-newbs">scopes-newbs</a>.
 </p>
-</div>
-</div>
-</div>
 
+<p>
+Some other things I maintain related to Scopes:
+</p>
 
-<div id="outline-container-orgca2f5eb" class="outline-2">
-<h2 id="orgca2f5eb">General Purpose Utilities</h2>
-<div class="outline-text-2" id="text-orgca2f5eb">
 <dl class="org-dl">
-<dt><a href="https://github.com/salotz/dask_scheduler"><code>dask_scheduler</code></a></dt>
-<dd>Simple command line interface to start a dask
-scheduling server.</dd>
+<dt><a href="https://github.com/salotz/scopes-lib_copier-template">scopes library template</a></dt>
+<dd>This is a template managed by the <a href="https://github.com/copier-org/copier/">copier</a>
+templating tool that will automatically generate a Scopes library
+project and keep it up to date that utilizes Spack for package
+management.</dd>
+
+<dt><a href="https://github.com/salotz/raylib-scopes">scopes-raylib</a></dt>
+<dd>Scopes bindings to <a href="https://github.com/raysan5/raylib">raylib</a> game development toolkit.</dd>
+
+<dt><a href="https://github.com/salotz/scopes-chipmunk2d">scopes-chipmunk2d</a></dt>
+<dd>Scopes bindings to the <a href="https://github.com/slembcke/Chipmunk2D">chipmunk2d</a> 2D physics
+library.</dd>
+
+<dt><a href="https://github.com/salotz/ob-scopes">ob-scopes</a></dt>
+<dd>Org-babel code execution and code blocks for
+emacs. Allows you to execute scopes code directly in Org-mode
+files. This is utilized in <code>scopes-newbs</code>.</dd>
+</dl>
+<p>
+I also maintain a <a href="https://spack.io">Spack</a> repository of packages oriented towards
+multimedia and Scopes development called, <a href="https://github.com/salotz/snailpacks">snailpacks</a>. This repo also
+has many examples of integrating Spack as a package manager into your
+build system scripts.
+</p>
+</div>
+</div>
+
+
+
+<div id="outline-container-orgb88d05a" class="outline-2">
+<h2 id="orgb88d05a">General Purpose Utilities</h2>
+<div class="outline-text-2" id="text-orgb88d05a">
+<dl class="org-dl">
 <dt><a href="https://github.com/salotz/bibby"><code>bibby</code></a></dt>
 <dd>Command line interface to update a local bibtex file from
 <a href="https://www.bibsonomy.org/">bibsonomy.org</a> for paper and book citations.</dd>
 <dt><a href="https://github.com/salotz/inkscape_pages"><code>inkscape_pages</code></a></dt>
 <dd>CLI to turn a multi-layer Inkscape SVG file into a
 multi-page PDF. I use this for making slide decks.</dd>
-<dt><a href="https://github.com/salotz/fshank"><code>fshank</code></a></dt>
-<dd>Python library with nice data structures for representing,
-parsing, and writing <code>fstab</code> files. Idea is to configure <code>fstab</code>
-information in a nicer more forgiving format (like <code>toml</code>).</dd>
-<dt><a href="https://github.com/salotz/py_rsync"><code>py_rsync</code></a></dt>
-<dd>Python libray for generating <code>rsync</code> command
-strings from python dataclasses. Used in <code>refugue</code>.</dd>
-<dt><a href="https://github.com/salotz/slurmify"><code>slurmify</code></a></dt>
-<dd>Generate submission scripts for the SLURM job scheduler
-from shell scripts that is configurable via <code>toml</code>.</dd>
 <dt><a href="https://github.com/salotz/python_serialize_test">python <code>serialize_test</code></a></dt>
 <dd>Simple utility to quickly benchmark the
 speed of various python serialization tools on files of your
@@ -233,14 +273,13 @@ docstrings for my large projects.</dd>
 </div>
 </div>
 
-
-<div id="outline-container-orgf4f4eaa" class="outline-2">
-<h2 id="orgf4f4eaa">Personal Productivity</h2>
-<div class="outline-text-2" id="text-orgf4f4eaa">
+<div id="outline-container-orgfd883a2" class="outline-2">
+<h2 id="orgfd883a2">Personal Productivity</h2>
+<div class="outline-text-2" id="text-orgfd883a2">
 </div>
-<div id="outline-container-orgd82e6ed" class="outline-3">
-<h3 id="orgd82e6ed">bim suite</h3>
-<div class="outline-text-3" id="text-orgd82e6ed">
+<div id="outline-container-org0c6109b" class="outline-3">
+<h3 id="org0c6109b">bim suite</h3>
+<div class="outline-text-3" id="text-org0c6109b">
 <p>
 Configurations for users in Unix-like environments (like linux) is a
 major pain point for beginners and advanced users alike.
@@ -248,37 +287,20 @@ major pain point for beginners and advanced users alike.
 
 <p>
 I have been slowly developing a set of tools to regain some sanity and
-add some essential features.
+add some essential features. The main product of the suite thus far is <a href="https://github.com/salotz/bimhaw"><code>bimhaw</code></a>.
 </p>
 
 <p>
-They are (in order of maturity):
+<code>bimhaw</code> provides layer of indirection over shell configurations
+(i.e. <code>.profile</code> and <code>.bashrc</code> files) that is semantically meaningful
+and allows for componentization and several distinct user profiles.
 </p>
-
-<dl class="org-dl">
-<dt><a href="https://github.com/salotz/bimhaw"><code>bimhaw</code></a></dt>
-<dd>Which is a layer of indirection over shell
-configurations (i.e. <code>.profile</code> and <code>.bashrc</code> files) that is
-semantically meaningful and allows for componentization and
-several distinct user profiles.</dd>
-<dt><a href="https://github.com/salotz/bimker"><code>bimker</code></a></dt>
-<dd>Because <code>$HOME</code> is a warzone. A toolset and directory
-schema for your "dotfiles" and bootstrapping user configurations
-into new computers and environments.</dd>
-<dt><code>bimsec</code></dt>
-<dd>Tool and flows for managing credentials and secrets
-across different computers and environments.</dd>
-<dt><code>bimtree</code></dt>
-<dd>Tools, schemas, &amp; flows for managing files and projects
-across different <b>domains</b> (e.g. work, personal, hobby
-groups).</dd>
-</dl>
 </div>
 </div>
 
-<div id="outline-container-orgf8ce546" class="outline-3">
-<h3 id="orgf8ce546">refugue</h3>
-<div class="outline-text-3" id="text-orgf8ce546">
+<div id="outline-container-org7ac9498" class="outline-3">
+<h3 id="org7ac9498">refugue</h3>
+<div class="outline-text-3" id="text-org7ac9498">
 <p>
 Repo: <a href="https://github.com/salotz/refugue">https://github.com/salotz/refugue</a>
 </p>
@@ -326,9 +348,9 @@ command (as long as they are reachable via ssh).
 </div>
 </div>
 
-<div id="outline-container-org7416f0c" class="outline-3">
-<h3 id="org7416f0c">jubeo: Meta-Project Protocol</h3>
-<div class="outline-text-3" id="text-org7416f0c">
+<div id="outline-container-org5c66025" class="outline-3">
+<h3 id="org5c66025">jubeo: Meta-Project Protocol</h3>
+<div class="outline-text-3" id="text-org5c66025">
 <p>
 Repo: <a href="https://github.com/salotz/jubeo">https://github.com/salotz/jubeo</a>
 </p>
@@ -446,25 +468,6 @@ which will always be necessary. Just write new <code>invoke</code> files in the
 It leverages <code>invoke</code> and <code>doit</code> (WIP) to give a uniform command-line
 interface across all tools.
 </p>
-
-<p>
-Since a specific directory layout is usually expected (hey we can't
-fix everything!) it is supported by a collection of <a href="https://github.com/cookiecutter/cookiecutter">cookiecutters</a> for
-bootstrapping projects as well:
-</p>
-
-<dl class="org-dl">
-<dt><a href="https://github.com/salotz/meta-cookiecutter">meta-cookiecutter</a></dt>
-<dd>For generating new cookiecutter projects.</dd>
-<dt><a href="https://github.com/salotz/jubeo-cookiecutter">jubeo-cookiecutter</a></dt>
-<dd>For generating new jubeo repos.</dd>
-<dt><a href="https://github.com/salotz/salotz-py-cookiecutter">salotz-py-cookiecutter</a></dt>
-<dd>For generating python projects in the way
-I think is best.</dd>
-<dt><a href="https://github.com/salotz/analytics-cookiecutter">analytics-cookiecutter</a></dt>
-<dd>For generating data science projects with
-pipelines, data management, modules, packaging, and deployment.</dd>
-</dl>
 </div>
 </div>
 </div>

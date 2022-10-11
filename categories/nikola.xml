@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Salotz's Homepage (Posts about nikola)</title><link>https://salotz.info/</link><description></description><atom:link href="https://salotz.info/categories/nikola.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2021 &lt;a href="mailto:samuel.lotz@salotz.info"&gt;Samuel D. Lotz&lt;/a&gt; </copyright><lastBuildDate>Sun, 12 Dec 2021 03:13:04 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Blog Launch</title><link>https://salotz.info/posts/blog_launch/</link><dc:creator>Samuel D. Lotz</dc:creator><description>&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Salotz's Homepage (Posts about nikola)</title><link>https://salotz.info/</link><description></description><atom:link href="https://salotz.info/categories/nikola.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2022 &lt;a href="mailto:samuel.lotz@salotz.info"&gt;Samuel D. Lotz&lt;/a&gt; </copyright><lastBuildDate>Tue, 11 Oct 2022 03:22:16 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Blog Launch</title><link>https://salotz.info/posts/blog_launch/</link><dc:creator>Samuel D. Lotz</dc:creator><description>&lt;p&gt;
 Here is my obligatory blog launch post where I tell you about how I
 created my blog and so that there is at least one post here ;)
 &lt;/p&gt;
 
-&lt;div id="outline-container-org83328e5" class="outline-2"&gt;
-&lt;h2 id="org83328e5"&gt;This Blog&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org83328e5"&gt;
+&lt;div id="outline-container-orgb884607" class="outline-2"&gt;
+&lt;h2 id="orgb884607"&gt;This Blog&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgb884607"&gt;
 &lt;p&gt;
 I ended up choosing &lt;a href="https://getnikola.com/"&gt;Nikola&lt;/a&gt; mainly because:
 &lt;/p&gt;
@@ -30,9 +30,9 @@ that they are just fancy makefiles. QED
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgce62744" class="outline-2"&gt;
-&lt;h2 id="orgce62744"&gt;Future Posts&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orgce62744"&gt;
+&lt;div id="outline-container-orgec60bab" class="outline-2"&gt;
+&lt;h2 id="orgec60bab"&gt;Future Posts&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgec60bab"&gt;
 &lt;p&gt;
 In future posts I hope to discuss some practical issues around:
 &lt;/p&gt;
@@ -54,9 +54,9 @@ tools but rather how they all can fit together and integrate.
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org43b7b53" class="outline-2"&gt;
-&lt;h2 id="org43b7b53"&gt;Potential Collaborations&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org43b7b53"&gt;
+&lt;div id="outline-container-org7db6010" class="outline-2"&gt;
+&lt;h2 id="org7db6010"&gt;Potential Collaborations&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org7db6010"&gt;
 &lt;p&gt;
 Check out my list of &lt;a href="https://salotz.info/pages/projects/"&gt;projects&lt;/a&gt;. I am looking for others to test out and
 critique their design.
