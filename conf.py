@@ -164,7 +164,7 @@ POSTS = (
 )
 
 PAGES = (
-    ("pages/about_me.org", "", "page.tmpl"),
+    ("pages/about_me.md", "", "page.tmpl"),
     ("pages/*.org", "pages", "page.tmpl"),
     ("pages/*.rst", "pages", "page.tmpl"),
     ("pages/*.md", "pages", "page.tmpl"),
@@ -216,6 +216,9 @@ DATE_FORMAT = 'yyyy-MM-dd HH:mm'
 # Default is:
 # FILES_FOLDERS = {'files': ''}
 # Which means copy 'files' into 'output'
+FILES_FOLDERS = {
+    'resources': 'resources'
+}
 
 # One or more folders containing code listings to be processed and published on
 # the site. The format is a dictionary of {source: relative destination}.
@@ -1024,7 +1027,12 @@ PRETTY_URLS = True
 #       with the MarkdownExtension class and should not be added here.
 # Defaults are markdown.extensions.(fenced_code|codehilite|extra)
 # markdown.extensions.meta is required for Markdown metadata.
-MARKDOWN_EXTENSIONS = ['markdown.extensions.fenced_code', 'markdown.extensions.codehilite', 'markdown.extensions.extra']
+MARKDOWN_EXTENSIONS = [
+    'markdown.extensions.fenced_code',
+    'markdown.extensions.codehilite',
+    'markdown.extensions.extra',
+    'markdown.extensions.toc',
+]
 
 # Options to be passed to markdown extensions (See https://python-markdown.github.io/reference/)
 # Default is {} (no config at all)
