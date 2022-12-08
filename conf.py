@@ -163,14 +163,23 @@ POSTS = (
     ("posts/*.html", "posts", "post.tmpl"),
 )
 
-PAGES = (
+DEMOS = [
+    ("demos/godot-2d-creeps.md", "demos", "page.tmpl")
+]
+
+# top level pages for general informative content
+INFO = [
     ("pages/about_me.org", "", "page.tmpl"),
     ("pages/*.org", "pages", "page.tmpl"),
     ("pages/*.rst", "pages", "page.tmpl"),
     ("pages/*.md", "pages", "page.tmpl"),
     ("pages/*.txt", "pages", "page.tmpl"),
     ("pages/*.html", "pages", "page.tmpl"),
-)
+]
+
+# aggregate them all into the pages
+PAGES = tuple(INFO + DEMOS)
+
 
 
 # Below this point, everything is optional
@@ -216,6 +225,7 @@ DATE_FORMAT = 'yyyy-MM-dd HH:mm'
 # Default is:
 # FILES_FOLDERS = {'files': ''}
 # Which means copy 'files' into 'output'
+FILES_FOLDERS = {'demos': 'demos'}
 
 # One or more folders containing code listings to be processed and published on
 # the site. The format is a dictionary of {source: relative destination}.
@@ -232,7 +242,7 @@ DATE_FORMAT = 'yyyy-MM-dd HH:mm'
 # 'rest' is reStructuredText
 # 'markdown' is Markdown
 # 'html' assumes the file is HTML and just copies it
-COMPILERS = {
+COMPILERS= {
     "orgmode": ('.org',),
     "rest": ('.rst', '.txt'),
     "markdown": ('.md', '.mdown', '.markdown'),
