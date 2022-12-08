@@ -7,15 +7,19 @@
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
   <loc>https://salotz.info/</loc>
-  <lastmod>2022-12-08T21:28:00Z</lastmod>
+  <lastmod>2022-12-08T21:40:00Z</lastmod>
  </url>
  <url>
   <loc>https://salotz.info/2020/</loc>
   <lastmod>2022-11-27T22:56:00Z</lastmod>
  </url>
  <url>
+  <loc>https://salotz.info/2022/</loc>
+  <lastmod>2022-12-08T21:40:00Z</lastmod>
+ </url>
+ <url>
   <loc>https://salotz.info/archive.html</loc>
-  <lastmod>2022-12-08T20:53:00Z</lastmod>
+  <lastmod>2022-12-08T21:55:00Z</lastmod>
  </url>
  <url>
   <loc>https://salotz.info/blog/</loc>
@@ -23,7 +27,7 @@
  </url>
  <url>
   <loc>https://salotz.info/categories/</loc>
-  <lastmod>2022-12-08T21:28:00Z</lastmod>
+  <lastmod>2022-12-08T21:40:00Z</lastmod>
  </url>
  <url>
   <loc>https://salotz.info/categories/blog/</loc>
@@ -34,8 +38,20 @@
   <lastmod>2022-11-27T22:56:00Z</lastmod>
  </url>
  <url>
+  <loc>https://salotz.info/categories/demos/</loc>
+  <lastmod>2022-12-08T21:40:00Z</lastmod>
+ </url>
+ <url>
   <loc>https://salotz.info/categories/enhanced-sampling/</loc>
   <lastmod>2022-11-27T22:56:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://salotz.info/categories/games/</loc>
+  <lastmod>2022-12-08T21:40:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://salotz.info/categories/godot/</loc>
+  <lastmod>2022-12-08T21:40:00Z</lastmod>
  </url>
  <url>
   <loc>https://salotz.info/categories/introduction/</loc>
@@ -106,6 +122,10 @@
   <lastmod>2022-11-27T22:56:00Z</lastmod>
  </url>
  <url>
+  <loc>https://salotz.info/categories/wasm/</loc>
+  <lastmod>2022-12-08T21:40:00Z</lastmod>
+ </url>
+ <url>
   <loc>https://salotz.info/categories/weighted-ensemble/</loc>
   <lastmod>2022-11-27T22:56:00Z</lastmod>
  </url>
@@ -114,8 +134,24 @@
   <lastmod>2022-11-27T22:56:00Z</lastmod>
  </url>
  <url>
+  <loc>https://salotz.info/demos/godot-2d-creeps/</loc>
+  <lastmod>2022-12-08T21:40:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://salotz.info/demos/godot-2d-creeps/creeps.html</loc>
+  <lastmod>2022-12-08T21:40:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://salotz.info/pages/</loc>
+  <lastmod>2022-12-08T21:47:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://salotz.info/pages/demos/</loc>
+  <lastmod>2022-12-08T21:47:00Z</lastmod>
+ </url>
+ <url>
   <loc>https://salotz.info/pages/portfolio/</loc>
-  <lastmod>2022-12-08T21:28:00Z</lastmod>
+  <lastmod>2022-12-08T21:40:00Z</lastmod>
  </url>
  <url>
   <loc>https://salotz.info/pages/software/</loc>
@@ -124,6 +160,10 @@
  <url>
   <loc>https://salotz.info/posts/blog_launch/</loc>
   <lastmod>2022-11-27T22:56:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://salotz.info/posts/demos/</loc>
+  <lastmod>2022-12-08T21:43:00Z</lastmod>
  </url>
  <url>
   <loc>https://salotz.info/posts/runit_snooze/</loc>

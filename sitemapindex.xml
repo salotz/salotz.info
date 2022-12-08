@@ -14,8 +14,20 @@
   <lastmod>2022-11-27T22:56:00Z</lastmod>
  </sitemap>
  <sitemap>
+  <loc>https://salotz.info/categories/demos.xml</loc>
+  <lastmod>2022-12-08T21:53:00Z</lastmod>
+ </sitemap>
+ <sitemap>
   <loc>https://salotz.info/categories/enhanced-sampling.xml</loc>
   <lastmod>2022-11-27T22:56:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://salotz.info/categories/games.xml</loc>
+  <lastmod>2022-12-08T21:53:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://salotz.info/categories/godot.xml</loc>
+  <lastmod>2022-12-08T21:53:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://salotz.info/categories/introduction.xml</loc>
@@ -86,6 +98,10 @@
   <lastmod>2022-11-27T22:56:00Z</lastmod>
  </sitemap>
  <sitemap>
+  <loc>https://salotz.info/categories/wasm.xml</loc>
+  <lastmod>2022-12-08T21:53:00Z</lastmod>
+ </sitemap>
+ <sitemap>
   <loc>https://salotz.info/categories/weighted-ensemble.xml</loc>
   <lastmod>2022-11-27T22:56:00Z</lastmod>
  </sitemap>
@@ -95,10 +111,10 @@
  </sitemap>
  <sitemap>
   <loc>https://salotz.info/rss.xml</loc>
-  <lastmod>2022-12-08T20:53:00Z</lastmod>
+  <lastmod>2022-12-08T21:55:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://salotz.info/sitemap.xml</loc>
-  <lastmod>2022-12-08T21:35:00Z</lastmod>
+  <lastmod>2022-12-08T21:55:00Z</lastmod>
  </sitemap>
 </sitemapindex>
