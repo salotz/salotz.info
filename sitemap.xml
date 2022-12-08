@@ -7,130 +7,130 @@
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
   <loc>https://salotz.info/</loc>
-  <lastmod>2022-10-11T03:22:00Z</lastmod>
+  <lastmod>2022-12-08T21:28:00Z</lastmod>
  </url>
  <url>
   <loc>https://salotz.info/2020/</loc>
-  <lastmod>2022-10-11T03:22:00Z</lastmod>
+  <lastmod>2022-11-27T22:56:00Z</lastmod>
  </url>
  <url>
   <loc>https://salotz.info/archive.html</loc>
-  <lastmod>2022-10-11T03:22:00Z</lastmod>
+  <lastmod>2022-12-08T20:53:00Z</lastmod>
  </url>
  <url>
   <loc>https://salotz.info/blog/</loc>
-  <lastmod>2022-10-11T03:22:00Z</lastmod>
+  <lastmod>2022-11-27T22:56:00Z</lastmod>
  </url>
  <url>
   <loc>https://salotz.info/categories/</loc>
-  <lastmod>2022-10-11T03:22:00Z</lastmod>
+  <lastmod>2022-12-08T21:28:00Z</lastmod>
  </url>
  <url>
   <loc>https://salotz.info/categories/blog/</loc>
-  <lastmod>2022-10-11T03:22:00Z</lastmod>
+  <lastmod>2022-11-27T22:56:00Z</lastmod>
  </url>
  <url>
   <loc>https://salotz.info/categories/cron/</loc>
-  <lastmod>2022-10-11T03:22:00Z</lastmod>
+  <lastmod>2022-11-27T22:56:00Z</lastmod>
  </url>
  <url>
   <loc>https://salotz.info/categories/enhanced-sampling/</loc>
-  <lastmod>2022-10-11T03:22:00Z</lastmod>
+  <lastmod>2022-11-27T22:56:00Z</lastmod>
  </url>
  <url>
   <loc>https://salotz.info/categories/introduction/</loc>
-  <lastmod>2022-10-11T03:22:00Z</lastmod>
+  <lastmod>2022-11-27T22:56:00Z</lastmod>
  </url>
  <url>
   <loc>https://salotz.info/categories/linux/</loc>
-  <lastmod>2022-10-11T03:22:00Z</lastmod>
+  <lastmod>2022-11-27T22:56:00Z</lastmod>
  </url>
  <url>
   <loc>https://salotz.info/categories/molecular-dynamics/</loc>
-  <lastmod>2022-10-11T03:22:00Z</lastmod>
+  <lastmod>2022-11-27T22:56:00Z</lastmod>
  </url>
  <url>
   <loc>https://salotz.info/categories/nikola/</loc>
-  <lastmod>2022-10-11T03:22:00Z</lastmod>
+  <lastmod>2022-11-27T22:56:00Z</lastmod>
  </url>
  <url>
   <loc>https://salotz.info/categories/nix/</loc>
-  <lastmod>2022-10-11T03:22:00Z</lastmod>
+  <lastmod>2022-11-27T22:56:00Z</lastmod>
  </url>
  <url>
   <loc>https://salotz.info/categories/presentation/</loc>
-  <lastmod>2022-10-11T03:22:00Z</lastmod>
+  <lastmod>2022-11-27T22:56:00Z</lastmod>
  </url>
  <url>
   <loc>https://salotz.info/categories/research/</loc>
-  <lastmod>2022-10-11T03:22:00Z</lastmod>
+  <lastmod>2022-11-27T22:56:00Z</lastmod>
  </url>
  <url>
   <loc>https://salotz.info/categories/runit/</loc>
-  <lastmod>2022-10-11T03:22:00Z</lastmod>
+  <lastmod>2022-11-27T22:56:00Z</lastmod>
  </url>
  <url>
   <loc>https://salotz.info/categories/scheduling/</loc>
-  <lastmod>2022-10-11T03:22:00Z</lastmod>
+  <lastmod>2022-11-27T22:56:00Z</lastmod>
  </url>
  <url>
   <loc>https://salotz.info/categories/snooze/</loc>
-  <lastmod>2022-10-11T03:22:00Z</lastmod>
+  <lastmod>2022-11-27T22:56:00Z</lastmod>
  </url>
  <url>
   <loc>https://salotz.info/categories/static-sites/</loc>
-  <lastmod>2022-10-11T03:22:00Z</lastmod>
+  <lastmod>2022-11-27T22:56:00Z</lastmod>
  </url>
  <url>
   <loc>https://salotz.info/categories/systemd/</loc>
-  <lastmod>2022-10-11T03:22:00Z</lastmod>
+  <lastmod>2022-11-27T22:56:00Z</lastmod>
  </url>
  <url>
   <loc>https://salotz.info/categories/talk/</loc>
-  <lastmod>2022-10-11T03:22:00Z</lastmod>
+  <lastmod>2022-11-27T22:56:00Z</lastmod>
  </url>
  <url>
   <loc>https://salotz.info/categories/tips/</loc>
-  <lastmod>2022-10-11T03:22:00Z</lastmod>
+  <lastmod>2022-11-27T22:56:00Z</lastmod>
  </url>
  <url>
   <loc>https://salotz.info/categories/tricks/</loc>
-  <lastmod>2022-10-11T03:22:00Z</lastmod>
+  <lastmod>2022-11-27T22:56:00Z</lastmod>
  </url>
  <url>
   <loc>https://salotz.info/categories/unix/</loc>
-  <lastmod>2022-10-11T03:22:00Z</lastmod>
+  <lastmod>2022-11-27T22:56:00Z</lastmod>
  </url>
  <url>
   <loc>https://salotz.info/categories/utilities/</loc>
-  <lastmod>2022-10-11T03:22:00Z</lastmod>
+  <lastmod>2022-11-27T22:56:00Z</lastmod>
  </url>
  <url>
   <loc>https://salotz.info/categories/weighted-ensemble/</loc>
-  <lastmod>2022-10-11T03:22:00Z</lastmod>
+  <lastmod>2022-11-27T22:56:00Z</lastmod>
  </url>
  <url>
   <loc>https://salotz.info/categories/wepy/</loc>
-  <lastmod>2022-10-11T03:22:00Z</lastmod>
+  <lastmod>2022-11-27T22:56:00Z</lastmod>
  </url>
  <url>
   <loc>https://salotz.info/pages/portfolio/</loc>
-  <lastmod>2022-10-11T03:22:00Z</lastmod>
+  <lastmod>2022-12-08T21:28:00Z</lastmod>
  </url>
  <url>
   <loc>https://salotz.info/pages/software/</loc>
-  <lastmod>2022-10-11T03:22:00Z</lastmod>
+  <lastmod>2022-11-27T22:56:00Z</lastmod>
  </url>
  <url>
   <loc>https://salotz.info/posts/blog_launch/</loc>
-  <lastmod>2022-10-11T03:22:00Z</lastmod>
+  <lastmod>2022-11-27T22:56:00Z</lastmod>
  </url>
  <url>
   <loc>https://salotz.info/posts/runit_snooze/</loc>
-  <lastmod>2022-10-11T03:22:00Z</lastmod>
+  <lastmod>2022-11-27T22:56:00Z</lastmod>
  </url>
  <url>
   <loc>https://salotz.info/posts/sitx_wepy_talk/</loc>
-  <lastmod>2022-10-11T03:22:00Z</lastmod>
+  <lastmod>2022-11-27T22:56:00Z</lastmod>
  </url>
 </urlset>

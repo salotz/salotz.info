@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Salotz's Homepage (Posts about snooze)</title><link>https://salotz.info/</link><description></description><atom:link href="https://salotz.info/categories/snooze.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2022 &lt;a href="mailto:samuel.lotz@salotz.info"&gt;Samuel D. Lotz&lt;/a&gt; </copyright><lastBuildDate>Tue, 11 Oct 2022 03:22:16 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Cron alternative with runit and snooze</title><link>https://salotz.info/posts/runit_snooze/</link><dc:creator>Samuel D. Lotz</dc:creator><description>&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Salotz's Homepage (Posts about snooze)</title><link>https://salotz.info/</link><description></description><atom:link href="https://salotz.info/categories/snooze.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2022 &lt;a href="mailto:samuel.lotz@salotz.info"&gt;Samuel D. Lotz&lt;/a&gt; </copyright><lastBuildDate>Sun, 27 Nov 2022 22:56:09 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Cron alternative with runit and snooze</title><link>https://salotz.info/posts/runit_snooze/</link><dc:creator>Samuel D. Lotz</dc:creator><description>&lt;p&gt;
 I have tried many times to use &lt;code&gt;cron&lt;/code&gt; effectively, but ultimately this
 ends in failure each time. Lets look at why I find cron onerous and
 a solution I came up with&lt;sup&gt;&lt;a id="fnr.1" class="footref" href="https://salotz.info/posts/runit_snooze/#fn.1" role="doc-backlink"&gt;1&lt;/a&gt;&lt;/sup&gt;.
@@ -9,9 +9,9 @@ a solution I came up with&lt;sup&gt;&lt;a id="fnr.1" class="footref" href="https
 Skip to this &lt;a href="https://salotz.info/posts/runit_snooze/#solution"&gt;section&lt;/a&gt; if you just want to see the solution.
 &lt;/p&gt;
 
-&lt;div id="outline-container-org6fef649" class="outline-2"&gt;
-&lt;h2 id="org6fef649"&gt;Non-Issues&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org6fef649"&gt;
+&lt;div id="outline-container-org8b64ff5" class="outline-2"&gt;
+&lt;h2 id="org8b64ff5"&gt;Non-Issues&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org8b64ff5"&gt;
 &lt;p&gt;
 Conceptually specifying when to run things with a special syntax
 is not a bad idea and not why I find cron hard to use.
@@ -34,9 +34,9 @@ this regard).
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org5650f14" class="outline-2"&gt;
-&lt;h2 id="org5650f14"&gt;Sys-Admin Orientation&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org5650f14"&gt;
+&lt;div id="outline-container-org6f13b1f" class="outline-2"&gt;
+&lt;h2 id="org6f13b1f"&gt;Sys-Admin Orientation&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org6f13b1f"&gt;
 &lt;p&gt;
 My first issue with &lt;code&gt;cron&lt;/code&gt; is that it is inseparable (or at least
 practically so) from the base *nix system. That means you can't run it
@@ -78,7 +78,7 @@ For instance where exactly am I supposed to put a cron job? On Ubuntu
 20.04 (KDE Neon actually) I see this in my &lt;code&gt;/etc&lt;/code&gt; dir:
 &lt;/p&gt;
 
-&lt;pre class="example" id="org75a533b"&gt;
+&lt;pre class="example" id="org7ca452f"&gt;
 --&amp;gt; ls /etc/ | grep cron
 anacrontab
 cron.d
@@ -98,7 +98,7 @@ For instance here is part of the &lt;code&gt;man&lt;/code&gt; page for cron on m
 &lt;/p&gt;
 
 
-&lt;pre class="example" id="org6611b4f"&gt;
+&lt;pre class="example" id="org0885608"&gt;
 DEBIAN SPECIFIC
        Debian introduces some changes to cron that were not originally available  upstream.   The  most
        significant changes introduced are:
@@ -175,9 +175,9 @@ Cron is simply not meant for a simple user like me.
 &lt;/div&gt;
 
 
-&lt;div id="outline-container-orgb6bac25" class="outline-2"&gt;
-&lt;h2 id="orgb6bac25"&gt;Control &amp;amp; Supervision&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orgb6bac25"&gt;
+&lt;div id="outline-container-orgbffb771" class="outline-2"&gt;
+&lt;h2 id="orgbffb771"&gt;Control &amp;amp; Supervision&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgbffb771"&gt;
 &lt;p&gt;
 The second major problem I had with cron was the real lack of control
 you have over it. You write text into the file and cron goes off and
@@ -225,9 +225,9 @@ expect to have going into the future on all my systems.
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org1acbf6b" class="outline-2"&gt;
-&lt;h2 id="org1acbf6b"&gt;Observability &amp;amp; Logging Utilities&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org1acbf6b"&gt;
+&lt;div id="outline-container-orge77d3a3" class="outline-2"&gt;
+&lt;h2 id="orge77d3a3"&gt;Observability &amp;amp; Logging Utilities&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orge77d3a3"&gt;
 &lt;p&gt;
 I was able to get through all the issues above through sheer force of
 will, but ultimately I was done in by the necessary interaction of
@@ -299,9 +299,9 @@ mistakes happen and logs can fill up a &lt;code&gt;/&lt;/code&gt; partition scar
 &lt;/div&gt;
 
 
-&lt;div id="outline-container-org256436c" class="outline-2"&gt;
-&lt;h2 id="org256436c"&gt;Runit tutorial&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org256436c"&gt;
+&lt;div id="outline-container-orgc2cde1b" class="outline-2"&gt;
+&lt;h2 id="orgc2cde1b"&gt;Runit tutorial&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgc2cde1b"&gt;
 &lt;p&gt;
 I've contemplated and even tried a few alternatives to cron. This one
 was discovered while throwing stones at other birds. I was pleasantly
@@ -440,7 +440,7 @@ To define a &lt;b&gt;service&lt;/b&gt; you make a directory in &lt;code&gt;SVLIB
 specially named shell scripts. Mine has these directories in it:
 &lt;/p&gt;
 
-&lt;pre class="example" id="orga78ce13"&gt;
+&lt;pre class="example" id="org1b6258a"&gt;
 --&amp;gt; ls $SVLIB
 backup  hello  printer_live  recollindex  test_env
 &lt;/pre&gt;
@@ -450,7 +450,7 @@ Each one is a specific service. Lets first look at &lt;code&gt;hello&lt;/code&gt
 simple picture of what these are:
 &lt;/p&gt;
 
-&lt;pre class="example" id="orgddfa9a4"&gt;
+&lt;pre class="example" id="org6240e9e"&gt;
 --&amp;gt; ls $SVLIB/hello
 finish  log  run  supervise
 &lt;/pre&gt;
@@ -485,7 +485,7 @@ This service isn't being run yet. For that you need to put it into the
 You can check the status of the service with the &lt;code&gt;sv&lt;/code&gt; command:
 &lt;/p&gt;
 
-&lt;pre class="example" id="org0ab5cc1"&gt;
+&lt;pre class="example" id="org5defdca"&gt;
 --&amp;gt; sudo sv status $SVDIR/hello
 run: /etc/service/hello: (pid 664634) 193s
 &lt;/pre&gt;
@@ -501,7 +501,7 @@ You can check the status of all services similarly:
 If you see this:
 &lt;/p&gt;
 
-&lt;pre class="example" id="org9d1ca05"&gt;
+&lt;pre class="example" id="org88d6022"&gt;
 --&amp;gt; sudo sv status $SVDIR/hello
 down: /etc/service/hello: 1s, normally up, want up
 &lt;/pre&gt;
@@ -520,7 +520,7 @@ Once its working you should see the "Hello"s on the log for runit if
 you aren't logging this service:
 &lt;/p&gt;
 
-&lt;pre class="example" id="orga470ad8"&gt;
+&lt;pre class="example" id="orgf1ea7ec"&gt;
 --&amp;gt; sudo journalctl -u runit | tail
 Oct 23 16:49:30 ostrich 2[664634]: Hello
 Oct 23 16:49:32 ostrich 2[664634]: Hello
@@ -553,7 +553,7 @@ you could do cleanup stuff here if you want.
 Last the logging spec. This is a subdirectory called &lt;code&gt;log&lt;/code&gt;:
 &lt;/p&gt;
 
-&lt;pre class="example" id="org3c99834"&gt;
+&lt;pre class="example" id="org8698266"&gt;
 --&amp;gt; tree $SVLIB/hello/log
 /etc/sv/hello/log
 ├── run
@@ -591,7 +591,7 @@ You'll stop seeing "Hello" in the runit system log, and start seeing
 it in the log file we configured:
 &lt;/p&gt;
 
-&lt;pre class="example" id="org439a1a0"&gt;
+&lt;pre class="example" id="org97a1f42"&gt;
 sudo less +F "$SVLOG_SYS_DIR/hello/current"
 # or
 sudo tail -f "$SVLOG_SYS_DIR/hello/current"
@@ -650,7 +650,7 @@ With this all in place you'll see something like this in
 &lt;code&gt;SVLOG_SYS_DIR/hello&lt;/code&gt;:
 &lt;/p&gt;
 
-&lt;pre class="example" id="org1d57877"&gt;
+&lt;pre class="example" id="org8da4c44"&gt;
 --&amp;gt; sudo tree $SVLOG_SYS_DIR/hello
 /var/local/log/runit/hello
 ├── @400000005f929f2c12d2041c.s
@@ -813,9 +813,9 @@ time soon its a good candidate for inside of containers.
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org5b31872" class="outline-2"&gt;
-&lt;h2 id="org5b31872"&gt;Final Notes&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org5b31872"&gt;
+&lt;div id="outline-container-org0152643" class="outline-2"&gt;
+&lt;h2 id="org0152643"&gt;Final Notes&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org0152643"&gt;
 &lt;p&gt;
 As I mentioned I am not a grey-neckbeard and so if I've made any gross
 oversights in my claims, please let me know in the comments. I would
@@ -824,9 +824,9 @@ love to like cron more.
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org115d2d9" class="outline-2"&gt;
-&lt;h2 id="org115d2d9"&gt;Comments&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org115d2d9"&gt;
+&lt;div id="outline-container-org2caa482" class="outline-2"&gt;
+&lt;h2 id="org2caa482"&gt;Comments&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org2caa482"&gt;
 &lt;p&gt;
 Comments are implemented as a mailing list hosted on sourcehut:
 &lt;a href="https://lists.sr.ht/~salotz/salotz.info_comments-section"&gt;https://lists.sr.ht/~salotz/salotz.info_comments-section&lt;/a&gt;

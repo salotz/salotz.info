@@ -42,7 +42,7 @@
             <div class="col-md-3 justify-content-end align-items-center bs-nav-collapsible collapse flex-collapse bootblog4-right-nav">
             <nav class="navbar navbar-light bg-white"><ul class="navbar-nav bootblog4-right-nav">
 <li class="nav-item">
-    <a href="index.org" id="sourcelink" class="nav-link">Source</a>
+    <a href="index.md" id="sourcelink" class="nav-link">Source</a>
     </li>
 
 
@@ -89,132 +89,61 @@
         
 
     </header><div class="e-content entry-content" itemprop="articleBody text">
-    <div id="outline-container-orgd4162ad" class="outline-2">
-<h2 id="orgd4162ad">Roivant Sciences</h2>
-<div class="outline-text-2" id="text-orgd4162ad">
-<p>
-I work closely with computational scientists on drug discovery teams
+    <h3 id="roivant-sciences">Roivant Sciences</h3>
+<p>I work closely with computational scientists on drug discovery teams
 to develop simulation and ML pipelines. This includes bespoke
 solutions and general libraries for performing highly scalable
-analysis platforms tuned for massive simulation data.
-</p>
-
-<p>
-In addition I have worked on various aspects of DevOps, workflow
+analysis platforms tuned for massive simulation data.</p>
+<p>In addition I have worked on various aspects of DevOps, workflow
 orchestration, and data engineering in a a cloud-HPC hybrid
-organization.
-</p>
-
-<p>
-This has included extensive experience with package management,
+organization.</p>
+<p>This has included extensive experience with package management,
 deployment, and compilation of complex sets of dependencies via the
-excellent <a href="https://spack.io/">Spack</a> package manager.
-</p>
-</div>
-</div>
-
-<div id="outline-container-orgd75b16d" class="outline-2">
-<h2 id="orgd75b16d">PhD Related</h2>
-<div class="outline-text-2" id="text-orgd75b16d">
-</div>
-<div id="outline-container-org6381426" class="outline-3">
-<h3 id="org6381426">Thesis Project: Drug Unbinding Transition-State Plasticity</h3>
-<div class="outline-text-3" id="text-org6381426">
-<p>
-My main thesis project is to investigate the plasticity of ligand
-unbinding transition states from receptor binding sites.
-</p>
-
-<p>
-This is of interest to drug designers which are looking to tailor the
+excellent <a href="https://spack.io/">Spack</a> package manager.</p>
+<h3 id="phd-related">PhD Related</h3>
+<h4 id="thesis-project-drug-unbinding-transition-state-plasticity">Thesis Project: Drug Unbinding Transition-State Plasticity</h4>
+<p>My main thesis project is to investigate the plasticity of ligand
+unbinding transition states from receptor binding sites.</p>
+<p>This is of interest to drug designers which are looking to tailor the
 kinetic properties of drugs. Such kinetics oriented design can have
 impacts on drug efficacy and practical improvements of drugs by
 decreasing the frequency of dosing and avoiding side effects by
-improving windows of efficacy.
-</p>
-
-<p>
-This project pipeline is multipart.
-</p>
-
-<p>
-First, we perform molecular dynamics (MD) simulations of drug molecules
+improving windows of efficacy.</p>
+<p>This project pipeline is multipart.</p>
+<p>First, we perform molecular dynamics (MD) simulations of drug molecules
 unbinding from their protein targets using supercomputer clusters of
-graphics processing units (GPUs).
-</p>
-
-<p>
-Because the unbinding process is a slow one (relative to the timescale
+graphics processing units (GPUs).</p>
+<p>Because the unbinding process is a slow one (relative to the timescale
 of the MD simulations) novel enhanced sampling algorithms must be used
 in order to speed up the simulations without disturbing the physical
-correctness of the structures we observe.
-</p>
-
-<p>
-Primarily this is the <code>WExplore</code> algorithm which was implemented in my
-<b>weighted ensemble</b> simulation library <a href="https://github.com/ADicksonLab/wepy">wepy</a>. 
-</p>
-
-<p>
-These methods are similar to Markov State Monte Carlo (MCMC), particle
+correctness of the structures we observe.</p>
+<p>Primarily this is the <code>WExplore</code> algorithm which was implemented in my
+<em>weighted ensemble</em> simulation library <a href="https://github.com/ADicksonLab/wepy">wepy</a>. </p>
+<p>These methods are similar to Markov State Monte Carlo (MCMC), particle
 methods, and other importance sampling techniques and are applicable
-outside of biophysics for estimating probabilities of rare events.
-</p>
-
-<p>
-Second, a number of machine learning and custom data mining methods
+outside of biophysics for estimating probabilities of rare events.</p>
+<p>Second, a number of machine learning and custom data mining methods
 are applied to extract meaning from the "raw" simulation data in a
-distributed fashion.
-</p>
-
-<p>
-This includes geometric constraint queries using the <a href="https://github.com/ADicksonLab/mastic">mastic</a> and <a href="https://github.com/ADicksonLab/geomm">geomm</a>
-libaries, as well as custom analyses with <code>numpy</code> and <code>scipy</code>.
-</p>
-
-<p>
-I also perform machine learning analyses using <code>sckit-learn</code> for
+distributed fashion.</p>
+<p>This includes geometric constraint queries using the <a href="https://github.com/ADicksonLab/mastic">mastic</a> and <a href="https://github.com/ADicksonLab/geomm">geomm</a>
+libaries, as well as custom analyses with <code>numpy</code> and `scipy``.</p>
+<p>I also perform machine learning analyses using <code>sckit-learn</code> for
 clustering and PCA as well as a number of libraries specific to the
 field for building Markov State Models and calculating stochastic
-network properties via Transition Path Theory.
-</p>
-
-<p>
-I have leveraged the distributed computing framework <a href="https://github.com/dask/dask">dask</a> to scale the
-analysis of terabytes of simulation data.
-</p>
-
-<p>
-The results of this research so far have been published or are still
-in progress.
-</p>
-</div>
-
-<div id="outline-container-org8d995fb" class="outline-4">
-<h4 id="org8d995fb">Results</h4>
-<div class="outline-text-4" id="text-org8d995fb">
-<p>
-Papers:
-</p>
-<ul class="org-ul">
-<li><a href="https://pubs.acs.org/doi/abs/10.1021/jacs.7b08572">Unbiased Molecular Dynamics of 11 min Timescale Drug Unbinding Reveals Transition State Stabilizing Interactions</a></li>
-</ul>
-<p>
-Data:
-</p>
-<ul class="org-ul">
-<li><a href="https://zenodo.org/record/1021565">zenodo</a></li>
-</ul>
-<p>
-Posters and Conferences:
-</p>
-<ul class="org-ul">
-<li><a href="https://zenodo.org/record/439376">Unbiased Molecular Dynamics of 11 min Timescale Drug Unbinding Reveals Transition State Stabilizing Residues</a></li>
-</ul>
-</div>
-</div>
-</div>
-</div>
+network properties via Transition Path Theory.</p>
+<p>I have leveraged the distributed computing framework <a href="https://github.com/dask/dask">dask</a> to scale the
+analysis of terabytes of simulation data.</p>
+<p>The results of this research so far have been published or are still
+in progress.</p>
+<h4 id="results">Results</h4>
+<p>Thesis:
+- <a href="/resources/thesis.pdf">Thesis</a></p>
+<p>Papers:
+- <a href="https://pubs.acs.org/doi/abs/10.1021/jacs.7b08572">Unbiased Molecular Dynamics of 11 min Timescale Drug Unbinding Reveals Transition State Stabilizing Interactions</a></p>
+<p>Data:
+- <a href="https://zenodo.org/record/1021565">zenodo</a></p>
+<p>Posters and Conferences:
+- <a href="https://zenodo.org/record/439376">Unbiased Molecular Dynamics of 11 min Timescale Drug Unbinding Reveals Transition State Stabilizing Residues</a> </p>
     </div>
     
 

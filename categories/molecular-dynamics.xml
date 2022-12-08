@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Salotz's Homepage (Posts about molecular-dynamics)</title><link>https://salotz.info/</link><description></description><atom:link href="https://salotz.info/categories/molecular-dynamics.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2022 &lt;a href="mailto:samuel.lotz@salotz.info"&gt;Samuel D. Lotz&lt;/a&gt; </copyright><lastBuildDate>Tue, 11 Oct 2022 03:22:16 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Presentation at Silicon Therapeutics</title><link>https://salotz.info/posts/sitx_wepy_talk/</link><dc:creator>Samuel D. Lotz</dc:creator><description>&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Salotz's Homepage (Posts about molecular-dynamics)</title><link>https://salotz.info/</link><description></description><atom:link href="https://salotz.info/categories/molecular-dynamics.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2022 &lt;a href="mailto:samuel.lotz@salotz.info"&gt;Samuel D. Lotz&lt;/a&gt; </copyright><lastBuildDate>Sun, 27 Nov 2022 22:56:09 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Presentation at Silicon Therapeutics</title><link>https://salotz.info/posts/sitx_wepy_talk/</link><dc:creator>Samuel D. Lotz</dc:creator><description>&lt;p&gt;
 I was lucky enough to be able to present my work this week at Silicon
 Therapeutics, thanks for having me!
 &lt;/p&gt;
@@ -23,9 +23,9 @@ analyzing WE simulations as well as prototyping new methods.&lt;/li&gt;
 structure for clinically relevant target soluble epoxide hydrolase.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;div id="outline-container-org7ac387a" class="outline-2"&gt;
-&lt;h2 id="org7ac387a"&gt;Comments&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org7ac387a"&gt;
+&lt;div id="outline-container-org129cd8d" class="outline-2"&gt;
+&lt;h2 id="org129cd8d"&gt;Comments&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org129cd8d"&gt;
 &lt;p&gt;
 Comments are implemented as a mailing list hosted on sourcehut:
 &lt;a href="https://lists.sr.ht/~salotz/salotz.info_comments-section"&gt;https://lists.sr.ht/~salotz/salotz.info_comments-section&lt;/a&gt;

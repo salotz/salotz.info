@@ -124,9 +124,9 @@ a solution I came up with<sup><a id="fnr.1" class="footref" href="#fn.1" role="d
 Skip to this <a href="#solution">section</a> if you just want to see the solution.
 </p>
 
-<div id="outline-container-org6fef649" class="outline-2">
-<h2 id="org6fef649">Non-Issues</h2>
-<div class="outline-text-2" id="text-org6fef649">
+<div id="outline-container-org8b64ff5" class="outline-2">
+<h2 id="org8b64ff5">Non-Issues</h2>
+<div class="outline-text-2" id="text-org8b64ff5">
 <p>
 Conceptually specifying when to run things with a special syntax
 is not a bad idea and not why I find cron hard to use.
@@ -149,9 +149,9 @@ this regard).
 </div>
 </div>
 
-<div id="outline-container-org5650f14" class="outline-2">
-<h2 id="org5650f14">Sys-Admin Orientation</h2>
-<div class="outline-text-2" id="text-org5650f14">
+<div id="outline-container-org6f13b1f" class="outline-2">
+<h2 id="org6f13b1f">Sys-Admin Orientation</h2>
+<div class="outline-text-2" id="text-org6f13b1f">
 <p>
 My first issue with <code>cron</code> is that it is inseparable (or at least
 practically so) from the base *nix system. That means you can't run it
@@ -193,7 +193,7 @@ For instance where exactly am I supposed to put a cron job? On Ubuntu
 20.04 (KDE Neon actually) I see this in my <code>/etc</code> dir:
 </p>
 
-<pre class="example" id="org75a533b">
+<pre class="example" id="org7ca452f">
 --&gt; ls /etc/ | grep cron
 anacrontab
 cron.d
@@ -213,7 +213,7 @@ For instance here is part of the <code>man</code> page for cron on my system:
 </p>
 
 
-<pre class="example" id="org6611b4f">
+<pre class="example" id="org0885608">
 DEBIAN SPECIFIC
        Debian introduces some changes to cron that were not originally available  upstream.   The  most
        significant changes introduced are:
@@ -290,9 +290,9 @@ Cron is simply not meant for a simple user like me.
 </div>
 
 
-<div id="outline-container-orgb6bac25" class="outline-2">
-<h2 id="orgb6bac25">Control &amp; Supervision</h2>
-<div class="outline-text-2" id="text-orgb6bac25">
+<div id="outline-container-orgbffb771" class="outline-2">
+<h2 id="orgbffb771">Control &amp; Supervision</h2>
+<div class="outline-text-2" id="text-orgbffb771">
 <p>
 The second major problem I had with cron was the real lack of control
 you have over it. You write text into the file and cron goes off and
@@ -339,9 +339,9 @@ expect to have going into the future on all my systems.
 </div>
 </div>
 
-<div id="outline-container-org1acbf6b" class="outline-2">
-<h2 id="org1acbf6b">Observability &amp; Logging Utilities</h2>
-<div class="outline-text-2" id="text-org1acbf6b">
+<div id="outline-container-orge77d3a3" class="outline-2">
+<h2 id="orge77d3a3">Observability &amp; Logging Utilities</h2>
+<div class="outline-text-2" id="text-orge77d3a3">
 <p>
 I was able to get through all the issues above through sheer force of
 will, but ultimately I was done in by the necessary interaction of
@@ -413,9 +413,9 @@ mistakes happen and logs can fill up a <code>/</code> partition scarily easy.
 </div>
 
 
-<div id="outline-container-org256436c" class="outline-2">
-<h2 id="org256436c">Runit tutorial</h2>
-<div class="outline-text-2" id="text-org256436c">
+<div id="outline-container-orgc2cde1b" class="outline-2">
+<h2 id="orgc2cde1b">Runit tutorial</h2>
+<div class="outline-text-2" id="text-orgc2cde1b">
 <p>
 I've contemplated and even tried a few alternatives to cron. This one
 was discovered while throwing stones at other birds. I was pleasantly
@@ -553,7 +553,7 @@ To define a <b>service</b> you make a directory in <code>SVLIB</code> with some
 specially named shell scripts. Mine has these directories in it:
 </p>
 
-<pre class="example" id="orga78ce13">
+<pre class="example" id="org1b6258a">
 --&gt; ls $SVLIB
 backup  hello  printer_live  recollindex  test_env
 </pre>
@@ -563,7 +563,7 @@ Each one is a specific service. Lets first look at <code>hello</code> to get a
 simple picture of what these are:
 </p>
 
-<pre class="example" id="orgddfa9a4">
+<pre class="example" id="org6240e9e">
 --&gt; ls $SVLIB/hello
 finish  log  run  supervise
 </pre>
@@ -598,7 +598,7 @@ This service isn't being run yet. For that you need to put it into the
 You can check the status of the service with the <code>sv</code> command:
 </p>
 
-<pre class="example" id="org0ab5cc1">
+<pre class="example" id="org5defdca">
 --&gt; sudo sv status $SVDIR/hello
 run: /etc/service/hello: (pid 664634) 193s
 </pre>
@@ -614,7 +614,7 @@ You can check the status of all services similarly:
 If you see this:
 </p>
 
-<pre class="example" id="org9d1ca05">
+<pre class="example" id="org88d6022">
 --&gt; sudo sv status $SVDIR/hello
 down: /etc/service/hello: 1s, normally up, want up
 </pre>
@@ -633,7 +633,7 @@ Once its working you should see the "Hello"s on the log for runit if
 you aren't logging this service:
 </p>
 
-<pre class="example" id="orga470ad8">
+<pre class="example" id="orgf1ea7ec">
 --&gt; sudo journalctl -u runit | tail
 Oct 23 16:49:30 ostrich 2[664634]: Hello
 Oct 23 16:49:32 ostrich 2[664634]: Hello
@@ -666,7 +666,7 @@ you could do cleanup stuff here if you want.
 Last the logging spec. This is a subdirectory called <code>log</code>:
 </p>
 
-<pre class="example" id="org3c99834">
+<pre class="example" id="org8698266">
 --&gt; tree $SVLIB/hello/log
 /etc/sv/hello/log
 ├── run
@@ -704,7 +704,7 @@ You'll stop seeing "Hello" in the runit system log, and start seeing
 it in the log file we configured:
 </p>
 
-<pre class="example" id="org439a1a0">
+<pre class="example" id="org97a1f42">
 sudo less +F "$SVLOG_SYS_DIR/hello/current"
 # or
 sudo tail -f "$SVLOG_SYS_DIR/hello/current"
@@ -763,7 +763,7 @@ With this all in place you'll see something like this in
 <code>SVLOG_SYS_DIR/hello</code>:
 </p>
 
-<pre class="example" id="org1d57877">
+<pre class="example" id="org8da4c44">
 --&gt; sudo tree $SVLOG_SYS_DIR/hello
 /var/local/log/runit/hello
 ├── @400000005f929f2c12d2041c.s
@@ -926,9 +926,9 @@ time soon its a good candidate for inside of containers.
 </div>
 </div>
 
-<div id="outline-container-org5b31872" class="outline-2">
-<h2 id="org5b31872">Final Notes</h2>
-<div class="outline-text-2" id="text-org5b31872">
+<div id="outline-container-org0152643" class="outline-2">
+<h2 id="org0152643">Final Notes</h2>
+<div class="outline-text-2" id="text-org0152643">
 <p>
 As I mentioned I am not a grey-neckbeard and so if I've made any gross
 oversights in my claims, please let me know in the comments. I would
@@ -937,9 +937,9 @@ love to like cron more.
 </div>
 </div>
 
-<div id="outline-container-org115d2d9" class="outline-2">
-<h2 id="org115d2d9">Comments</h2>
-<div class="outline-text-2" id="text-org115d2d9">
+<div id="outline-container-org2caa482" class="outline-2">
+<h2 id="org2caa482">Comments</h2>
+<div class="outline-text-2" id="text-org2caa482">
 <p>
 Comments are implemented as a mailing list hosted on sourcehut:
 <a href="https://lists.sr.ht/~salotz/salotz.info_comments-section">https://lists.sr.ht/~salotz/salotz.info_comments-section</a>
