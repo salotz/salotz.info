@@ -217,6 +217,7 @@ DATE_FORMAT = 'yyyy-MM-dd HH:mm'
 # FILES_FOLDERS = {'files': ''}
 # Which means copy 'files' into 'output'
 FILES_FOLDERS = {
+    'files': '',
     'resources': 'resources'
 }
 
