@@ -1,0 +1,9 @@
++++
+title = "On git-hook managers"
+slug = "on-git-hook-managers"
+date = "2022-12-17 11:11:58 UTC-05:00"
+tags = "git-hooks, git, pre-commit, lefthook"
+link = ""
+description = "Thoughts on using git hooks effectively."
+type = "text"
++++

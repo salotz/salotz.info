@@ -18,7 +18,7 @@ build: ## Generate the static site
 .PHONY: build
 
 dev: ## Start the reloading development server
-	nikola auto
+	nikola auto -b -p 5544
 .PHONY: dev
 
 check: build ## Run the Nikola checker
