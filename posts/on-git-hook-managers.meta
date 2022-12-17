@@ -6,4 +6,5 @@ tags = "git-hooks, git, pre-commit, lefthook"
 link = ""
 description = "Thoughts on using git hooks effectively."
 type = "text"
+devto = "true"
 +++
