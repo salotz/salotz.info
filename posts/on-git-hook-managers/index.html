@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="Thoughts on using git hooks effectively.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>On git-hook managers | Salotz's Homepage</title>
+<link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" hreflang="en" href="../../rss.xml">
+<link rel="canonical" href="https://salotz.info/posts/on-git-hook-managers/">
+<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><meta name="author" content="Samuel D. Lotz">
+<link rel="prev" href="../demos/" title="Demos" type="text/html">
+<meta property="og:site_name" content="Salotz's Homepage">
+<meta property="og:title" content="On git-hook managers">
+<meta property="og:url" content="https://salotz.info/posts/on-git-hook-managers/">
+<meta property="og:description" content="Thoughts on using git hooks effectively.">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2022-12-17T11:11:58-05:00">
+<meta property="article:tag" content="git">
+<meta property="article:tag" content="git-hooks">
+<meta property="article:tag" content="lefthook">
+<meta property="article:tag" content="pre-commit">
+</head>
+<body>
+<a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+
+<!-- Header and menu bar -->
+<div class="container">
+      <header class="blog-header py-3"><div class="row nbb-header align-items-center">
+          <div class="col-md-3 col-xs-2 col-sm-2" style="width: auto;">
+            <button class="navbar-toggler navbar-light bg-light nbb-navbar-toggler" type="button" data-toggle="collapse" data-target=".bs-nav-collapsible" aria-controls="bs-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse bs-nav-collapsible bootblog4-search-form-holder">
+                
+            </div>
+        </div>
+          <div class="col-md-6 col-xs-10 col-sm-10 bootblog4-brand" style="width: auto;">
+            <a class="navbar-brand blog-header-logo text-dark" href="../../">
+
+            <span id="blog-title">Salotz's Homepage</span>
+        </a>
+          </div>
+            <div class="col-md-3 justify-content-end align-items-center bs-nav-collapsible collapse flex-collapse bootblog4-right-nav">
+            <nav class="navbar navbar-light bg-white"><ul class="navbar-nav bootblog4-right-nav">
+<li class="nav-item">
+    <a href="index.md" id="sourcelink" class="nav-link">Source</a>
+    </li>
+
+
+                    
+            </ul></nav>
+</div>
+    </div>
+</header><nav class="navbar navbar-expand-md navbar-light bg-white static-top"><div class="collapse navbar-collapse bs-nav-collapsible" id="bs-navbar">
+            <ul class="navbar-nav nav-fill d-flex w-100">
+<li class="nav-item">
+<a href="../../index.html" class="nav-link">About Me</a>
+                </li>
+<li class="nav-item">
+<a href="../../pages/software/" class="nav-link">Open Source</a>
+                </li>
+<li class="nav-item">
+<a href="../../pages/portfolio/" class="nav-link">Portfolio</a>
+                </li>
+<li class="nav-item">
+<a href="../../blog/" class="nav-link">Blog</a>
+                </li>
+<li class="nav-item">
+<a href="../../categories/" class="nav-link">Tags</a>
+                </li>
+<li class="nav-item">
+<a href="../../rss.xml" class="nav-link">RSS feed</a>
+
+                
+            </li>
+</ul>
+</div>
+<!-- /.navbar-collapse -->
+</nav>
+</div>
+
+<div class="container" id="content" role="main">
+    <div class="body-content">
+        <!--Body content-->
+        
+        
+        
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">On git-hook managers</a></h1>
+
+        <div class="metadata">
+            <p class="byline author vcard p-author h-card"><span class="byline-name fn p-name" itemprop="author">
+                    Samuel D. Lotz
+            </span></p>
+            <p class="dateline">
+            <a href="." rel="bookmark">
+            <time class="published dt-published" datetime="2022-12-17T11:11:58-05:00" itemprop="datePublished" title="2022-12-17 11:11">2022-12-17 11:11</time></a>
+            </p>
+            
+        <p class="sourceline"><a href="index.md" class="sourcelink">Source</a></p>
+
+        </div>
+        
+
+    </header><div class="e-content entry-content" itemprop="articleBody text">
+    <p>Using <a href="https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks">git-hooks</a> is a
+common method used to enforce constraints, standards, and static quality of a
+code bases. By checking for things at the point of the "pre-commit" git hook it
+allows for a faster feedback loop for the developer, rather than waiting for it
+to fail in CI.</p>
+<p>It is common to use a <strong>hook manager</strong> to automate the installation of the hooks
+into <code>.git/hooks</code> and to pull them from either a remote repository of common
+hook implementations or generate them from a simple kind of configuration.</p>
+<p>This page (<a href="githooks.com">githooks.com</a>) provides a nice third-party overview of
+git hooks along with the most commonly used hook managers.</p>
+<p>I was a little late in adopting git-hooks myself and have finally sat down and
+figured out a good workflow for my tastes.</p>
+<p>At least in my little bubble the most common hook manager is
+<a href="https://pre-commit.com/">pre-commit</a>. I've created repository templates that
+use it, bootstrap it, and integrate it with CI such that it is by default
+reproduced locally to avoid version drifts <sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>.</p>
+<h3 id="the-problem-with-pre-commit">The Problem with <code>pre-commit</code>
+</h3>
+<p>I found <code>pre-commit</code> to be pretty frustrating most of the time. When I imagined
+a hook manager I expected that it would be a pretty simple piece of software
+that simply took some commands to run, or potentially downloaded some scripts
+from a git repo. <code>pre-commit</code> on the other hand is much more complicated and
+actually takes on the responsibility for downloading the hook scripts from a
+special "package" format, creating individual virtual environments for them, and
+a host of other options for controlling their behavior. All of which can break
+in non-obvious and confusing ways <sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>.</p>
+<p>I lived with the inconveniences for a while as it seemed that everyone around me
+was happily using it and I must have been missing something. Unfortunately, I
+don't think this to be true anymore and I'm convinced that <code>pre-commit</code> is just
+adopted in cargo cult fashion. Perhaps there is even a conflation that
+<code>pre-commit</code> is <strong>git hooks</strong>.</p>
+<p>Regardless the straw that broke this camel's back was setting up Python type
+checking to be run as a git hook. Because <code>pre-commit</code> hooks are run in their
+own contained virtual environment they cannot easily import either local code
+you are working on (for type stubs) and if you want to inject third-party type
+stubs you need to explicitly write them all down in the <code>pre-commit</code>
+configuration. The issue is that I already have all this done using other tools
+or scripts which are the primary entrypoints for working on the project. I don't
+want to have to maintain a duplicate listing just for my hooks to work. Managing
+dependencies is hard enough without having another place to duplicate them.</p>
+<p>This is really an issue with separation of concerns and composability.
+Personally, I take great care and choose my tools such that I can generate
+reproducible development environments such that they are composable with many
+other tools. <code>pre-commit</code> is in opposition to this and wants to control
+everything. This is useful for simple static analysis tools like <code>black</code> which
+do not need to be installed alongside your code and can act on your code as
+simple text blobs. However, when you want to do more complex things that require
+pulling in extra dependencies and actually importing builds of your code
+<code>pre-commit</code> just ceases to be simple and is in your way.</p>
+<p>Secondly, because <code>pre-commit</code> thinks it runs the show it ends up infecting the
+rest of your development automation. I typically give all my projects some kind
+of "task runner" which gives a high-level and abstracted entrypoint to doing
+repetitive tasks. This typically takes the form of a <code>Makefile</code>, but I've also
+used and can recommend <a href="https://github.com/pyinvoke/invoke">invoke</a> and
+<a href="https://pydoit.org/">pydoit</a> to accomplish the same thing.</p>
+<p>Here is an example of a <code>Makefile</code> with some common tasks without using
+<code>pre-commit</code>:</p>
+<div class="code"><pre class="code literal-block"><span class="nf">clean</span><span class="o">:</span> <span class="c">## Clean temporary files, directories etc.</span>
+    hatch clean
+    rm -rf dist .pytest_cache .coverage
+    find . -type f -name <span class="s2">"*.pyc"</span> -print -delete
+<span class="nf">.PHONY</span><span class="o">:</span> <span class="n">clean</span>
+
+<span class="nf">format</span><span class="o">:</span> <span class="c">## Run source code formatters manually.</span>
+    hatch run -- black src tests
+    hatch run -- isort src tests
+<span class="nf">.PHONY</span><span class="o">:</span> <span class="n">docstrings</span>
+
+<span class="nf">validate</span><span class="o">:</span> <span class="n">format</span>-<span class="n">check</span> <span class="n">lint</span> <span class="n">docstring</span> <span class="n">typecheck</span> <span class="c">## Run all linters, type checks, static analysis, etc.</span>
+<span class="nf">.PHONY</span><span class="o">:</span> <span class="n">validate</span>
+
+<span class="nf">format-check</span><span class="o">:</span> <span class="c">## Run code formatting checks</span>
+    hatch run -- black --check src tests
+    hatch run -- isort --check src tests
+<span class="nf">.PHONY</span><span class="o">:</span> <span class="n">format</span>-<span class="n">check</span>
+
+<span class="nf">lint</span><span class="o">:</span> <span class="c">## Run only the linters (non-autoformatters).</span>
+    hatch run -- flake8 src tests
+<span class="nf">.PHONY</span><span class="o">:</span> <span class="n">lint</span>
+
+<span class="nf">docstring-check</span><span class="o">:</span> <span class="c">## Run docstring coverage only.</span>
+    hatch run -- interrogate src tests
+<span class="nf">.PHONY</span><span class="o">:</span> <span class="n">docstring</span>
+
+<span class="nf">typecheck</span><span class="o">:</span> <span class="c">## Run only the type checker (requires mypy)</span>
+    hatch run -- mypy --strict src tests/utils
+<span class="nf">.PHONY</span><span class="o">:</span> <span class="n">typecheck</span>
+</pre></div>
+
+<p>In this scenario <code>make validate</code> is the canonical way to run all the various
+linters. This should be the only entrypoint to these tasks so that we don't get
+duplication and drift in different environments, e.g. locally, CI, and
+git-hooks.</p>
+<p>Using <code>pre-commit</code> however I cannot call these <code>Makefile</code> tasks in any practical
+means. So what ends up happening is that you need to replace commands in the
+tasks with explicit calls to <code>pre-commit</code> to run things for you. E.g.:</p>
+<p><code>.pre-commit-config.yaml</code></p>
+<div class="code"><pre class="code literal-block"><span class="nt">repos</span><span class="p">:</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/psf/black</span><span class="w"></span>
+<span class="w">  </span><span class="nt">rev</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">22.6.0</span><span class="w"></span>
+<span class="w">  </span><span class="nt">hooks</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">  </span><span class="c1"># run the formatting</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">black</span><span class="w"></span>
+<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">black-format</span><span class="w"></span>
+<span class="w">    </span><span class="nt">files</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">^(src|tests)</span><span class="w"></span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"Format:</span><span class="nv"> </span><span class="s">black"</span><span class="w"></span>
+
+<span class="w">  </span><span class="c1"># just check</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">black</span><span class="w"></span>
+<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">black-check</span><span class="w"></span>
+<span class="w">    </span><span class="nt">args</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">--check</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">    </span><span class="nt">files</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">^(src|tests)</span><span class="w"></span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"Check:</span><span class="nv"> </span><span class="s">black"</span><span class="w"></span>
+<span class="w">    </span><span class="c1"># don't run unless done manually</span><span class="w"></span>
+<span class="w">    </span><span class="nt">stages</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">manual</span><span class="w"></span>
+</pre></div>
+
+<p>Notice the rigamarole you have to go through to run a single hook type in
+multiple ways.</p>
+<p><code>Makefile</code></p>
+<div class="code"><pre class="code literal-block"><span class="nf">format</span><span class="o">:</span> <span class="c">## Run source code formatters manually.</span>
+    pre-commit run --all-files black-format
+    pre-commit run --all-files isort-format
+<span class="nf">.PHONY</span><span class="o">:</span> <span class="n">docstrings</span>
+</pre></div>
+
+<p>So now <code>pre-commit</code> is not just the thing that runs things on your behalf at
+specific time (the essence of what git hooks are) it is now an integral part of
+how you manage dependencies for your project.</p>
+<h3 id="the-solutions">The Solutions</h3>
+<p>At this point I decided I needed something better. I want a hook manager to be:</p>
+<ol>
+<li>Very easy to install and bootstrap for newcomers to a project.</li>
+<li>Ability to run arbitrary commands and integrate with any virtual environment
+   manager and task runner I'm already using.</li>
+</ol>
+<p>For 1 this is very important because you do not want to frustrate people before
+they actually start working on your code. At this stage it should be so easy
+that you should be able to write a task or shell script that can bootstrap the
+manager. So ideally that means a single executable file.</p>
+<p>I narrowed it down to two hook managers that seemed to accomplish this:</p>
+<ul>
+<li><a href="https://github.com/evilmartians/lefthook">lefthook</a></li>
+<li><a href="https://github.com/Autohook/Autohook">Autohook</a></li>
+</ul>
+<p>I ultimately decided on <code>lefthook</code> but <code>Autohook</code> was very tempting as well.
+<code>Autohook</code> is a single <code>bash</code> script that you can just download. You operate it
+by maintaining a <code>hooks</code> directory that you dump executables into, and control
+which hook stage and order they run in with symlinks. All <code>Autohook</code> does is
+place these into <code>.git/hooks</code>. I don't think it gets any easier than that.
+Looking at the code as well its just a bit more robust version of the shell
+script you would have written yourself without a plethora of hook managers to
+choose from.</p>
+<p>What I liked about <code>lefthook</code> was that its a Go project and comes as a single
+binary executable which is easy to download and immediately use. It should also
+be easier to support on platforms like Windows since there is no reliance on a
+POSIX-like shell. It also provides packages for just about every package
+manager, and even for language specific ones like <code>pip</code> and <code>npm</code>.</p>
+<p>Second, its dead simple in its operation. You write a <code>lefthook.yml</code> file which
+specifies the hooks you want to use. Here is mine:</p>
+<p><code>lefthook.yml</code></p>
+<div class="code"><pre class="code literal-block"><span class="nt">pre-commit</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">  </span><span class="nt">parallel</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+<span class="w">  </span><span class="nt">commands</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">    </span><span class="nt">format-check</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">make format-check</span><span class="w"></span>
+
+<span class="w">    </span><span class="nt">lint</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">make lint</span><span class="w"></span>
+
+<span class="w">    </span><span class="nt">docstrings</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">make docstring-check</span><span class="w"></span>
+
+<span class="w">    </span><span class="nt">typecheck</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">make typecheck</span><span class="w"></span>
+</pre></div>
+
+<p>The top-level groups are for each hook stage and here I am only configuring the
+"pre-commit" stage. Under the <code>commands</code> section I list out the name of each
+hook and how to run it. Since I already have the business logic for these in my
+task runner its as simple as wiring them up!</p>
+<p>This is great, its a hook manager thats doing only one thing, managing hooks,
+and doing it well. It didn't require any refactoring of anything else in my
+project, it runs the hooks in parallel and provides a bunch of other useful
+options to control its behavior.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>Thats it! I've not even used
+<a href="https://github.com/evilmartians/lefthook">lefthook</a> for a full day and its
+already much improved my life:</p>
+<ul>
+<li>I now can easily do complex typechecking with a git pre-commit hook,</li>
+<li>I don't need to run my hook manager in CI, just my task runner,</li>
+<li>I don't need to worry about yet-another system with caches and virtualenvs,</li>
+<li>I can run hooks more quickly and in parallel</li>
+</ul>
+<p>I highly recommend it and encourage you to question cargo cult adoption of
+sub-par tooling like <code>pre-commit</code> in other areas.</p>
+<div class="footnote">
+<hr>
+<ol>
+<li id="fn:1">
+<p>A lot of times I see impatient developer's just ignore these kinds of
+issues and get by just fine for a long while. I have the unique (mis)fortune
+of typically running into these kinds of issues very quickly if not
+immediately and this was the same for using <code>pre-commit</code> in my CI pipelines.
+So thats just to say that, yes you really do need to worry about this as it
+will bite you sooner or later. <a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+<li id="fn:2">
+<p>For <a href="https://github.com/econchick/interrogate/issues/60">example</a> <a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">↩</a></p>
+</li>
+</ol>
+</div>
+    </div>
+    <aside class="postpromonav"><nav><ul itemprop="keywords" class="tags">
+<li><a class="tag p-category" href="../../categories/git/" rel="tag">git</a></li>
+            <li><a class="tag p-category" href="../../categories/git-hooks/" rel="tag">git-hooks</a></li>
+            <li><a class="tag p-category" href="../../categories/lefthook/" rel="tag">lefthook</a></li>
+            <li><a class="tag p-category" href="../../categories/pre-commit/" rel="tag">pre-commit</a></li>
+        </ul>
+<ul class="pager hidden-print">
+<li class="previous">
+                <a href="../demos/" rel="prev" title="Demos">Previous post</a>
+            </li>
+        </ul></nav></aside></article><!--End of body content--><footer id="footer">
+            Contents © 2022         <a href="mailto:samuel.lotz@salotz.info">Samuel D. Lotz</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+            
+            
+        </footer>
+</div>
+</div>
+
+
+        <script src="../../assets/js/all-nocdn.js"></script><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element){var i=element.getElementsByTagName('img')[0];return i===undefined?'':i.alt;}});
+    </script>
+</body>
+</html>

@@ -26,12 +26,24 @@
   <lastmod>2022-12-08T21:53:00Z</lastmod>
  </sitemap>
  <sitemap>
+  <loc>https://salotz.info/categories/git-hooks.xml</loc>
+  <lastmod>2022-12-17T16:14:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://salotz.info/categories/git.xml</loc>
+  <lastmod>2022-12-17T16:14:00Z</lastmod>
+ </sitemap>
+ <sitemap>
   <loc>https://salotz.info/categories/godot.xml</loc>
   <lastmod>2022-12-08T21:53:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://salotz.info/categories/introduction.xml</loc>
   <lastmod>2022-11-27T22:56:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://salotz.info/categories/lefthook.xml</loc>
+  <lastmod>2022-12-17T16:14:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://salotz.info/categories/linux.xml</loc>
@@ -48,6 +60,10 @@
  <sitemap>
   <loc>https://salotz.info/categories/nix.xml</loc>
   <lastmod>2022-11-27T22:56:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://salotz.info/categories/pre-commit.xml</loc>
+  <lastmod>2022-12-17T16:14:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://salotz.info/categories/presentation.xml</loc>
@@ -111,10 +127,10 @@
  </sitemap>
  <sitemap>
   <loc>https://salotz.info/rss.xml</loc>
-  <lastmod>2022-12-08T21:55:00Z</lastmod>
+  <lastmod>2022-12-17T16:14:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://salotz.info/sitemap.xml</loc>
-  <lastmod>2022-12-08T21:55:00Z</lastmod>
+  <lastmod>2022-12-17T16:14:00Z</lastmod>
  </sitemap>
 </sitemapindex>

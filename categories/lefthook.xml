@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Salotz's Homepage (Posts about lefthook)</title><link>https://salotz.info/</link><description></description><atom:link href="https://salotz.info/categories/lefthook.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2022 &lt;a href="mailto:samuel.lotz@salotz.info"&gt;Samuel D. Lotz&lt;/a&gt; </copyright><lastBuildDate>Sat, 17 Dec 2022 17:21:47 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>On git-hook managers</title><link>https://salotz.info/posts/on-git-hook-managers/</link><dc:creator>Samuel D. Lotz</dc:creator><description>&lt;p&gt;Using &lt;a href="https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks"&gt;git-hooks&lt;/a&gt; is a
+common method used to enforce constraints, standards, and static quality of a
+code bases. By checking for things at the point of the "pre-commit" git hook it
+allows for a faster feedback loop for the developer, rather than waiting for it
+to fail in CI.&lt;/p&gt;
+&lt;p&gt;It is common to use a &lt;strong&gt;hook manager&lt;/strong&gt; to automate the installation of the hooks
+into &lt;code&gt;.git/hooks&lt;/code&gt; and to pull them from either a remote repository of common
+hook implementations or generate them from a simple kind of configuration.&lt;/p&gt;
+&lt;p&gt;This page (&lt;a href="https://salotz.info/posts/on-git-hook-managers/githooks.com"&gt;githooks.com&lt;/a&gt;) provides a nice third-party overview of
+git hooks along with the most commonly used hook managers.&lt;/p&gt;
+&lt;p&gt;I was a little late in adopting git-hooks myself and have finally sat down and
+figured out a good workflow for my tastes.&lt;/p&gt;
+&lt;p&gt;At least in my little bubble the most common hook manager is
+&lt;a href="https://pre-commit.com/"&gt;pre-commit&lt;/a&gt;. I've created repository templates that
+use it, bootstrap it, and integrate it with CI such that it is by default
+reproduced locally to avoid version drifts &lt;sup id="fnref:1"&gt;&lt;a class="footnote-ref" href="https://salotz.info/posts/on-git-hook-managers/#fn:1"&gt;1&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+&lt;h3 id="the-problem-with-pre-commit"&gt;The Problem with &lt;code&gt;pre-commit&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;I found &lt;code&gt;pre-commit&lt;/code&gt; to be pretty frustrating most of the time. When I imagined
+a hook manager I expected that it would be a pretty simple piece of software
+that simply took some commands to run, or potentially downloaded some scripts
+from a git repo. &lt;code&gt;pre-commit&lt;/code&gt; on the other hand is much more complicated and
+actually takes on the responsibility for downloading the hook scripts from a
+special "package" format, creating individual virtual environments for them, and
+a host of other options for controlling their behavior. All of which can break
+in non-obvious and confusing ways &lt;sup id="fnref:2"&gt;&lt;a class="footnote-ref" href="https://salotz.info/posts/on-git-hook-managers/#fn:2"&gt;2&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+&lt;p&gt;I lived with the inconveniences for a while as it seemed that everyone around me
+was happily using it and I must have been missing something. Unfortunately, I
+don't think this to be true anymore and I'm convinced that &lt;code&gt;pre-commit&lt;/code&gt; is just
+adopted in cargo cult fashion. Perhaps there is even a conflation that
+&lt;code&gt;pre-commit&lt;/code&gt; is &lt;strong&gt;git hooks&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Regardless the straw that broke this camel's back was setting up Python type
+checking to be run as a git hook. Because &lt;code&gt;pre-commit&lt;/code&gt; hooks are run in their
+own contained virtual environment they cannot easily import either local code
+you are working on (for type stubs) and if you want to inject third-party type
+stubs you need to explicitly write them all down in the &lt;code&gt;pre-commit&lt;/code&gt;
+configuration. The issue is that I already have all this done using other tools
+or scripts which are the primary entrypoints for working on the project. I don't
+want to have to maintain a duplicate listing just for my hooks to work. Managing
+dependencies is hard enough without having another place to duplicate them.&lt;/p&gt;
+&lt;p&gt;This is really an issue with separation of concerns and composability.
+Personally, I take great care and choose my tools such that I can generate
+reproducible development environments such that they are composable with many
+other tools. &lt;code&gt;pre-commit&lt;/code&gt; is in opposition to this and wants to control
+everything. This is useful for simple static analysis tools like &lt;code&gt;black&lt;/code&gt; which
+do not need to be installed alongside your code and can act on your code as
+simple text blobs. However, when you want to do more complex things that require
+pulling in extra dependencies and actually importing builds of your code
+&lt;code&gt;pre-commit&lt;/code&gt; just ceases to be simple and is in your way.&lt;/p&gt;
+&lt;p&gt;Secondly, because &lt;code&gt;pre-commit&lt;/code&gt; thinks it runs the show it ends up infecting the
+rest of your development automation. I typically give all my projects some kind
+of "task runner" which gives a high-level and abstracted entrypoint to doing
+repetitive tasks. This typically takes the form of a &lt;code&gt;Makefile&lt;/code&gt;, but I've also
+used and can recommend &lt;a href="https://github.com/pyinvoke/invoke"&gt;invoke&lt;/a&gt; and
+&lt;a href="https://pydoit.org/"&gt;pydoit&lt;/a&gt; to accomplish the same thing.&lt;/p&gt;
+&lt;p&gt;Here is an example of a &lt;code&gt;Makefile&lt;/code&gt; with some common tasks without using
+&lt;code&gt;pre-commit&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&lt;span class="nf"&gt;clean&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="c"&gt;## Clean temporary files, directories etc.&lt;/span&gt;
+    hatch clean
+    rm -rf dist .pytest_cache .coverage
+    find . -type f -name &lt;span class="s2"&gt;"*.pyc"&lt;/span&gt; -print -delete
+&lt;span class="nf"&gt;.PHONY&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;clean&lt;/span&gt;
+
+&lt;span class="nf"&gt;format&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="c"&gt;## Run source code formatters manually.&lt;/span&gt;
+    hatch run -- black src tests
+    hatch run -- isort src tests
+&lt;span class="nf"&gt;.PHONY&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;docstrings&lt;/span&gt;
+
+&lt;span class="nf"&gt;validate&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;format&lt;/span&gt;-&lt;span class="n"&gt;check&lt;/span&gt; &lt;span class="n"&gt;lint&lt;/span&gt; &lt;span class="n"&gt;docstring&lt;/span&gt; &lt;span class="n"&gt;typecheck&lt;/span&gt; &lt;span class="c"&gt;## Run all linters, type checks, static analysis, etc.&lt;/span&gt;
+&lt;span class="nf"&gt;.PHONY&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;validate&lt;/span&gt;
+
+&lt;span class="nf"&gt;format-check&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="c"&gt;## Run code formatting checks&lt;/span&gt;
+    hatch run -- black --check src tests
+    hatch run -- isort --check src tests
+&lt;span class="nf"&gt;.PHONY&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;format&lt;/span&gt;-&lt;span class="n"&gt;check&lt;/span&gt;
+
+&lt;span class="nf"&gt;lint&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="c"&gt;## Run only the linters (non-autoformatters).&lt;/span&gt;
+    hatch run -- flake8 src tests
+&lt;span class="nf"&gt;.PHONY&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;lint&lt;/span&gt;
+
+&lt;span class="nf"&gt;docstring-check&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="c"&gt;## Run docstring coverage only.&lt;/span&gt;
+    hatch run -- interrogate src tests
+&lt;span class="nf"&gt;.PHONY&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;docstring&lt;/span&gt;
+
+&lt;span class="nf"&gt;typecheck&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="c"&gt;## Run only the type checker (requires mypy)&lt;/span&gt;
+    hatch run -- mypy --strict src tests/utils
+&lt;span class="nf"&gt;.PHONY&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;typecheck&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;In this scenario &lt;code&gt;make validate&lt;/code&gt; is the canonical way to run all the various
+linters. This should be the only entrypoint to these tasks so that we don't get
+duplication and drift in different environments, e.g. locally, CI, and
+git-hooks.&lt;/p&gt;
+&lt;p&gt;Using &lt;code&gt;pre-commit&lt;/code&gt; however I cannot call these &lt;code&gt;Makefile&lt;/code&gt; tasks in any practical
+means. So what ends up happening is that you need to replace commands in the
+tasks with explicit calls to &lt;code&gt;pre-commit&lt;/code&gt; to run things for you. E.g.:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;.pre-commit-config.yaml&lt;/code&gt;&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&lt;span class="nt"&gt;repos&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;repo&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;https://github.com/psf/black&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nt"&gt;rev&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;22.6.0&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nt"&gt;hooks&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="c1"&gt;# run the formatting&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;id&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;black&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;alias&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;black-format&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;files&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;^(src|tests)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;"Format:&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;black"&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="c1"&gt;# just check&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;id&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;black&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;alias&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;black-check&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;args&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p p-Indicator"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;--check&lt;/span&gt;&lt;span class="p p-Indicator"&gt;]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;files&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;^(src|tests)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;"Check:&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;black"&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="c1"&gt;# don't run unless done manually&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;stages&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;manual&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Notice the rigamarole you have to go through to run a single hook type in
+multiple ways.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Makefile&lt;/code&gt;&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&lt;span class="nf"&gt;format&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="c"&gt;## Run source code formatters manually.&lt;/span&gt;
+    pre-commit run --all-files black-format
+    pre-commit run --all-files isort-format
+&lt;span class="nf"&gt;.PHONY&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;docstrings&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;So now &lt;code&gt;pre-commit&lt;/code&gt; is not just the thing that runs things on your behalf at
+specific time (the essence of what git hooks are) it is now an integral part of
+how you manage dependencies for your project.&lt;/p&gt;
+&lt;h3 id="the-solutions"&gt;The Solutions&lt;/h3&gt;
+&lt;p&gt;At this point I decided I needed something better. I want a hook manager to be:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Very easy to install and bootstrap for newcomers to a project.&lt;/li&gt;
+&lt;li&gt;Ability to run arbitrary commands and integrate with any virtual environment
+   manager and task runner I'm already using.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;For 1 this is very important because you do not want to frustrate people before
+they actually start working on your code. At this stage it should be so easy
+that you should be able to write a task or shell script that can bootstrap the
+manager. So ideally that means a single executable file.&lt;/p&gt;
+&lt;p&gt;I narrowed it down to two hook managers that seemed to accomplish this:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/evilmartians/lefthook"&gt;lefthook&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/Autohook/Autohook"&gt;Autohook&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I ultimately decided on &lt;code&gt;lefthook&lt;/code&gt; but &lt;code&gt;Autohook&lt;/code&gt; was very tempting as well.
+&lt;code&gt;Autohook&lt;/code&gt; is a single &lt;code&gt;bash&lt;/code&gt; script that you can just download. You operate it
+by maintaining a &lt;code&gt;hooks&lt;/code&gt; directory that you dump executables into, and control
+which hook stage and order they run in with symlinks. All &lt;code&gt;Autohook&lt;/code&gt; does is
+place these into &lt;code&gt;.git/hooks&lt;/code&gt;. I don't think it gets any easier than that.
+Looking at the code as well its just a bit more robust version of the shell
+script you would have written yourself without a plethora of hook managers to
+choose from.&lt;/p&gt;
+&lt;p&gt;What I liked about &lt;code&gt;lefthook&lt;/code&gt; was that its a Go project and comes as a single
+binary executable which is easy to download and immediately use. It should also
+be easier to support on platforms like Windows since there is no reliance on a
+POSIX-like shell. It also provides packages for just about every package
+manager, and even for language specific ones like &lt;code&gt;pip&lt;/code&gt; and &lt;code&gt;npm&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Second, its dead simple in its operation. You write a &lt;code&gt;lefthook.yml&lt;/code&gt; file which
+specifies the hooks you want to use. Here is mine:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;lefthook.yml&lt;/code&gt;&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&lt;span class="nt"&gt;pre-commit&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nt"&gt;parallel&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;true&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nt"&gt;commands&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;format-check&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="nt"&gt;run&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;make format-check&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;lint&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="nt"&gt;run&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;make lint&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;docstrings&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="nt"&gt;run&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;make docstring-check&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;typecheck&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="nt"&gt;run&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;make typecheck&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The top-level groups are for each hook stage and here I am only configuring the
+"pre-commit" stage. Under the &lt;code&gt;commands&lt;/code&gt; section I list out the name of each
+hook and how to run it. Since I already have the business logic for these in my
+task runner its as simple as wiring them up!&lt;/p&gt;
+&lt;p&gt;This is great, its a hook manager thats doing only one thing, managing hooks,
+and doing it well. It didn't require any refactoring of anything else in my
+project, it runs the hooks in parallel and provides a bunch of other useful
+options to control its behavior.&lt;/p&gt;
+&lt;h3 id="conclusion"&gt;Conclusion&lt;/h3&gt;
+&lt;p&gt;Thats it! I've not even used
+&lt;a href="https://github.com/evilmartians/lefthook"&gt;lefthook&lt;/a&gt; for a full day and its
+already much improved my life:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;I now can easily do complex typechecking with a git pre-commit hook,&lt;/li&gt;
+&lt;li&gt;I don't need to run my hook manager in CI, just my task runner,&lt;/li&gt;
+&lt;li&gt;I don't need to worry about yet-another system with caches and virtualenvs,&lt;/li&gt;
+&lt;li&gt;I can run hooks more quickly and in parallel&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I highly recommend it and encourage you to question cargo cult adoption of
+sub-par tooling like &lt;code&gt;pre-commit&lt;/code&gt; in other areas.&lt;/p&gt;
+&lt;div class="footnote"&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id="fn:1"&gt;
+&lt;p&gt;A lot of times I see impatient developer's just ignore these kinds of
+issues and get by just fine for a long while. I have the unique (mis)fortune
+of typically running into these kinds of issues very quickly if not
+immediately and this was the same for using &lt;code&gt;pre-commit&lt;/code&gt; in my CI pipelines.
+So thats just to say that, yes you really do need to worry about this as it
+will bite you sooner or later. &lt;a class="footnote-backref" href="https://salotz.info/posts/on-git-hook-managers/#fnref:1" title="Jump back to footnote 1 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn:2"&gt;
+&lt;p&gt;For &lt;a href="https://github.com/econchick/interrogate/issues/60"&gt;example&lt;/a&gt; &lt;a class="footnote-backref" href="https://salotz.info/posts/on-git-hook-managers/#fnref:2" title="Jump back to footnote 2 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;</description><category>git</category><category>git-hooks</category><category>lefthook</category><category>pre-commit</category><guid>https://salotz.info/posts/on-git-hook-managers/</guid><pubDate>Sat, 17 Dec 2022 16:11:58 GMT</pubDate></item></channel></rss>
