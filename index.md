@@ -1,9 +1,9 @@
 
 ## Bio
 
-My name is Samuel Lotz and I am a Senior Research Engineer at Roivant
-Sciences under the Vant Tech team specializing in the full spectrum of
-industrial grade scientific software development.
+My name is Samuel Lotz I'm currently working on a startup,
+[Examol](https://examol.io/), providing software for AI & physics enhanced
+drug-discovery.
 
 ## Professional
 
