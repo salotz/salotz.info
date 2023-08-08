@@ -1,6 +1,11 @@
 
-* Scientific
 
+* Scientific (Examol)
+
+Cloud-native kubernetes applications and infrastructure for computational
+drug-discovery. Should be open-sourced in the near future.
+
+* Scientific (PhD)
 ** wepy
 
 Repo: https://github.com/ADicksonLab/wepy
@@ -56,7 +61,7 @@ this is extensible as well.
 Results come as pure-python objects as well as pandas tables which can
 then be exported to any format or database.
 
-* Multimedia
+* Scopes programming language
 
 In my spare time I mostly enjoy programming in the [[http://scopes.rocks][Scopes]] programming
 language as a alternative to C/C++ or Rust for multimedia
@@ -84,6 +89,8 @@ Some other things I maintain related to Scopes:
   emacs. Allows you to execute scopes code directly in Org-mode
   files. This is utilized in ~scopes-newbs~.
 
+** Spack package index
+
 I also maintain a [[https://spack.io][Spack]] repository of packages oriented towards
 multimedia and Scopes development called, [[https://github.com/salotz/snailpacks][snailpacks]]. This repo also
 has many examples of integrating Spack as a package manager into your
@@ -106,13 +113,9 @@ build system scripts.
 
 * Personal Productivity
 
-** bim suite
+** bimhaw
 
-Configurations for users in Unix-like environments (like linux) is a
-major pain point for beginners and advanced users alike.
-
-I have been slowly developing a set of tools to regain some sanity and
-add some essential features. The main product of the suite thus far is [[https://github.com/salotz/bimhaw][~bimhaw~]].
+Repo: https://github.com/salotz/bimhaw.
 
 ~bimhaw~ provides layer of indirection over shell configurations
 (i.e. ~.profile~ and ~.bashrc~ files) that is semantically meaningful
@@ -150,13 +153,14 @@ Working sets for each are defined in a local versionable configuration
 file and need not be executed on either of the two computers in the
 command (as long as they are reachable via ssh).
 
-** jubeo: Meta-Project Protocol
+* Polyrepo Tools
+** jubeo
 
 Repo: https://github.com/salotz/jubeo
 
-The name is stolen from object based systems like Smalltalk and Common
-Lisp's Meta-Object Protocol which is a way to update "living" code
-objects.
+Sometimes I described this as a "Meta-Project Protocol" which is based on a term
+from object based systems like Smalltalk and Common Lisp's Meta-Object Protocol
+which is a way to update "living" code objects.
 
 This is a tool for updating and maintaining tooling for different
 types of projects (software dev, analytics, website design, etc.).

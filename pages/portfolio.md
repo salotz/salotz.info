@@ -1,4 +1,16 @@
 
+
+## Examol
+
+Formerly Ibeks Technologies.
+
+Cofounder and CTO.
+
+Working on a cloud-native Kubernetes application for computational drug-discovery.
+
+Designed and implemented our entire server backend in fully statically typed
+Python code using the Starlette web server.
+
 ## Roivant Sciences
 
 I work closely with computational scientists on drug discovery teams

@@ -2,7 +2,7 @@
 
 #+begin_src sh
   make bootstrap
-  make auto
+  make dev
   # edit...
   make deploy
 #+end_src
